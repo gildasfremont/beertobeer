@@ -4,3 +4,32 @@
   font-weight: 400;
   src: local('Montserrat-Regular'), url('../fonts/montserrat.woff') format('woff');
 }
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Montserrat-Bold'), url('../fonts/montserratBold.woff') format('woff');
+}
+
+body {
+	font-family: 'Montserrat';
+}
+
+/* DESIGN MOBILE */
+@media (max-width: 767px) {
+	.home {
+		margin-top: 35%;
+	}
+	h1 {
+		color: #f96727;
+		text-align: center;
+		font-size: 27px;
+		font-family: 'MontserratBold';
+	}
+	h2 {
+		color: #f96727;
+		text-align: center;
+		font-size: 18px;
+	}
+}
