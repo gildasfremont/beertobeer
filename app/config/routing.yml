@@ -3,7 +3,7 @@ beer_to_beer_core:
     prefix:   /
 
 #REST 
-rest : 
-	type : rest 
-	resource : "routing_rest.yml"
-	prefix : /api
+#rest : 
+#    type : rest 
+#    resource : "routing_rest.yml"
+#    prefix : /api
