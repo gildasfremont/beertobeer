@@ -1,0 +1,3 @@
+beer_to_beer_core_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: BeerToBeerCoreBundle:Default:index }

@@ -1,0 +1,9 @@
+beer_to_beer_core:
+    resource: "@BeerToBeerCoreBundle/Resources/config/routing.yml"
+    prefix:   /
+
+#REST 
+rest : 
+	type : rest 
+	resource : "routing_rest.yml"
+	prefix : /api
