@@ -25,11 +25,54 @@ body {
 		color: #f96727;
 		text-align: center;
 		font-size: 27px;
-		font-family: 'MontserratBold';
+		font-family: 'Montserrat';
+		font-weight: bold;
+		margin-bottom: 5px;
 	}
 	h2 {
 		color: #f96727;
 		text-align: center;
 		font-size: 18px;
+		margin-top: 0;
 	}
-}
+	.home form {
+		margin: 0 12px;
+		text-align: center;
+	}
+	.home form label {
+		font-weight: normal;
+		font-size: 13px;
+		margin-top: 25px;
+	}
+	.home form input {
+		border-radius: 0;
+		padding: 6px 30px;
+	}
+	.home form button {
+		padding: 8px 10px;
+		margin:0;
+		border:0; /* Remove default button styles */
+		background-color:transparent;
+	}
+	.home .location {
+		float: right;
+		margin-right: 6px;
+		margin-top: 4px;
+	}
+	/* enable absolute positioning */
+	.inner-icon { 
+	    position: relative; 
+	}
+
+	/* style icon */
+	.inner-icon button {
+	  position: absolute;
+	  padding: 10px;
+	  pointer-events: none;
+	}
+
+	/* align icon */
+	.left-icon button  { left:  0px;}
+	.right-icon button { right: 0px;}
+
+	}

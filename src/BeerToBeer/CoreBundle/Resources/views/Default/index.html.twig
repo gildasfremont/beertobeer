@@ -2,7 +2,16 @@
 
 {% block body %}
 <div class="home">
-<h1>Beer to Beer</h1>
-<h2>Partageons nos plans bière.</h2>
+	<h1>Beer to Beer</h1>
+	<h2>Partageons nos plans bière.</h2>
+
+	<form action="test.php" method="get" id="form">
+		<label for="search">Cherchez une adresse, un métro à Paris</label>
+		<div class="inner-icon left-icon">
+			<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+			<a href="location.php"><img src="{{ asset('bundles/beertobeercore/images/location.png') }}" alt="Localisation" title="Localisez-vous !" class="location" /></a>
+			<input type="search" id="search" class="form-control" />
+		</div>
+	</form>
 </div>
 {% endblock %}
