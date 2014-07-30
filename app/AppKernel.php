@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new FOS\RestBundle\FOSRestBundle(),
+            new SimpleThings\EntityAudit\SimpleThingsEntityAuditBundle(),
             
             new BeerToBeer\CoreBundle\BeerToBeerCoreBundle(),
         );
