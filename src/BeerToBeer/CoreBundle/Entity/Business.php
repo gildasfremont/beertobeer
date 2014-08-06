@@ -5,12 +5,12 @@ namespace BeerToBeer\CoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Establishment
+ * Business
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="BeerToBeer\CoreBundle\Entity\EstablishmentRepository")
+ * @ORM\Entity(repositoryClass="BeerToBeer\CoreBundle\Entity\BusinessRepository")
  */
-class Establishment
+class Business
 {
     /**
      * @var integer
@@ -57,7 +57,7 @@ class Establishment
      * Set nom
      *
      * @param string $nom
-     * @return Establishment
+     * @return Business
      */
     public function setNom($nom)
     {
@@ -80,7 +80,7 @@ class Establishment
      * Set adresse
      *
      * @param string $adresse
-     * @return Establishment
+     * @return Business
      */
     public function setAdresse($adresse)
     {
@@ -103,7 +103,7 @@ class Establishment
      * Set codePostal
      *
      * @param string $codePostal
-     * @return Establishment
+     * @return Business
      */
     public function setCodePostal($codePostal)
     {

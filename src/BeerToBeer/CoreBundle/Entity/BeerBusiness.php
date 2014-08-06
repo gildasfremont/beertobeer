@@ -5,12 +5,12 @@ namespace BeerToBeer\CoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * BeerEstablishment
+ * BeerBusiness
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="BeerToBeer\CoreBundle\Entity\BeerEstablishmentRepository")
+ * @ORM\Entity(repositoryClass="BeerToBeer\CoreBundle\Entity\BeerBusinessRepository")
  */
-class BeerEstablishment
+class BeerBusiness
 {
     /**
      * @var integer
@@ -34,9 +34,9 @@ class BeerEstablishment
 
     /**
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Establishment")
+     * @ORM\ManyToOne(targetEntity="Business")
      */
-    private $establishment;
+    private $business;
 
 
 
@@ -54,7 +54,7 @@ class BeerEstablishment
      * Set prixNormal
      *
      * @param integer $prixNormal
-     * @return BeerEstablishment
+     * @return BeerBusiness
      */
     public function setPrixNormal($prixNormal)
     {
@@ -77,7 +77,7 @@ class BeerEstablishment
      * Set prixHappyHour
      *
      * @param integer $prixHappyHour
-     * @return BeerEstablishment
+     * @return BeerBusiness
      */
     public function setPrixHappyHour($prixHappyHour)
     {
@@ -100,7 +100,7 @@ class BeerEstablishment
      * Set beer
      *
      * @param \BeerToBeer\CoreBundle\Entity\Beer $beer
-     * @return BeerEstablishment
+     * @return BeerBusiness
      */
     public function setBeer(\BeerToBeer\CoreBundle\Entity\Beer $beer)
     {
@@ -120,25 +120,25 @@ class BeerEstablishment
     }
 
     /**
-     * Set establishment
+     * Set business
      *
-     * @param \BeerToBeer\CoreBundle\Entity\Establishment $establishment
-     * @return BeerEstablishment
+     * @param \BeerToBeer\CoreBundle\Entity\Business $business
+     * @return BeerBusiness
      */
-    public function setEstablishment(\BeerToBeer\CoreBundle\Entity\Establishment $establishment)
+    public function setBusiness(\BeerToBeer\CoreBundle\Entity\Business $business)
     {
-        $this->establishment = $establishment;
+        $this->business = $business;
 
         return $this;
     }
 
     /**
-     * Get establishment
+     * Get business
      *
-     * @return \BeerToBeer\CoreBundle\Entity\Establishment 
+     * @return \BeerToBeer\CoreBundle\Entity\Business 
      */
-    public function getEstablishment()
+    public function getBusiness()
     {
-        return $this->establishment;
+        return $this->business;
     }
 }
