@@ -19,7 +19,9 @@ body {
 /* DESIGN MOBILE */
 @media (max-width: 767px) {
 	.home {
-		margin-top: 35%;
+	    position: absolute;
+	    top: 20%;
+	    width: 100%;
 	}
 	h1 {
 		color: #f96727;
