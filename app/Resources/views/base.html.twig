@@ -16,8 +16,15 @@
 
         {% block javascripts %}
             {% javascripts
-                '@BeerToBeerCoreBundle/Resources/public/js/libs/*'
-                '@BeerToBeerCoreBundle/Resources/public/js/*' %}
+                '@BeerToBeerCoreBundle/Resources/public/js/libs/jquery-2.1.1.min.js'
+                '@BeerToBeerCoreBundle/Resources/public/js/libs/underscore-min.js'
+                '@BeerToBeerCoreBundle/Resources/public/js/libs/backbone-min.js'
+                '@BeerToBeerCoreBundle/Resources/public/js/models/*'
+                '@BeerToBeerCoreBundle/Resources/public/js/collections/*'
+                '@BeerToBeerCoreBundle/Resources/public/js/routers/*'
+                '@BeerToBeerCoreBundle/Resources/public/js/views/*'
+                '@BeerToBeerCoreBundle/Resources/public/js/*'
+                 %}
                 <script src="{{ asset_url }}"></script>
             {% endjavascripts %}
         {% endblock %}
