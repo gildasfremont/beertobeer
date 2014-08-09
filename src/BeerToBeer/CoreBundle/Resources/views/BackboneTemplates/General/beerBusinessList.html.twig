@@ -1,0 +1,14 @@
+<ul>
+    <% _.each( beerBusinesses, function( beerBusiness ){ %>
+
+        <li>
+         
+            <%- beerBusiness.businessNom %>
+             
+            Prix normal : <%= beerBusiness.prixNormal %>
+            Prix Happy Hour : <%= beerBusiness.prixHappyHour %>
+         
+        </li>
+     
+    <% }); %>
+</ul>
