@@ -10,12 +10,6 @@
       prixNormal: 0,
       prixHappyHour: 0,
       businessNom: ''
-    },
-
-    toggle: function() {
-      this.save({
-        completed: !this.get('completed')
-      });
     }
 
   });
