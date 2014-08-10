@@ -1,7 +1,7 @@
 var app = app || {};
 
 app.BeerBusinessesView = Backbone.View.extend({
-    el: '#home',
+    el: '#general',
 
     events: {
         'submit #searchForm': 'submitSearch'
