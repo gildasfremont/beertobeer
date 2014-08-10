@@ -50,6 +50,10 @@ body {
 		border-radius: 0;
 		padding: 6px 30px;
 	}
+	.beerBusinessList #searchForm input {
+		padding-left: 10px;
+		margin-top: 15px;
+	}
 	#searchForm button {
 		padding: 8px 10px;
 		margin:0;
