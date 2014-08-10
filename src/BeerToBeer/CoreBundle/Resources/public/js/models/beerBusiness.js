@@ -5,7 +5,7 @@
   app.BeerBusiness = Backbone.Model.extend({
 
     defaults: {
-      prixNormal: 0,
+      prixNow: 0,
       prixHappyHour: 0,
       businessNom: ''
     }
