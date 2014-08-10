@@ -77,4 +77,36 @@ body {
 	.left-icon button  { left:  0px;}
 	.right-icon button { right: 0px;}
 
+	.infosPrix {
+		border: 1px solid #eeeeee;
+		margin: 20px 5px;
+    	padding: 6px 0;
 	}
+	.infosPrix .titre {
+		font-size: 0.8em;
+		text-align: right;
+		line-height: 16px;
+		color: #979797;
+		padding-right: 0;
+	}
+	.prix {
+		line-height: 16px;
+	}
+	.bar {
+		line-height: 16px;
+		padding-left: 0;
+	}
+	.BBCounts {
+		font-size: 0.8em;
+		color: #979797;
+	}
+	.prixHappyHour {
+		color: #b3b3b3;
+	}
+	.prixNow {
+		color: #f96727;
+	}
+	.beerBusiness {
+		margin: 10px 0;
+	}
+}
