@@ -8,26 +8,26 @@ app.BeerBusinessesView = Backbone.View.extend({
     },
 
     initialize: function( initialBeerBusinesses ) {
-        console.log("init app");
+        console.log("Init BeerBusinessesView");
         this.collection = app.BeerBusinesses;
         this.collection.reset(app.fixtures);
     },
 
     submitSearch: function(e) {
         e.preventDefault();
-        console.log("submitSearch");
+        console.log("Search Form submitted");
         location.href = "#search/"+ $('#searchInput').val();
     },
 
     search: function(adress) {
         console.log("Adresse : "+ adress);
+        this.$el.html(_.template($('#beerBusinessList').html(), { BBCounts: this.collection.length }));
         $('#searchInput').val(adress);
         if (adress != '')
             this.render();
     },
 
     render: function() {
-        this.$el.html(_.template($('#beerBusinessList').html(), { BBCounts: this.collection.length }));
         $('#bBContainer').html('');
         this.collection.each(function( item ) {
             this.renderBeerBusiness( item );

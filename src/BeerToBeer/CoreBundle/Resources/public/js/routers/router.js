@@ -6,7 +6,7 @@ $(function() {
 	  },
 
 	  search: function(adress){
-	    console.log("Search requested.");
+	    console.log("Search Route requested.");
 	    app.AppView.search(adress);
 	  },
 	});

@@ -1,6 +1,8 @@
 var app = app || {};
 
 $(function() {
+	console.log("Init App");
+
     app.fixtures = [
         { businessNom: 'Dirty Dick', prixNow: 2, prixHappyHour: 2 },
         { businessNom: 'Marlusse et Lapin', prixNow: 6, prixHappyHour: 4.3 },
