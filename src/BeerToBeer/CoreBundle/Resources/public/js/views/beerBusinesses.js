@@ -26,7 +26,8 @@ app.BeerBusinessesView = Backbone.View.extend({
     },
 
     render: function() {
-        $('#beerBusinessContainer').html('');
+        this.$el.html(_.template($('#beerBusinessList').html(), { BBCounts: this.collection.length }));
+        $('#bBContainer').html('');
         this.collection.each(function( item ) {
             this.renderBeerBusiness( item );
         }, this );
@@ -36,6 +37,6 @@ app.BeerBusinessesView = Backbone.View.extend({
         var beerBusinessView = new app.BeerBusinessView({
             model: item
         });
-        $('#beerBusinessContainer').append( beerBusinessView.render().el );
+        $('#bBContainer').append( beerBusinessView.render().el );
     }
 });

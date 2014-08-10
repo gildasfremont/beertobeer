@@ -1,8 +1,8 @@
 var app = app || {};
 
 app.BeerBusinessView = Backbone.View.extend({
-    tagName: 'li',
-    className: 'beerBusiness',
+    tagName: 'div',
+    className: 'row',
     template: _.template( $( '#beerBusiness' ).html() ),
 
     render: function() {

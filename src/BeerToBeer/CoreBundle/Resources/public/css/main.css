@@ -37,26 +37,26 @@ body {
 		font-size: 18px;
 		margin-top: 0;
 	}
-	#home form {
+	#searchForm {
 		margin: 0 12px;
 		text-align: center;
 	}
-	#home form label {
+	#searchForm label {
 		font-weight: normal;
 		font-size: 13px;
 		margin-top: 25px;
 	}
-	#home form input {
+	#searchForm input {
 		border-radius: 0;
 		padding: 6px 30px;
 	}
-	#home form button {
+	#searchForm button {
 		padding: 8px 10px;
 		margin:0;
 		border:0; /* Remove default button styles */
 		background-color:transparent;
 	}
-	#home .location {
+	#searchForm .location {
 		float: right;
 		margin-right: 6px;
 		margin-top: 4px;

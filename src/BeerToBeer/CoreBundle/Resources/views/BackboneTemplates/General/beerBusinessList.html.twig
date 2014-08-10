@@ -1,0 +1,30 @@
+<div class="beerBusinessList">
+	<div class="leftBack"></div>
+	<h1>Beer to Beer</h1>
+
+	<form action="#" method="get" id="searchForm">
+		<div class="inner-icon left-icon">
+			<a href="location.php"><img src="{{ asset('bundles/beertobeercore/images/location.png') }}" alt="Localisation" title="Localisez-vous !" class="location" /></a>
+			<input type="search" id="searchInput" class="form-control" />
+		</div>
+	</form>
+	<div class="container">
+		<div class="infosPrix row">
+			<div class="col-xs-9">
+				Prix de la pinte en Happy Hour<br>
+				Prix de la pinte en ce moment
+			</div>
+			<div class="col-xs-3">
+				<span class="prixHappyHour">€ 4</span><br>
+				<span class="prixNow">€ 8</span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<%= BBCounts %> établissements
+			</div>
+		</div>
+		<div id="bBContainer">
+
+		</div>
+</div>
