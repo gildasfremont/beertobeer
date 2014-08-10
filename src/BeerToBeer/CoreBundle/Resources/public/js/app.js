@@ -1,7 +1,7 @@
 var app = app || {};
 
 $(function() {
-    var beerBusinesses = [
+    app.fixtures = [
         { businessNom: 'Dirty Dick', prixNormal: 2, prixHappyHour: 2 },
         { businessNom: 'Marlusse et Lapin', prixNormal: 6, prixHappyHour: 4.3 },
         { businessNom: 'Le Syphax', prixNormal: 6.5, prixHappyHour: 4 },
@@ -10,5 +10,5 @@ $(function() {
 
     ];
 
-    new app.BeerBusinessesView( beerBusinesses );
+    app.AppView = new app.BeerBusinessesView();
 });
