@@ -7,7 +7,10 @@
     defaults: {
       prixNow: 0,
       prixHappyHour: 0,
-      businessNom: ''
+      businessNom: '',
+      businessType: "Bar",
+      businessAdress: "",
+      businessDistance: ""
     }
 
   });
