@@ -21,6 +21,7 @@ app.BeerBusinessesView = Backbone.View.extend({
 
     search: function(adress) {
         console.log("Adresse : "+ adress);
+        $('#searchInput').val(adress);
         if (adress != '')
             this.render();
     },
