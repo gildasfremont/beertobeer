@@ -9,10 +9,6 @@ var Router = Backbone.Router.extend({
     console.log("Search requested.");
     app.AppView.search(adress);
   },
-
-  editTodo: function(id) {
-    console.log("Edit todo opened.");
-  }
 });
 
 app.Router = new Router();
