@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class DefaultController extends Controller
 {
-    public function searchFromGpsAction()
+    public function searchFromGpsAction($latitude, $longitude)
     {
         $response = new JsonResponse();
 		return $response->setData(array(

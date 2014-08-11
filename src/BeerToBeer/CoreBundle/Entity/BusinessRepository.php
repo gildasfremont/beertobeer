@@ -12,4 +12,29 @@ use Doctrine\ORM\EntityRepository;
  */
 class BusinessRepository extends EntityRepository
 {
+	/**
+	 * getClosestBusinesses($latitude, $longitude, $offset = 0, $limit = 10)
+	 *
+	 * S'utilise pour trouver les établissements les plus proches d'une position en donnant une limite
+	 *
+	 * float $latitude : la latitude de l'utilisateur
+	 * float $longitude : la longitude de l'utilisateur
+	 * int $offset : par où on commence à lire les résultats, à utiliser lors du lazy loading
+	 * int $limit : le nombre d'établissements à afficher
+	 *
+	 **/
+	public function getClosestBusinesses($latitude, $longitude, $offset = 0, $limit = 10) {
+
+		$query = $this->_em->createQuery('
+			SELECT b, 
+			GEO_DISTANCE(:latitude, :longitude, b.latitude, b.longitude) AS distance 
+			FROM BeerToBeerCoreBundle:Business b
+			ORDERBY distance')
+			->setParameter('latitude', $latitude)
+		    ->setParameter('longitude', $longitude)
+			->setFirstResult($offset)
+			->setMaxResults($limit);
+
+		return $query->getArrayResult();
+	}
 }
