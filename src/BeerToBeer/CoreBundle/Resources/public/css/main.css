@@ -50,7 +50,7 @@ body {
 		border-radius: 0;
 		padding: 6px 30px;
 	}
-	.beerBusinessList #searchForm input {
+	.businessList #searchForm input {
 		padding-left: 10px;
 		margin-top: 15px;
 	}
@@ -81,43 +81,51 @@ body {
 	.left-icon button  { left:  0px;}
 	.right-icon button { right: 0px;}
 
-	.beerBusinessList .infosPrix {
+	.businessList .infosPrix {
 		border: 1px solid #eeeeee;
 		margin: 20px 5px;
     	padding: 6px 0;
 	}
-	.beerBusinessList .infosPrix .titre {
+	.businessList .infosPrix .titre {
 		font-size: 0.8em;
 		text-align: right;
 		line-height: 16px;
 		color: #979797;
 		padding-right: 0;
 	}
-	.beerBusinessList .prix {
+	.businessList .prix {
 		line-height: 16px;
 	}
-	.beerBusinessList .bar {
+	.businessList .bar {
 		line-height: 16px;
 		padding-left: 0;
-	}
-	.beerBusinessList .BBCounts {
+		white-space:nowrap;
+		overflow: hidden;
+		-o-text-overflow: ellipsis;
+		text-overflow: ellipsis;
 		font-size: 0.8em;
 		color: #979797;
 	}
-	.beerBusinessList .prixHappyHour {
+	.businessList .bar .nom {
+		color: #333;
+		font-size: 14px;
+	}
+	.businessList .BusinessesCounts {
+		font-size: 0.8em;
+		color: #979797;
+	}
+	.businessList .prixHappyHour {
 		color: #b3b3b3;
 	}
-	.beerBusinessList .prixNow {
+	.businessList .prixNow {
 		color: #f96727;
 	}
-	.beerBusinessList .beerBusiness {
+	.businessList .business {
 		margin: 10px 0;
 	}
-	.beerBusinessList .adress {
-		font-size: 0.8em;
-		color: #979797;
-	}
-	.beerBusinessList .type {
-		font-size: 0.7em;
+	.businessList .type {
+		font-size: 1em;
+		color: #333;
+		margin-left: 7px;
 	}
 }

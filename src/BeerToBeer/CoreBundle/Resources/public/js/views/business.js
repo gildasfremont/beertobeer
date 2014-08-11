@@ -1,9 +1,9 @@
 var app = app || {};
 
-app.BeerBusinessView = Backbone.View.extend({
+app.BusinessView = Backbone.View.extend({
     tagName: 'div',
-    className: 'row beerBusiness',
-    template: _.template( $( '#beerBusiness' ).html() ),
+    className: 'row business',
+    template: _.template( $( '#business' ).html() ),
 
     render: function() {
         this.$el.html( this.template( this.model.attributes ) );

@@ -7,7 +7,7 @@ $(function() {
 
 	  search: function(adress){
 	    console.log("Search Route requested.");
-	    app.AppView.search(adress);
+	    app.AppView.BusinessesView.search(adress);
 	  },
 	});
 
