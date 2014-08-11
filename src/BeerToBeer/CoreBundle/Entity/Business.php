@@ -35,19 +35,9 @@ class Business
      * 
      * @ORM\Column(name="type", type="smallint")
      */
-    private $typeInt;
-
-    /**
-     * @var string
-     */
     private $type;
 
-    /**
-     * @var array
-     * 
-     * La correspondance entre le type et sa valeur numérale
-     */
-    private $typeArray;
+    const TYPE_BAR = 1;
 
     /**
      * @var string
@@ -83,16 +73,6 @@ class Business
      * @ORM\Column(name="longitude", type="float")
      */
     private $longitude;
-
-    public function __construct() {
-        $this->typeArray = array(
-            "Bar" => 1
-        );
-        foreach ($this->typeArray as $key => $value) {
-            if ($this->typeInt == $value)
-                $this->type = $key;
-        }
-    }
 
 
     /**
@@ -185,30 +165,6 @@ class Business
     }
 
     /**
-     * Set type
-     *
-     * @param string $type
-     * @return Business
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-        $this->typeInt = $this->typeArray[$type];
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string 
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
      * Set ville
      *
      * @param string $ville
@@ -278,25 +234,25 @@ class Business
     }
 
     /**
-     * Set typeInt
+     * Set type
      *
-     * @param integer $typeInt
+     * @param integer $type
      * @return Business
      */
-    public function setTypeInt($typeInt)
+    public function setType($type)
     {
-        $this->typeInt = $typeInt;
+        $this->type = $type;
 
         return $this;
     }
 
     /**
-     * Get typeInt
+     * Get type
      *
      * @return integer 
      */
-    public function getTypeInt()
+    public function getType()
     {
-        return $this->typeInt;
+        return $this->type;
     }
 }
