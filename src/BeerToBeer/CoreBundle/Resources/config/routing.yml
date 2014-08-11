@@ -1,3 +1,10 @@
 beer_to_beer_core_homepage:
     path:     /
     defaults: { _controller: BeerToBeerCoreBundle:Default:index }
+
+btb_api_gps:
+    path:     /api/business/gps/lat/{latitude}/long/{longitude}
+    defaults: { _controller: BeerToBeerCoreBundle:Api:searchFromGps }
+    requirements:
+        latitude:  -?\d+\.\d+
+        longitude: -?\d+\.\d+

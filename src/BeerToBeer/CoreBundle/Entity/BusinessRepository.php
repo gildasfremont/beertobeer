@@ -35,6 +35,17 @@ class BusinessRepository extends EntityRepository
 			->setFirstResult($offset)
 			->setMaxResults($limit);
 
-		return $query->getArrayResult();
+		$results =  $query->getArrayResult();
+
+		// Render the results as the API wants it
+		$businessesForApi = array();
+		$i = 0;
+		foreach ($results as $key => $result) {
+			$businessesForApi[$i] = $result[0];
+			$businessesForApi[$i]["distance"] = round($result["distance"]*1000, -1); // On ajoute la distance en mètres arrondi aux dizaines
+			$i++;
+		}
+
+		return $businessesForApi;
 	}
 }
