@@ -19,3 +19,5 @@ bin/security-checker.bat
 composer.lock
 app/check.php
 app/SymfonyRequirements.php
+composer.lock
+app/check.php
