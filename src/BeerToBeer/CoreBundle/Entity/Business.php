@@ -36,11 +36,32 @@ class Business
     private $adresse;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="codePostal", type="string", length=5)
+     * @ORM\Column(name="codePostal", type="integer", length=5)
      */
     private $codePostal;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ville", type="string", length=60)
+     */
+    private $ville;
+
+    /**
+     * @var decimal
+     *
+     * @ORM\Column(name="latitude", type="decimal")
+     */
+    private $latitude;
+
+    /**
+     * @var decimal
+     *
+     * @ORM\Column(name="longitude", type="decimal")
+     */
+    private $longitude;
 
 
     /**
