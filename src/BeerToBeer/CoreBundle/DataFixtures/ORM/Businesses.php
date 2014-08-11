@@ -59,7 +59,7 @@ class Businesses implements FixtureInterface, OrderedFixtureInterface
       }
       $liste_items[$i]->setLatitude($item["lat"]);
       $liste_items[$i]->setLongitude($item["long"]);
-      $liste_items[$i]->setType("Bar");
+      $liste_items[$i]->setType(Business::TYPE_BAR);
 
       $manager->persist($liste_items[$i]);
     }
