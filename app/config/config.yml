@@ -60,8 +60,8 @@ doctrine:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
         dql:
-        numeric_functions:
-            GEO_DISTANCE: Craue\GeoBundle\Doctrine\Query\Mysql\GeoDistance
+            numeric_functions:
+                GEO_DISTANCE: Craue\GeoBundle\Doctrine\Query\Mysql\GeoDistance
 
 # Swiftmailer Configuration
 swiftmailer:
