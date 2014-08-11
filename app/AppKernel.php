@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new SimpleThings\EntityAudit\SimpleThingsEntityAuditBundle(),
+            new Craue\GeoBundle\CraueGeoBundle(),
             
             new BeerToBeer\CoreBundle\BeerToBeerCoreBundle(),
         );
