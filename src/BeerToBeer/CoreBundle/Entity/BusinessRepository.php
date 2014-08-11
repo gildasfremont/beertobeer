@@ -29,7 +29,7 @@ class BusinessRepository extends EntityRepository
 			SELECT b, 
 			GEO_DISTANCE(:latitude, :longitude, b.latitude, b.longitude) AS distance 
 			FROM BeerToBeerCoreBundle:Business b
-			ORDERBY distance')
+			ORDER BY distance')
 			->setParameter('latitude', $latitude)
 		    ->setParameter('longitude', $longitude)
 			->setFirstResult($offset)
