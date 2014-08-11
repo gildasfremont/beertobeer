@@ -9,14 +9,17 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class ApiController extends Controller
 {
 	public function businessAction() {
+		$request = $this->getRequest();
+
+		if ($request->query->get('latitude') != null && $request->query->get('longitude') != null)
+			return $this->searchFromGpsAction($request->query->get('latitude'), $request->query->get('longitude'));
+
+		throw new HttpException(404, "Page introuvable.");
 	}
 
-    public function searchFromGpsAction()
+    public function searchFromGpsAction($latitude, $longitude)
     {
-    	$request = $this->getRequest();
-    	$latitude = $request->query->get('latitude');
-    	$longitude = $request->query->get('longitude');
-    	if ($latitude == null || $longitude == null){
+    	if (!is_numeric($latitude) || !is_numeric($longitude)) {
     		// Throw 400 BAD REQUEST puisqu'il manque des informations ou qu'elles sont mal données
     		throw new HttpException(400, "Vos coordonnées GPS sont absentes ou mal données.");
     	}
