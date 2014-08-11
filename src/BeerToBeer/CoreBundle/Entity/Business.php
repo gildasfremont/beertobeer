@@ -29,6 +29,15 @@ class Business
     private $nom;
 
     /**
+     * @var integer
+     *
+     * Le "type" de l'établissement : 1 si c'est un bar et... c'est tout pour l'instant
+     * 
+     * @ORM\Column(name="type", type="smallint")
+     */
+    private $type
+
+    /**
      * @var string
      *
      * @ORM\Column(name="adresse", type="string", length=255)
