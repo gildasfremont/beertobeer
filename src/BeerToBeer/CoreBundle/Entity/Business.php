@@ -35,7 +35,19 @@ class Business
      * 
      * @ORM\Column(name="type", type="smallint")
      */
-    private $type
+    private $typeInt;
+
+    /**
+     * @var string
+     */
+    private $type;
+
+    /**
+     * @var array
+     * 
+     * La correspondance entre le type et sa valeur numérale
+     */
+    private $typeArray;
 
     /**
      * @var string
@@ -71,6 +83,16 @@ class Business
      * @ORM\Column(name="longitude", type="decimal")
      */
     private $longitude;
+
+    public function __construct() {
+        $this->typeArray = array(
+            "Bar" => 1
+        );
+        foreach ($this->typeArray as $key => $value) {
+            if ($this->typeInt == $value)
+                $this->type = $key;
+        }
+    }
 
 
     /**
@@ -150,5 +172,98 @@ class Business
     public function getCodePostal()
     {
         return $this->codePostal;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     * @return Business
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+        $this->typeInt = $this->typeArray[$type];
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string 
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set ville
+     *
+     * @param string $ville
+     * @return Business
+     */
+    public function setVille($ville)
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    /**
+     * Get ville
+     *
+     * @return string 
+     */
+    public function getVille()
+    {
+        return $this->ville;
+    }
+
+    /**
+     * Set latitude
+     *
+     * @param string $latitude
+     * @return Business
+     */
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    /**
+     * Get latitude
+     *
+     * @return string 
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * Set longitude
+     *
+     * @param string $longitude
+     * @return Business
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    /**
+     * Get longitude
+     *
+     * @return string 
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
     }
 }
