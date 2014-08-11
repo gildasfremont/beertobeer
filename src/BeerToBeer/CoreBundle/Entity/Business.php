@@ -59,7 +59,7 @@ class Business
     /**
      * @var integer
      *
-     * @ORM\Column(name="codePostal", type="integer", length=5)
+     * @ORM\Column(name="codePostal", type="integer")
      */
     private $codePostal;
 
@@ -71,16 +71,16 @@ class Business
     private $ville;
 
     /**
-     * @var decimal
+     * @var float
      *
-     * @ORM\Column(name="latitude", type="decimal")
+     * @ORM\Column(name="latitude", type="float")
      */
     private $latitude;
 
     /**
-     * @var decimal
+     * @var float
      *
-     * @ORM\Column(name="longitude", type="decimal")
+     * @ORM\Column(name="longitude", type="float")
      */
     private $longitude;
 
@@ -149,6 +149,16 @@ class Business
     public function getAdresse()
     {
         return $this->adresse;
+    }
+
+    /**
+     * Get adresse complète
+     *
+     * @return string 
+     */
+    public function getAdresseComplete()
+    {
+        return $this->adresse + ",  " + $this->codePostal + " " + $this->ville;
     }
 
     /**
@@ -265,5 +275,28 @@ class Business
     public function getLongitude()
     {
         return $this->longitude;
+    }
+
+    /**
+     * Set typeInt
+     *
+     * @param integer $typeInt
+     * @return Business
+     */
+    public function setTypeInt($typeInt)
+    {
+        $this->typeInt = $typeInt;
+
+        return $this;
+    }
+
+    /**
+     * Get typeInt
+     *
+     * @return integer 
+     */
+    public function getTypeInt()
+    {
+        return $this->typeInt;
     }
 }
