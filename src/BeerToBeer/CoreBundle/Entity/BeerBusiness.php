@@ -13,25 +13,25 @@ use Doctrine\ORM\Mapping as ORM;
 class BeerBusiness
 {
     /**
-     * @var integer
+     * @var float
      *
-     * @ORM\Column(name="prixNormal", type="integer")
+     * @ORM\Column(name="prixNormal", type="float")
      */
     private $prixNormal;
 
     /**
-     * @var integer
+     * @var float
      *
-     * @ORM\Column(name="prixHappyHour", type="integer")
+     * @ORM\Column(name="prixHappyHour", type="float")
      */
     private $prixHappyHour;
 
     /**
-     * @var integer
+     * @var float
      *
      * Le volume de la bière servie, en cl
      *
-     * @ORM\Column(name="volume", type="integer")
+     * @ORM\Column(name="volume", type="float")
      */
     private $volume;
 
@@ -62,7 +62,7 @@ class BeerBusiness
     /**
      * Set prixNormal
      *
-     * @param integer $prixNormal
+     * @param float $prixNormal
      * @return BeerBusiness
      */
     public function setPrixNormal($prixNormal)
@@ -75,7 +75,7 @@ class BeerBusiness
     /**
      * Get prixNormal
      *
-     * @return integer 
+     * @return float 
      */
     public function getPrixNormal()
     {
@@ -85,7 +85,7 @@ class BeerBusiness
     /**
      * Set prixHappyHour
      *
-     * @param integer $prixHappyHour
+     * @param float $prixHappyHour
      * @return BeerBusiness
      */
     public function setPrixHappyHour($prixHappyHour)
@@ -98,7 +98,7 @@ class BeerBusiness
     /**
      * Get prixHappyHour
      *
-     * @return integer 
+     * @return float 
      */
     public function getPrixHappyHour()
     {
