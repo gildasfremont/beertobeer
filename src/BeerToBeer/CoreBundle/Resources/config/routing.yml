@@ -3,5 +3,5 @@ beer_to_beer_core_homepage:
     defaults: { _controller: BeerToBeerCoreBundle:Default:index }
 
 btb_api_gps:
-    path:     /api/business/
+    path:     /api/business
     defaults: { _controller: BeerToBeerCoreBundle:Api:business }

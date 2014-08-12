@@ -5,15 +5,15 @@ app.BusinessesView = Backbone.View.extend({
 
     initialize: function() {
         console.log("Init BusinessesView");
-        this.collection = new app.Businesses(app.fixtures);
+        this.collection = new app.Businesses();
+        this.listenTo(this.collection, "reset", this.render);
     },
 
     search: function(adress) {
         console.log("Adresse : "+ adress);
-        this.$el.html(_.template($('#businessList').html(), { BusinessesCounts: this.collection.length }));
         $('#searchInput').val(adress);
-        if (adress != '')
-            this.render();
+        this.$el.html(_.template($('#businessList').html()));
+        this.collection.fetch({reset: true, data: {latitude: 48.823549172, longitude: 2.302681803}});
     },
 
     render: function() {

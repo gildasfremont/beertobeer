@@ -1,8 +1,13 @@
-<div class="col-xs-9 bar">
-    <span class="nom"><%- nom %></span> <span class="type"><%= type %></span><br>
-    <span class="adress"><%= distance %> - <%- adress %></span>
+<div class="col-xs-10 bar">
+    <span class="nom"><%- nom %></span> 
+    <span class="type">
+    	<%= typeArray[type] %>
+    </span>
+
+    <br>
+    <span class="adress"><%= distance %> m - <%- adresse %>, <%= codePostal %> <%- ville %></span>
 </div>
-<div class="col-xs-3 prix">
+<div class="col-xs-2 prix">
     <span class="prixHappyHour">€ <%= prixHappyHour %></span><br>
     <span class="prixNow">€ <%= prixNow %></span>
 </div>

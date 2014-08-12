@@ -2,6 +2,8 @@ var app = app || {};
 
 // business Collection
 app.Businesses = Backbone.Collection.extend({
-  // Reference to this collection's model.
-  model: app.Business,
+	url: "api/business",
+
+  	// Reference to this collection's model.
+  	model: app.Business,
 });
