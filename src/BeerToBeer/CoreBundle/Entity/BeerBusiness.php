@@ -27,6 +27,15 @@ class BeerBusiness
     private $prixHappyHour;
 
     /**
+     * @var integer
+     *
+     * Le volume de la bière servie, en cl
+     *
+     * @ORM\Column(name="volume", type="integer")
+     */
+    private $volume;
+
+    /**
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Beer")
      */
@@ -140,5 +149,28 @@ class BeerBusiness
     public function getBusiness()
     {
         return $this->business;
+    }
+
+    /**
+     * Set volume
+     *
+     * @param integer $volume
+     * @return BeerBusiness
+     */
+    public function setVolume($volume)
+    {
+        $this->volume = $volume;
+
+        return $this;
+    }
+
+    /**
+     * Get volume
+     *
+     * @return integer 
+     */
+    public function getVolume()
+    {
+        return $this->volume;
     }
 }
