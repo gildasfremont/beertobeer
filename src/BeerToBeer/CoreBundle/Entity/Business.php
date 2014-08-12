@@ -74,6 +74,11 @@ class Business
      */
     private $longitude;
 
+    /**
+     * @ORM\OneToMany(targetEntity="BeerToBeer\CoreBundle\Entity\BeerBusiness", mappedBy="business")
+     */
+    private $beerBusinesses;
+
 
     /**
      * Get id
@@ -254,5 +259,45 @@ class Business
     public function getType()
     {
         return $this->type;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->beerBusinesses = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add beerBusinesses
+     *
+     * @param \BeerToBeer\CoreBundle\Entity\BeerBusiness $beerBusinesses
+     * @return Business
+     */
+    public function addBeerBusiness(\BeerToBeer\CoreBundle\Entity\BeerBusiness $beerBusinesses)
+    {
+        $this->beerBusinesses[] = $beerBusinesses;
+
+        return $this;
+    }
+
+    /**
+     * Remove beerBusinesses
+     *
+     * @param \BeerToBeer\CoreBundle\Entity\BeerBusiness $beerBusinesses
+     */
+    public function removeBeerBusiness(\BeerToBeer\CoreBundle\Entity\BeerBusiness $beerBusinesses)
+    {
+        $this->beerBusinesses->removeElement($beerBusinesses);
+    }
+
+    /**
+     * Get beerBusinesses
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBeerBusinesses()
+    {
+        return $this->beerBusinesses;
     }
 }
