@@ -26,10 +26,12 @@ class BusinessRepository extends EntityRepository
 	public function getClosestBusinesses($latitude, $longitude, $offset = 0, $limit = 10) {
 
 		$query = $this->_em->createQuery('
-			SELECT b, 
-			GEO_DISTANCE(:latitude, :longitude, b.latitude, b.longitude) AS distance 
-			FROM BeerToBeerCoreBundle:Business b
-			ORDER BY distance')
+			SELECT bu, bb, 
+			GEO_DISTANCE(:latitude, :longitude, bu.latitude, bu.longitude) AS distance 
+			FROM BeerToBeerCoreBundle:Business bu
+			JOIN bu.beerBusinesses bb
+			ORDER BY distance, bb.prixHappyHour
+			')
 			->setParameter('latitude', $latitude)
 		    ->setParameter('longitude', $longitude)
 			->setFirstResult($offset)
@@ -43,6 +45,11 @@ class BusinessRepository extends EntityRepository
 		foreach ($results as $key => $result) {
 			$businessesForApi[$i] = $result[0];
 			$businessesForApi[$i]["distance"] = round($result["distance"]*1000, -1); // On ajoute la distance en mètres arrondi aux dizaines
+			$businessesForApi[$i]["prixNow"] = $businessesForApi[$i]["beerBusinesses"][0]["prixNormal"];
+			$businessesForApi[$i]["prixHappyHour"] = $businessesForApi[$i]["beerBusinesses"][0]["prixHappyHour"];
+
+			unset($businessesForApi[$i]["beerBusinesses"]);
+
 			$i++;
 		}
 
