@@ -29,9 +29,9 @@ class Beer
     private $name;
 
     /**
-     * @var integer
+     * @var float
      *
-     * @ORM\Column(name="degree", type="integer")
+     * @ORM\Column(name="degree", type="float")
      */
     private $degree;
 
@@ -72,7 +72,7 @@ class Beer
     /**
      * Set degree
      *
-     * @param integer $degree
+     * @param float $degree
      * @return Beer
      */
     public function setDegree($degree)
@@ -85,7 +85,7 @@ class Beer
     /**
      * Get degree
      *
-     * @return integer 
+     * @return float 
      */
     public function getDegree()
     {
