@@ -75,9 +75,14 @@ class Business
     private $longitude;
 
     /**
-     * @ORM\OneToMany(targetEntity="BeerToBeer\CoreBundle\Entity\BeerBusiness", mappedBy="business")
+     * @ORM\OneToMany(targetEntity="BeerBusiness", mappedBy="business")
      */
     private $beerBusinesses;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Horaire", mappedBy="business")
+     */
+    private $horaires;
 
 
     /**
@@ -299,5 +304,38 @@ class Business
     public function getBeerBusinesses()
     {
         return $this->beerBusinesses;
+    }
+
+    /**
+     * Add horaires
+     *
+     * @param \BeerToBeer\CoreBundle\Entity\Horaire $horaires
+     * @return Business
+     */
+    public function addHoraire(\BeerToBeer\CoreBundle\Entity\Horaire $horaires)
+    {
+        $this->horaires[] = $horaires;
+
+        return $this;
+    }
+
+    /**
+     * Remove horaires
+     *
+     * @param \BeerToBeer\CoreBundle\Entity\Horaire $horaires
+     */
+    public function removeHoraire(\BeerToBeer\CoreBundle\Entity\Horaire $horaires)
+    {
+        $this->horaires->removeElement($horaires);
+    }
+
+    /**
+     * Get horaires
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getHoraires()
+    {
+        return $this->horaires;
     }
 }
