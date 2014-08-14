@@ -59,5 +59,12 @@ app.BusinessesView = Backbone.View.extend({
             model: item
         });
         $('#businessesContainer').append( businessView.render().el );
+    },
+
+    renderFullBusiness: function( id ) {
+        var businessView = new app.BusinessView({
+            model: this.collection.get(id)
+        });
+        businessView.renderFull();
     }
 });

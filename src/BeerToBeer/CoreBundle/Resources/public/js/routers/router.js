@@ -3,7 +3,8 @@ $(function() {
 	var Router = Backbone.Router.extend({
 	  routes: {
 	    "search/:adress": "search",
-	    "gps": "gps"
+	    "gps": "gps",
+	    "business/:id": "fullBusiness"
 	  },
 
 	  search: function(adress){
@@ -14,6 +15,11 @@ $(function() {
 	  gps: function() {
 	  	console.log("GPS Route requested.");
 	  	app.AppView.BusinessesView.gps();
+	  },
+
+	  fullBusiness: function(id) {
+		console.log("fullBusiness (id: "+id+") Route requested.");
+		app.AppView.BusinessesView.renderFullBusiness(id);
 	  }
 	});
 
