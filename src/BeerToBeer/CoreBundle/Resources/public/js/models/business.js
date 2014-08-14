@@ -3,19 +3,21 @@
   // Business Model
 
   app.Business = Backbone.Model.extend({
-
     defaults: {
       typeArray: {
         1: "Bar",
         2: "Resto"
       },
 
-      prixNow: 0,
+      id: 0,
+      prixNormal: 0,
       prixHappyHour: 0,
       nom: '',
-      type: "Bar",
+      type: 1,
       adress: "",
-      distance: ""
+      distance: "",
+      horaires: {},
+      prixNow: 0
     }
 
   });
