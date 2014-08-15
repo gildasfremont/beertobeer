@@ -59,12 +59,13 @@ class BusinessRepository extends EntityRepository
 
 	public function getBusiness($id) {
 		$query = $this->_em->createQuery('
-			SELECT bu
+			SELECT bu, h
 			FROM BeerToBeerCoreBundle:Business bu
+			LEFT JOIN bu.horaires h
 			WHERE bu.id = :id
 			')
 			->setParameter('id', $id)
-			->setMaxResults(1);
+		;
 
 		$result =  $query->getArrayResult();
 

@@ -15,14 +15,14 @@ class Horaires implements FixtureInterface, OrderedFixtureInterface
     $items = array(
         array(
           "business" => "Le Timbre Poste",
-          "jour" => 3,
+          "jour" => 5,
           "ouverture" => new \DateTime("9:00"),
           "duree" => 840,
           "happyHour" => false
         ),
         array(
           "business" => "Le Timbre Poste",
-          "jour" => 3,
+          "jour" => 5,
           "ouverture" => new \DateTime("16:00"),
           "duree" => 120,
           "happyHour" => true

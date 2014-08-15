@@ -7,7 +7,24 @@
 		<div class="row">
 			<div class="horaires col-xs-12">
 				<div class="today pull-left">
-					Ouvert de 18:00 à 19:00
+					<% var day = new Date().getDay(); 
+					if (typeof horaires[day] != 'undefined') {
+						if (horaires[day].normal.ouvert) {
+							%>
+							Ouvert de <%= horaires[day].normal.ouverture.getHours() %>:<% var minutes = horaires[day].normal.ouverture.getMinutes();
+							if (minutes < 10) { %>0<%= minutes %>
+							<% } else { %><%= minutes %>
+							<% } %>
+							à <%= horaires[day].normal.fermeture.getHours() %>:<% var minutes = horaires[day].normal.fermeture.getMinutes();
+							if (minutes < 10) { %>0<%= minutes %>
+							<% } else { %><%= minutes %>
+							<% } 
+						} else { %>
+							Fermé
+						<% } 
+					} else { %>
+						Inconnu
+					<% } %>
 				</div>
 				<div class="more pull-right">
 					Horaires
