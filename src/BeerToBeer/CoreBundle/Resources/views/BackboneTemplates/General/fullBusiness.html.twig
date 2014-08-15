@@ -3,32 +3,38 @@
 	<h1><%- nom %></h1>
 	<h2><%= typeArray[type] %></h2>
 
-	<div class="horaires">
-		<div class="today pull-left">
-			Ouvert de 18:00 à 19:00
-		</div>
-		<div class="more pull-right">
-			Horaires
-		</div>
-	</div>
-
-	<div class="location">
-		<div class="adresse pull-left">
-			<%- adresse %><br>
-			<%= codePostal %> <%- ville %>
-		</div>
-		<div class="whereIsIt pull-right">
-			<button type="button" class="btn btn-warning">C'est où ?</button>
-		</div>
-	</div>
-
-	<div class="beers">
-		<div class="type">
-			<div class="pull-left">
-				Pressions (2)
+	<div class="container">
+		<div class="row">
+			<div class="horaires col-xs-12">
+				<div class="today pull-left">
+					Ouvert de 18:00 à 19:00
+				</div>
+				<div class="more pull-right">
+					Horaires
+				</div>
 			</div>
-			<div class="pull-right">
-				Canettes et bouteilles (3)
+		</div>
+
+		<div class="row">
+			<div class="location col-xs-12">
+				<div class="adresse pull-left">
+					<%- adresse %><br>
+					<%= codePostal %> <%- ville %>
+				</div>
+				<div class="whereIsIt pull-right">
+					<button type="button" class="btn btn-default" id="btnFullBusiness">C'est où ?</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="beers">
+			<div class="type">
+				<div class="pull-left">
+					Pressions (2)
+				</div>
+				<div class="pull-right">
+					Canettes et bouteilles (3)
+				</div>
 			</div>
 		</div>
 	</div>

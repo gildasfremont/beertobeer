@@ -140,4 +140,27 @@ body {
 		color: #333;
 		font-size: 15px;
 	}
+
+	.fullBusiness .horaires {
+		background-color: #f9f9f9;
+	    height: 45px;
+    	line-height: 45px;
+	}
+	.fullBusiness .location {
+	    border-bottom: 1px solid #d5d5d5;
+	    margin-top: 10px;
+	    padding-bottom: 10px;
+	}
+	.fullBusiness .location .adresse {
+		color: #666;
+		font-size: 0.9em;
+	}
+	.fullBusiness .location #btnFullBusiness {
+		background-color: #ffe680;
+		border: 2px solid #ffcc00;
+		text-shadow: none;
+	}
+	.fullBusiness .beers {
+		margin-top: 15px;
+	}
 }
