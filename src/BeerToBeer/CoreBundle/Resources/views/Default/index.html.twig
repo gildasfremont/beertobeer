@@ -6,14 +6,7 @@
 		<h1>Beer to Beer</h1>
 		<h2>Partageons nos plans bière.</h2>
 
-		<form action="#" method="get" id="searchForm">
-			<label for="search">Cherchez une adresse, un métro à Paris</label>
-			<div class="inner-icon left-icon">
-				<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-				<a href="location.php"><img src="{{ asset('bundles/beertobeercore/images/location.png') }}" alt="Localisation" title="Localisez-vous !" class="location" /></a>
-				<input type="search" id="searchInput" class="form-control" />
-			</div>
-		</form>
+		{% include 'BeerToBeerCoreBundle:Forms:search.html.twig' %}
 	</div>
 </div>
 {% include 'BeerToBeerCoreBundle:BackboneTemplates:general.html.twig' %}

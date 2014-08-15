@@ -48,10 +48,11 @@ body {
 	}
 	#searchForm input {
 		border-radius: 0;
-		padding: 6px 30px;
+		padding: 6px 6px;
+		width: 90%;
+		border: none;
 	}
-	.businessList #searchForm input {
-		padding-left: 10px;
+	.businessList .searchDiv {
 		margin-top: 15px;
 	}
 	#searchForm button {
@@ -60,10 +61,24 @@ body {
 		border:0; /* Remove default button styles */
 		background-color:transparent;
 	}
+	#searchForm .searchDiv {
+	    width: 100%;
+	    border: 1px solid #ccc;
+	    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    	color: #555;
+    	transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+	}
+	#searchForm .searchDiv:focus {
+		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
+    	outline: 0 none;
+	}
 	#searchForm .location {
-		float: right;
-		margin-right: 6px;
-		margin-top: 4px;
+	    display: block;
+	    float: right;
+	    height: 30px;
+	    margin-right: 4px;
+	    margin-top: 4px;
+	    width: 20px;
 	}
 	/* enable absolute positioning */
 	.inner-icon { 

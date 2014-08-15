@@ -2,12 +2,7 @@
 	<div class="leftBack"></div>
 	<h1>Beer to Beer</h1>
 
-	<form action="#" method="get" id="searchForm">
-		<div class="inner-icon left-icon">
-			<a href="#gps" id="location"><img src="{{ asset('bundles/beertobeercore/images/location.png') }}" alt="Localisation" title="Localisez-vous !" class="location" /></a>
-			<input type="search" id="searchInput" class="form-control" />
-		</div>
-	</form>
+	{% include 'BeerToBeerCoreBundle:Forms:search.html.twig' %}
 	<div class="container">
 		<div class="infosPrix row">
 			<div class="col-xs-10 titre">
