@@ -12,4 +12,43 @@ use Doctrine\ORM\EntityRepository;
  */
 class BeerBusinessRepository extends EntityRepository
 {
+	/**
+	 * getBeersWithBusiness($business)
+	 *
+	 * S'utilise pour trouver les bières et leur prix d'un établissement donné
+	 *
+	 * Entity Business $business : l'établissement dont on cherche les bières
+	 *
+	 **/
+	public function getBeersWithBusiness($business) {
+
+		$query = $this->_em->createQuery('
+			SELECT bb, b
+			FROM BeerToBeerCoreBundle:BeerBusiness bb
+			JOIN bb.beer b
+			WHERE bb.business = :business
+			GROUP BY b.name
+			')
+			->setParameter('business', $business)
+		;
+
+		$results =  $query->getArrayResult();
+
+		return $results;
+
+		// Render the results as the API wants it
+		$businessesForApi = array();
+		$i = 0;
+		foreach ($results as $key => $result) {
+			$businessesForApi[$i] = $result[0];
+			$businessesForApi[$i]["name"] = $businessesForApi[$i]["beer"][0]["name"];
+			$businessesForApi[$i]["prixHappyHour"] = $businessesForApi[$i]["beerBusinesses"][0]["prixHappyHour"];
+
+			unset($businessesForApi[$i]["beerBusinesses"]);
+
+			$i++;
+		}
+
+		return $businessesForApi;
+	}
 }

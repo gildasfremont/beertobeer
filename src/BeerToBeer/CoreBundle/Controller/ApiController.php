@@ -5,6 +5,7 @@ namespace BeerToBeer\CoreBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use BeerToBeer\CoreBundle\Entity\Business;
 
 class ApiController extends Controller
 {
@@ -26,9 +27,46 @@ class ApiController extends Controller
 
     	$repo = $this->getDoctrine()->getManager()->getRepository('BeerToBeerCoreBundle:Business');
 
-    	$results = $repo->getClosestBusinesses(floatval($latitude), floatval($longitude)); // La vérification de la "validité" des nombres est déjà faite par le routeur
+    	$results = $repo->getClosestBusinesses(floatval($latitude), floatval($longitude));
 
         $response = new JsonResponse();
 		return $response->setData($results);
+    }
+
+    public function beerAction() {
+        $request = $this->getRequest();
+
+        if ($request->query->get('businessId') != null)
+            return $this->getBeersWithBusinessAction($request->query->get('businessId'));
+
+        throw new HttpException(404, "Page introuvable.");
+    }
+
+    public function getBeersWithBusinessAction($businessId)
+    {
+        if (!is_numeric($businessId)) {
+            // Throw 400 BAD REQUEST puisqu'il manque des informations ou qu'elles sont mal données
+            throw new HttpException(400, "Vous devez fournir l'ID d'un établissement.");
+        }
+
+        $repoBusiness = $this->getDoctrine()->getManager()->getRepository('BeerToBeerCoreBundle:Business');
+
+        $business = $repoBusiness->find(intval($businessId));
+
+        $repoBeerBusiness = $this->getDoctrine()->getManager()->getRepository('BeerToBeerCoreBundle:BeerBusiness');
+
+        $results = $repoBeerBusiness->getBeersWithBusiness($business);
+
+        $response = new JsonResponse();
+        return $response->setData($results);
+    }
+
+    public function getBusinessFromIdAction($id) {
+        $repoBusiness = $this->getDoctrine()->getManager()->getRepository('BeerToBeerCoreBundle:Business');
+
+        $result = $repoBusiness->getBusiness(intval($id));
+
+        $response = new JsonResponse();
+        return $response->setData($result[0]);
     }
 }

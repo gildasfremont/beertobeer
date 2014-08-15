@@ -56,4 +56,18 @@ class BusinessRepository extends EntityRepository
 
 		return $businessesForApi;
 	}
+
+	public function getBusiness($id) {
+		$query = $this->_em->createQuery('
+			SELECT bu
+			FROM BeerToBeerCoreBundle:Business bu
+			WHERE bu.id = :id
+			')
+			->setParameter('id', $id)
+			->setMaxResults(1);
+
+		$result =  $query->getArrayResult();
+
+		return $result;
+	}
 }

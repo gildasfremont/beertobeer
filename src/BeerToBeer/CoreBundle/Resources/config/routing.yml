@@ -2,6 +2,16 @@ beer_to_beer_core_homepage:
     path:     /
     defaults: { _controller: BeerToBeerCoreBundle:Default:index }
 
-btb_api_gps:
+btb_api_business:
     path:     /api/business
     defaults: { _controller: BeerToBeerCoreBundle:Api:business }
+
+btb_api_business_id:
+    path:     /api/business/{id}
+    defaults: { _controller: BeerToBeerCoreBundle:Api:getBusinessFromId }
+    requirements:
+        id: \d+
+
+btb_api_beer:
+    path:     /api/beer
+    defaults: { _controller: BeerToBeerCoreBundle:Api:beer }

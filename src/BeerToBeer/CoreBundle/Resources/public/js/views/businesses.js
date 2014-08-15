@@ -62,9 +62,19 @@ app.BusinessesView = Backbone.View.extend({
     },
 
     renderFullBusiness: function( id ) {
+        var business = new app.Business({id: id});
         var businessView = new app.BusinessView({
-            model: this.collection.get(id)
+            model: new app.Business({id: id})
         });
-        businessView.renderFull();
+        businessView.model.fetch({
+            success : function(model, response) {
+                app.AppView.BusinessesView.collection.remove(app.AppView.BusinessesView.collection.get(id));
+                app.AppView.BusinessesView.collection.add(businessView.model);
+                businessView.renderFull();
+            },
+            error : function(collection, response) {
+                // ERROR
+            }
+        });
     }
 });

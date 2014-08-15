@@ -3,6 +3,8 @@
   // Business Model
 
   app.Business = Backbone.Model.extend({
+    urlRoot: "api/business",
+
     defaults: {
       typeArray: {
         1: "Bar",
@@ -17,7 +19,8 @@
       adress: "",
       distance: "",
       horaires: {},
-      prixNow: 0
+      prixNow: 0,
+      beers: {}
     }
 
   });

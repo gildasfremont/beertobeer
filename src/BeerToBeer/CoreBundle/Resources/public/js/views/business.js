@@ -21,6 +21,8 @@ app.BusinessView = Backbone.View.extend({
     },
 
     renderFull: function() {
+        //this.model.beers = new app.Beer();
+        //this.model.beers.fetch({data: {businessId: this.model.id}});
     	app.AppView.BusinessesView.$el.html( this.templateFull( this.model.attributes ) );
     }
 });

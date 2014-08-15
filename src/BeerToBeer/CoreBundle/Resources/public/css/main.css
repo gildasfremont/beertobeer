@@ -131,4 +131,13 @@ body {
 		color: #333;
 		margin-left: 7px;
 	}
+
+	.fullBusiness h1 {
+		color: #333;
+		font-size: 18px;
+	}
+	.fullBusiness h2 {
+		color: #333;
+		font-size: 15px;
+	}
 }
