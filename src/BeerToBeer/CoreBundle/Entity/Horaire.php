@@ -36,9 +36,11 @@ class Horaire
     private $ouverture;
 
     /**
-     * @var \DateTime
+     * @var integer
      *
-     * @ORM\Column(name="duree", type="time")
+     * La durée de l'ouverture, en minutes
+     *
+     * @ORM\Column(name="duree", type="integer")
      */
     private $duree;
 
@@ -112,29 +114,6 @@ class Horaire
     }
 
     /**
-     * Set duree
-     *
-     * @param \DateTime $duree
-     * @return Horaire
-     */
-    public function setDuree($duree)
-    {
-        $this->duree = $duree;
-
-        return $this;
-    }
-
-    /**
-     * Get duree
-     *
-     * @return \DateTime 
-     */
-    public function getDuree()
-    {
-        return $this->duree;
-    }
-
-    /**
      * Set happyHour
      *
      * @param boolean $happyHour
@@ -178,5 +157,28 @@ class Horaire
     public function getBusiness()
     {
         return $this->business;
+    }
+
+    /**
+     * Set duree
+     *
+     * @param integer $duree
+     * @return Horaire
+     */
+    public function setDuree($duree)
+    {
+        $this->duree = $duree;
+
+        return $this;
+    }
+
+    /**
+     * Get duree
+     *
+     * @return integer 
+     */
+    public function getDuree()
+    {
+        return $this->duree;
     }
 }
