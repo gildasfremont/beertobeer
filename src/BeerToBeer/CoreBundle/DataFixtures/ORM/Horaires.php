@@ -27,21 +27,23 @@ class Horaires implements FixtureInterface, OrderedFixtureInterface
           "duree" => 120,
           "happyHour" => true
         ),
+
       );
 
-    foreach($items as $i => $item)
-    {
-      $liste_items[$i] = new Horaire();
-      $liste_items[$i]->setJour($item["jour"]);
-      $liste_items[$i]->setOuverture($item["ouverture"]);
-      $liste_items[$i]->setDuree($item["duree"]);
-      $liste_items[$i]->setHappyHour($item["happyHour"]);
+    $businesses = $manager->getRepository('BeerToBeerCoreBundle:Business')->findAll();
 
-      $business = $manager->getRepository('BeerToBeerCoreBundle:Business')->findBy(array("nom" => $item["business"]));
-      $business = $business[0];
-      $liste_items[$i]->setBusiness($business);
+    foreach ($businesses as $business) {
+      for ($i=0; $i <= 6; $i++) { 
+        $horaire = new Horaire();
+        $horaire->setJour($i);
+        $horaire->setOuverture(new \DateTime("9:00"));
+        $horaire->setDuree(1080);
+        $horaire->setHappyHour(false);
 
-      $manager->persist($liste_items[$i]);
+        $horaire->setBusiness($business);
+
+        $manager->persist($horaire);
+      }
     }
 
     // On déclenche l'enregistrement

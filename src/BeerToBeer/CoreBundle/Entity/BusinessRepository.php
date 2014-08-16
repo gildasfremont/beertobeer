@@ -36,7 +36,8 @@ class BusinessRepository extends EntityRepository
 			->setParameter('latitude', $latitude)
 		    ->setParameter('longitude', $longitude)
 			->setFirstResult($offset)
-			->setMaxResults($limit);
+			//->setMaxResults($limit)
+		;
 
 		$results =  $query->getArrayResult();
 
