@@ -26,10 +26,11 @@ class BusinessRepository extends EntityRepository
 	public function getClosestBusinesses($latitude, $longitude, $offset = 0, $limit = 10) {
 
 		$query = $this->_em->createQuery('
-			SELECT bu, bb, h,
+			SELECT bu, bb, h, be,
 			GEO_DISTANCE(:latitude, :longitude, bu.latitude, bu.longitude) AS distance 
 			FROM BeerToBeerCoreBundle:Business bu
 			JOIN bu.beerBusinesses bb
+			JOIN bb.beer be
 			LEFT JOIN bu.horaires h
 			ORDER BY distance, bb.prixHappyHour
 			')
@@ -45,13 +46,9 @@ class BusinessRepository extends EntityRepository
 		$businessesForApi = array();
 		$i = 0;
 		foreach ($results as $key => $result) {
-			$businessesForApi[$i] = $result[0];
+			$businessesForApi[$i] = $this->parseOneBusinessForApi($result[0]);
 			$businessesForApi[$i]["distance"] = round($result["distance"]*1000, -1); // On ajoute la distance en mètres arrondi aux dizaines
-			$businessesForApi[$i]["prixNormal"] = $businessesForApi[$i]["beerBusinesses"][0]["prixNormal"];
-			$businessesForApi[$i]["prixHappyHour"] = $businessesForApi[$i]["beerBusinesses"][0]["prixHappyHour"];
-
-			unset($businessesForApi[$i]["beerBusinesses"]);
-
+			
 			$i++;
 		}
 
@@ -60,15 +57,36 @@ class BusinessRepository extends EntityRepository
 
 	public function getBusiness($id) {
 		$query = $this->_em->createQuery('
-			SELECT bu, h
+			SELECT bu, h, bb, be
 			FROM BeerToBeerCoreBundle:Business bu
+			JOIN bu.beerBusinesses bb
+			JOIN bb.beer be
 			LEFT JOIN bu.horaires h
 			WHERE bu.id = :id
+			ORDER BY bb.prixHappyHour
 			')
 			->setParameter('id', $id)
 		;
 
 		$result =  $query->getArrayResult();
+
+		return $this->parseOneBusinessForApi($result[0]);
+	}
+
+	// S'utilise pour modifier l'array d'un business donné par Doctrine pour l'adapter à l'API
+	private function parseOneBusinessForApi($result) {
+		$result["prixNormal"] = $result["beerBusinesses"][0]["prixNormal"];
+		$result["prixHappyHour"] = $result["beerBusinesses"][0]["prixHappyHour"];
+
+		foreach ($result["beerBusinesses"] as $keyBb => $beerBusiness) {
+			$result["beers"][$keyBb]["name"] = $beerBusiness["beer"]["name"];
+			$result["beers"][$keyBb]["degree"] = $beerBusiness["beer"]["degree"];
+			$result["beers"][$keyBb]["volume"] = $beerBusiness["volume"];
+			$result["beers"][$keyBb]["prixNormal"] = $beerBusiness["prixNormal"];
+			$result["beers"][$keyBb]["prixHappyHour"] = $beerBusiness["prixHappyHour"];
+		}
+		
+		unset($result["beerBusinesses"]);
 
 		return $result;
 	}
