@@ -52,6 +52,10 @@ body {
 		width: 90%;
 		border: none;
 	}
+	#searchForm input:focus {
+		box-shadow: none;
+    	outline: 0 none;
+	}
 	.businessList .searchDiv {
 		margin-top: 15px;
 	}
