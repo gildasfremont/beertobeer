@@ -62,19 +62,24 @@ app.BusinessesView = Backbone.View.extend({
     },
 
     renderFullBusiness: function( id ) {
-        var business = new app.Business({id: id});
         var businessView = new app.BusinessView({
-            model: new app.Business({id: id})
+            model: this.collection.get(id)
         });
-        businessView.model.fetch({
-            success : function(model, response) {
-                app.AppView.BusinessesView.collection.remove(app.AppView.BusinessesView.collection.get(id));
-                app.AppView.BusinessesView.collection.add(businessView.model);
-                businessView.renderFull();
-            },
-            error : function(collection, response) {
-                // ERROR
-            }
-        });
+        if (typeof businessView.model == "undefined") {
+            businessView.model = new app.Business({id: id});
+            businessView.model.fetch({
+                success : function(model, response) {
+                    // Si elle n'existe pas déjà, on l'ajoute dans la collection
+                    app.AppView.BusinessesView.collection.add(businessView.model);
+                    businessView.renderFull();
+                },
+                error : function(collection, response) {
+                    // ERROR
+                }
+            });
+        }
+        else {
+            businessView.renderFull();
+        }
     }
 });
