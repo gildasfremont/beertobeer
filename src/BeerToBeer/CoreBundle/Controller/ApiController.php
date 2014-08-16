@@ -67,6 +67,6 @@ class ApiController extends Controller
         $result = $repoBusiness->getBusiness(intval($id));
 
         $response = new JsonResponse();
-        return $response->setData($result[0]);
+        return $response->setData($result);
     }
 }

@@ -11,7 +11,9 @@ app.BusinessView = Backbone.View.extend({
     },
 
     render: function() {
-        this.$el.html( this.template( this.model.attributes ) );
+        var attrs = this.model.attributes;
+        attrs.prixNow = this.model.getPrixNow();
+        this.$el.html( this.template( attrs ) );
 
         return this;
     },

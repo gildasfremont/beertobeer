@@ -25,7 +25,25 @@
         }
       });
       response.horaires = normalizedHoraires;
+
       return response;
+    },
+
+    getPrixNow: function() {
+      var now = new Date();
+      var todayHoraires = this.attributes.horaires[now.getDay()];
+      if (typeof todayHoraires.happyHour != "undefined" && now.getTime() >= todayHoraires.happyHour.ouverture.getTime() && now.getTime() <= todayHoraires.happyHour.fermeture.getTime()) {
+        return "€ " + this.attributes.prixHappyHour;
+      }
+      else if (typeof todayHoraires.normal != "undefined" && now.getTime() >= todayHoraires.normal.ouverture.getTime() && now.getTime() <= todayHoraires.normal.fermeture.getTime()) {
+        return "€ " + this.attributes.prixNormal;
+      }
+      else if (typeof todayHoraires.normal == "undefined") {
+        return "€ ?";
+      }
+      else {
+        return "Fermé"
+      }
     },
 
     defaults: {
