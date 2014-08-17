@@ -13,6 +13,15 @@ use Doctrine\ORM\Mapping as ORM;
 class BeerBusiness
 {
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
      * @var float
      *
      * @ORM\Column(name="prixNormal", type="float")
@@ -45,13 +54,11 @@ class BeerBusiness
     private $pression;
 
     /**
-     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Beer")
      */
     private $beer;
 
     /**
-     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Business")
      */
     private $business;
