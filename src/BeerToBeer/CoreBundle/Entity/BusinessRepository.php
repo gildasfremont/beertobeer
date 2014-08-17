@@ -83,7 +83,10 @@ class BusinessRepository extends EntityRepository
 		$result["prixHappyHour"] = $result["beerBusinesses"][0]["prixHappyHour"];
 
 		foreach ($result["beerBusinesses"] as $keyBb => $beerBusiness) {
-			$id = $beerBusiness["beer"]["id"];
+			if ($beerBusiness["pression"])
+				$id = "p".$beerBusiness["beer"]["id"];
+			else
+				$id = $beerBusiness["beer"]["id"];
 			if (!isset($result["beers"][$id])) {
 				$result["beers"][$id]["name"] = $beerBusiness["beer"]["name"];
 				$result["beers"][$id]["degree"] = $beerBusiness["beer"]["degree"];
