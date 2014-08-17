@@ -3,6 +3,11 @@ var app = app || {};
 app.BusinessesView = Backbone.View.extend({
     el: '#general',
 
+    events: {
+        "click #link_pressions": "linkPressions",
+        "click #link_others": "linkOthers",
+    },
+
     initialize: function() {
         console.log("Init BusinessesView");
         this.collection = new app.Businesses();
@@ -62,16 +67,16 @@ app.BusinessesView = Backbone.View.extend({
     },
 
     renderFullBusiness: function( id ) {
-        var businessView = new app.BusinessView({
+        this.fullBusinessView = new app.BusinessView({
             model: this.collection.get(id)
         });
-        if (typeof businessView.model == "undefined") {
-            businessView.model = new app.Business({id: id});
-            businessView.model.fetch({
+        if (typeof this.fullBusinessView.model == "undefined") {
+            this.fullBusinessView.model = new app.Business({id: id});
+            this.fullBusinessView.model.fetch({
                 success : function(model, response) {
                     // Si elle n'existe pas déjà, on l'ajoute dans la collection
-                    app.AppView.BusinessesView.collection.add(businessView.model);
-                    businessView.renderFull();
+                    app.AppView.BusinessesView.collection.add(app.AppView.BusinessesView.fullBusinessView.model);
+                    app.AppView.BusinessesView.fullBusinessView.renderFull();
                 },
                 error : function(collection, response) {
                     // ERROR
@@ -79,7 +84,25 @@ app.BusinessesView = Backbone.View.extend({
             });
         }
         else {
-            businessView.renderFull();
+            this.fullBusinessView.renderFull();
         }
+    },
+
+    linkPressions: function(e) {
+        e.preventDefault();
+        this.fullBusinessView.renderBeers(true);
+        this.fullBusinessView.etatBeersPression = true;
+        $("#link_pressions").unwrap();
+        if ($("#link_others").parent().prop("tagName") != "A")
+            $("#link_others").wrap('<a href="#"></a>');
+    },
+
+    linkOthers: function(e) {
+        e.preventDefault();
+        this.fullBusinessView.renderBeers(false);
+        this.fullBusinessView.etatBeersPression = false;
+        $("#link_others").unwrap();
+        if ($("#link_pressions").parent().prop("tagName") != "A")
+            $("#link_pressions").wrap('<a href="#"></a>');
     }
 });

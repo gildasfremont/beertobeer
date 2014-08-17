@@ -1,4 +1,9 @@
 <div class="beer">
 	<%= name %><br />
-	<span class="prix">
-		<% 
+	<span class="prices">
+		<% _.each(prix, function (oneprice) { %>
+			<span class="volume"><%= oneprice.volume %> cl</span>
+			<span class="price"><%= oneprice.prixNormal %> €</span>
+		<% }); %>
+	</span>
+</div>

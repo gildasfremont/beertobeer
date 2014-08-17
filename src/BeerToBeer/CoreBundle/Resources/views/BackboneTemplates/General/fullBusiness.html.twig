@@ -1,4 +1,4 @@
-<div class="fullBusiness">
+<div class="fullBusiness" id="<%= this.model.attributes.id %>">
 	<div class="leftBack"></div>
 	<h1><%- this.model.attributes.nom %></h1>
 	<h2><%= this.model.attributes.typeArray[this.model.attributes.type] %></h2>
@@ -52,15 +52,15 @@
 			%>
 			<div class="type">
 				<div class="pull-left">
-					Pressions (<%= pressions.length %>)
+					<span id="link_pressions">Pressions (<%= pressions.length %>)</span>
 				</div>
 				<div class="pull-right">
-					Canettes et bouteilles (<%= others.length %>)
+					<a href="#"><span id="link_others">Canettes et bouteilles (<%= others.length %>)</span></a>
 				</div>
 			</div>
-			<div class="pressions">
-
+			<div id="beers_container">
 			</div>
+
 		</div>
 	</div>
 </div>
