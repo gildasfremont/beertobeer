@@ -1,13 +1,14 @@
 <div class="fullBusiness">
 	<div class="leftBack"></div>
-	<h1><%- nom %></h1>
-	<h2><%= typeArray[type] %></h2>
+	<h1><%- this.model.attributes.nom %></h1>
+	<h2><%= this.model.attributes.typeArray[this.model.attributes.type] %></h2>
 
 	<div class="container">
 		<div class="row">
 			<div class="horaires col-xs-12">
 				<div class="today pull-left">
 					<% var day = new Date().getDay(); 
+						var horaires = this.model.attributes.horaires;
 					if (typeof horaires[day] != 'undefined') {
 						if (horaires[day].normal.ouvert) {
 							%>
@@ -35,8 +36,8 @@
 		<div class="row">
 			<div class="location col-xs-12">
 				<div class="adresse pull-left">
-					<%- adresse %><br>
-					<%= codePostal %> <%- ville %>
+					<%- this.model.attributes.adresse %><br>
+					<%= this.model.attributes.codePostal %> <%- this.model.attributes.ville %>
 				</div>
 				<div class="whereIsIt pull-right">
 					<button type="button" class="btn btn-default" id="btnFullBusiness">C'est où ?</button>
@@ -46,8 +47,8 @@
 
 		<div class="beers">
 			<% 
-				var pressions = _.where(beers, {pression: true});
-				var others = _.where(beers, {pression: false});
+				var pressions = _.where(this.model.attributes.beers, {pression: true});
+				var others = _.where(this.model.attributes.beers, {pression: false});
 			%>
 			<div class="type">
 				<div class="pull-left">
