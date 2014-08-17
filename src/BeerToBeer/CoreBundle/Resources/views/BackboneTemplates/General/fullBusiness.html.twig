@@ -45,13 +45,20 @@
 		</div>
 
 		<div class="beers">
+			<% 
+				var pressions = _.where(beers, {pression: true});
+				var others = _.where(beers, {pression: false});
+			%>
 			<div class="type">
 				<div class="pull-left">
-					Pressions (2)
+					Pressions (<%= pressions.length %>)
 				</div>
 				<div class="pull-right">
-					Canettes et bouteilles (3)
+					Canettes et bouteilles (<%= others.length %>)
 				</div>
+			</div>
+			<div class="pressions">
+
 			</div>
 		</div>
 	</div>
