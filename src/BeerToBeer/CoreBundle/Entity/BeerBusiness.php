@@ -36,6 +36,15 @@ class BeerBusiness
     private $volume;
 
     /**
+     * @var boolean
+     *
+     * Savoir si la bière est servie en pression ou non
+     *
+     * @ORM\Column(name="pression", type="boolean")
+     */
+    private $pression;
+
+    /**
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Beer")
      */
@@ -172,5 +181,28 @@ class BeerBusiness
     public function getVolume()
     {
         return $this->volume;
+    }
+
+    /**
+     * Set pression
+     *
+     * @param boolean $pression
+     * @return BeerBusiness
+     */
+    public function setPression($pression)
+    {
+        $this->pression = $pression;
+
+        return $this;
+    }
+
+    /**
+     * Get pression
+     *
+     * @return boolean 
+     */
+    public function getPression()
+    {
+        return $this->pression;
     }
 }
