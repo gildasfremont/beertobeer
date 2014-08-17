@@ -46,6 +46,22 @@ class BeerBusinesses implements FixtureInterface, OrderedFixtureInterface
           "pression" => true
         ),
         array(
+          "business" => "Le Timbre Poste",
+          "beer" => "Stella Artois",
+          "prixNormal" => 4.5,
+          "prixHappyHour" => 4.5,
+          "volume" => 33,
+          "pression" => false
+        ),
+        array(
+          "business" => "Le Timbre Poste",
+          "beer" => "Killkenny",
+          "prixNormal" => 5,
+          "prixHappyHour" => 5,
+          "volume" => 33,
+          "pression" => false
+        ),
+        array(
           "business" => "James Hetfeeld's Pub",
           "beer" => "Stella Artois",
           "prixNormal" => 7,
