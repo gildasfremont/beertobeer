@@ -83,12 +83,24 @@ class BusinessRepository extends EntityRepository
 		$result["prixHappyHour"] = $result["beerBusinesses"][0]["prixHappyHour"];
 
 		foreach ($result["beerBusinesses"] as $keyBb => $beerBusiness) {
-			$result["beers"][$keyBb]["name"] = $beerBusiness["beer"]["name"];
-			$result["beers"][$keyBb]["degree"] = $beerBusiness["beer"]["degree"];
-			$result["beers"][$keyBb]["volume"] = $beerBusiness["volume"];
-			$result["beers"][$keyBb]["pression"] = $beerBusiness["pression"];
-			$result["beers"][$keyBb]["prixNormal"] = $beerBusiness["prixNormal"];
-			$result["beers"][$keyBb]["prixHappyHour"] = $beerBusiness["prixHappyHour"];
+			$id = $beerBusiness["beer"]["id"];
+			if (!isset($result["beers"][$id])) {
+				$result["beers"][$id]["name"] = $beerBusiness["beer"]["name"];
+				$result["beers"][$id]["degree"] = $beerBusiness["beer"]["degree"];
+				$result["beers"][$id]["pression"] = $beerBusiness["pression"];
+				$result["beers"][$id]["prix"] = array();
+				$result["beers"][$id]["prix"][] = array(
+					"volume" => $beerBusiness["volume"],
+					"prixHappyHour" => $beerBusiness["prixHappyHour"],
+					"prixNormal" => $beerBusiness["prixNormal"]
+				);
+			} else {
+				$result["beers"][$id]["prix"][] = array(
+					"volume" => $beerBusiness["volume"],
+					"prixHappyHour" => $beerBusiness["prixHappyHour"],
+					"prixNormal" => $beerBusiness["prixNormal"]
+				);
+			}
 		}
 		
 		unset($result["beerBusinesses"]);
