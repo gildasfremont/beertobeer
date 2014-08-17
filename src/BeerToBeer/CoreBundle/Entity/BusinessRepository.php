@@ -3,6 +3,7 @@
 namespace BeerToBeer\CoreBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * BusinessRepository
@@ -70,6 +71,9 @@ class BusinessRepository extends EntityRepository
 
 		$result =  $query->getArrayResult();
 
+		if (!isset($result[0]))
+			throw new HttpException(404, "Business inexistant.");
+
 		return $this->parseOneBusinessForApi($result[0]);
 	}
 
@@ -82,6 +86,7 @@ class BusinessRepository extends EntityRepository
 			$result["beers"][$keyBb]["name"] = $beerBusiness["beer"]["name"];
 			$result["beers"][$keyBb]["degree"] = $beerBusiness["beer"]["degree"];
 			$result["beers"][$keyBb]["volume"] = $beerBusiness["volume"];
+			$result["beers"][$keyBb]["pression"] = $beerBusiness["pression"];
 			$result["beers"][$keyBb]["prixNormal"] = $beerBusiness["prixNormal"];
 			$result["beers"][$keyBb]["prixHappyHour"] = $beerBusiness["prixHappyHour"];
 		}
