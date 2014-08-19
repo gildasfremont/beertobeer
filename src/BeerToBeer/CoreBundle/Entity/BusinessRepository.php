@@ -79,9 +79,21 @@ class BusinessRepository extends EntityRepository
 
 	// S'utilise pour modifier l'array d'un business donné par Doctrine pour l'adapter à l'API
 	private function parseOneBusinessForApi($result) {
-		$result["prixNormal"] = $result["beerBusinesses"][0]["prixNormal"];
-		$result["prixHappyHour"] = $result["beerBusinesses"][0]["prixHappyHour"];
 
+		// Il faut prendre le prix de la "pinte" la moins chère, donc on vérifie que le volume est de 50cl
+		$stop = false;
+		for ($i=0; $stop === false ; $i++) { 
+			if ($result["beerBusinesses"][$i]["volume"] == 50) {
+				$result["prixNormal"] = $result["beerBusinesses"][$i]["prixNormal"];
+				$result["prixHappyHour"] = $result["beerBusinesses"][$i]["prixHappyHour"];
+				$stop = true;
+			} else if (!isset($result["beerBusinesses"][$i]["volume"])) {
+				$result["prixNormal"] = $result["beerBusinesses"][0]["prixNormal"];
+				$result["prixHappyHour"] = $result["beerBusinesses"][0]["prixHappyHour"];
+				$stop = true;
+			}
+		}
+		
 		foreach ($result["beerBusinesses"] as $keyBb => $beerBusiness) {
 			if ($beerBusiness["pression"])
 				$id = "p".$beerBusiness["beer"]["id"];
