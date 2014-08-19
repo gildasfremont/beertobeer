@@ -116,7 +116,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -1373,9 +1373,9 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -1423,9 +1423,9 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -1637,12 +1637,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/simplethings/EntityAudit.git",
-                "reference": "5e65315a71db422ea92791af114f067500745c9d"
+                "reference": "bc5e7c50677816a42c53bfae7d00f160af465d25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/simplethings/EntityAudit/zipball/5e65315a71db422ea92791af114f067500745c9d",
-                "reference": "5e65315a71db422ea92791af114f067500745c9d",
+                "url": "https://api.github.com/repos/simplethings/EntityAudit/zipball/bc5e7c50677816a42c53bfae7d00f160af465d25",
+                "reference": "bc5e7c50677816a42c53bfae7d00f160af465d25",
                 "shasum": ""
             },
             "require": {
@@ -1672,7 +1672,7 @@
                 "database",
                 "persistence"
             ],
-            "time": "2014-08-06 16:20:07"
+            "time": "2014-08-18 15:17:28"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2325,6 +2325,7 @@
         "jms/serializer-bundle": 20,
         "simplethings/entity-audit-bundle": 20
     },
+    "prefer-stable": false,
     "platform": {
         "php": ">=5.3.3"
     },
