@@ -12,6 +12,7 @@ app.BusinessesView = Backbone.View.extend({
         console.log("Init BusinessesView");
         this.collection = new app.Businesses();
         this.listenTo(this.collection, "reset", this.render);
+        this.home();
     },
 
     home: function() {
