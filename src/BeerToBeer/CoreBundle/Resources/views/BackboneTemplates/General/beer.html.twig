@@ -1,9 +1,15 @@
 <div class="beer">
 	<%= name %><br />
 	<span class="prices">
-		<% _.each(prix, function (oneprice) { %>
-			<span class="volume"><%= oneprice.volume %> cl</span>
-			<span class="price"><%= oneprice.prixNormal %> €</span>
+		<% _.each(prix, function (oneprice, key, list) { 
+			if (key == list.length-1) { %>
+				<span class="price lastPrice">
+			<% } else { %>
+				<span class="price">
+			<% } %>
+				<span class="volume"><%= oneprice.volume %> cl</span>
+				<%= oneprice.prixNormal %> €
+			</span>
 		<% }); %>
 	</span>
 </div>

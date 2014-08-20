@@ -51,10 +51,10 @@
 				var others = _.where(this.model.attributes.beers, {pression: false});
 			%>
 			<div class="type">
-				<div class="pull-left">
+				<div class="pull-left type">
 					<span id="link_pressions">Pressions (<%= pressions.length %>)</span>
 				</div>
-				<div class="pull-right">
+				<div class="pull-right type">
 					<a href="#"><span id="link_others">Canettes et bouteilles (<%= others.length %>)</span></a>
 				</div>
 			</div>

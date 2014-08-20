@@ -184,5 +184,27 @@ body {
 	}
 	.fullBusiness .beers .type {
 		font-size: 0.95em; /* On réduit un tout petit peu pour éviter le chevauchement */
+		margin-bottom: 12px;
+	}
+	.fullBusiness .beers #beers_container {
+	}
+	.fullBusiness .beers .beer {
+		color: #4d4d4d;
+		font-size: 0.95em;
+	}
+	.fullBusiness .beers .beer .prices {
+		font-size: 0.9em;
+		color: #808080;
+	}
+	.fullBusiness .beers .beer .prices .price .volume {
+		margin-right: 6px;
+	}
+	.fullBusiness .beers .beer .prices .price {
+		border-right: 1px solid #cccccc;
+		padding-right: 8px;
+		margin-right: 8px;
+	}
+	.fullBusiness .beers .beer .prices .lastPrice {
+		border-right: none;
 	}
 }
