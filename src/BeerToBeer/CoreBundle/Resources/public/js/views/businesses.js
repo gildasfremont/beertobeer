@@ -14,6 +14,11 @@ app.BusinessesView = Backbone.View.extend({
         this.listenTo(this.collection, "reset", this.render);
     },
 
+    home: function() {
+        if (this.$el.children().attr("id") != "home")
+            this.$el.html(_.template($('#homeTemplate').html()));
+    },
+
     search: function(adress) {
         console.log("Adresse : "+ adress);
         this.$el.html(_.template($('#businessList').html()));

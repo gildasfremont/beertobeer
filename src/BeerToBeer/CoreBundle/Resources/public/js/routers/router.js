@@ -2,9 +2,15 @@ var app = app || {};
 $(function() {
 	var Router = Backbone.Router.extend({
 	  routes: {
+	  	"": "home",
 	    "search/:adress": "search",
 	    "gps": "gps",
 	    "business/:id": "fullBusiness"
+	  },
+
+	  home: function() {
+	  	console.log("Home Route requested");
+	  	app.AppView.BusinessesView.home();
 	  },
 
 	  search: function(adress){
