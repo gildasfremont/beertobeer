@@ -6,6 +6,8 @@ app.BusinessesView = Backbone.View.extend({
     events: {
         "click #link_pressions": "linkPressions",
         "click #link_others": "linkOthers",
+        "focus #searchInput": "focusSearchInput",
+        "blur #searchInput": "unfocusSearchInput"
     },
 
     initialize: function() {
@@ -13,6 +15,17 @@ app.BusinessesView = Backbone.View.extend({
         this.collection = new app.Businesses();
         this.listenTo(this.collection, "reset", this.render);
         this.home();
+    },
+
+    focusSearchInput: function() {
+        console.log('"focus #searchInput" triggered')
+        $("#home").switchClass("unfocus", "focus");
+        $("#searchInput").geocomplete();
+    },
+
+    unfocusSearchInput: function() {
+        console.log('"unfocus #searchInput" triggered')
+        $("#home").switchClass("focus", "unfocus");
     },
 
     home: function() {

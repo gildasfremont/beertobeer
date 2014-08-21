@@ -18,10 +18,19 @@ body {
 
 /* DESIGN MOBILE */
 @media (max-width: 767px) {
-	#home {
+	#home.unfocus {
 	    position: absolute;
 	    top: 20%;
 	    width: 100%;
+	}
+	#home.focus {
+		top: 0%;
+	}
+	#home.focus #labelSearch {
+		display: none;
+	}
+	#home.focus h2 {
+		display: none;
 	}
 	h1 {
 		color: #f96727;

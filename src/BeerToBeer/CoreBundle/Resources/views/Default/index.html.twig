@@ -2,12 +2,7 @@
 
 {% block body %}
 <div id="general">
-	<div id="home">
-		<h1>Beer to Beer</h1>
-		<h2>Partageons nos plans bière.</h2>
-
-		{% include 'BeerToBeerCoreBundle:Forms:search.html.twig' %}
-	</div>
+	{% include 'BeerToBeerCoreBundle:BackboneTemplates:General/home.html.twig' %}
 </div>
 {% include 'BeerToBeerCoreBundle:BackboneTemplates:general.html.twig' %}
 {% endblock %}
