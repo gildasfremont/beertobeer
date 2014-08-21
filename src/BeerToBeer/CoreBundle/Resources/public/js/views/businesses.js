@@ -58,13 +58,21 @@ app.BusinessesView = Backbone.View.extend({
         $("#home").switchClass("unfocus", "focus");
         $("#home.unfocus #labelSearch").hide(400);
         $("#home.unfocus h2").hide(400);
-        $("#home #gpsContainer").show(400);
         $("#searchInput")
             .geocomplete()
             .bind("geocode:result", function(event, result){
                 app.Router.navigate("search/lat/"+result.geometry.location.lat()+"/lng/"+result.geometry.location.lng(), {trigger: true});
             })
         ;
+        $(window)
+            .resize(function() { // Adapter la taille du bloc "Chercher autour de moi" à la largeur du champ de recherche
+                console.log("Sizing gpsContainer...");
+                var width = $("#searchInput").outerWidth();
+                $("#home #gpsContainer a").width(width-4); // -4 pour le fait que Google soit complètement foncedé et me fasse des putains de listes mal dimensionnées
+            })
+            .resize() // Trigger resize
+        ;
+        $("#home #gpsContainer").show(400);
     },
 
     home: function() {

@@ -211,12 +211,6 @@ body {
 }
 
 /* Google Places autocomplete */
-#gpsContainer {
-	padding: 0 12px;
-	text-align: center;
-	margin: 0 auto;
-	font-family: 'Montserrat';
-}
 .pac-container {
 	background-color:#fff;
 	margin: 0 auto;
@@ -306,4 +300,13 @@ body {
 	color:gray;
 }
 
-
+/* gpsContainer = "Chercher autour de moi" */
+#gpsContainer {
+	text-align: center;
+	margin: 0 12px;
+	font-family: 'Montserrat';
+	position: absolute;
+}
+#gpsContainer .pac-item {
+	padding: 0;
+}
