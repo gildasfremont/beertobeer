@@ -21,12 +21,14 @@ app.BusinessesView = Backbone.View.extend({
         $("#home").switchClass("unfocus", "focus");
         $("#home.unfocus #labelSearch").hide(400);
         $("#home.unfocus h2").hide(400);
+        $("#home #gpsContainer").show(400);
         $("#searchInput").geocomplete();
     },
 
     home: function() {
         if (this.$el.children().attr("id") != "home")
             this.$el.html(_.template($('#homeTemplate').html()));
+        $("#home.unfocus #labelSearch").show(400);
     },
 
     search: function(adress) {
