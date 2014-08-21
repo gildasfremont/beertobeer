@@ -25,7 +25,7 @@ app.BusinessesView = Backbone.View.extend({
                 app.AppView.BusinessesView.userLat = position.coords.latitude;
                 app.AppView.BusinessesView.userLng = position.coords.longitude;
                 // On redirige le lien "Chercher autour de moi" vers la page de recherche de la position
-                $("#home #gpsContainer").attr("href", "#search/lat/"+result.geometry.location.lat()+"/lng/"+result.geometry.location.lng())
+                $("#home #gpsContainer a").attr("href", "#search/lat/"+position.coords.latitude+"/lng/"+position.coords.longitude)
             }, function (error) {
                 switch(error.code) {
                     case error.TIMEOUT:
@@ -49,7 +49,7 @@ app.BusinessesView = Backbone.View.extend({
             alert(errorMessage);
             // TODO : afficher un message à la place de "Chercher autour de moi"
         }
-    }
+    },
 
     focusSearchInput: function() {
         console.log('"focus #searchInput" triggered');
@@ -73,18 +73,15 @@ app.BusinessesView = Backbone.View.extend({
         $("#home.unfocus #labelSearch").show(400);
     },
 
-    search: function(adress) {
-        console.log("Adresse : "+ adress);
+    search: function(lat, lng) {
         this.$el.html(_.template($('#businessList').html()));
-        $('#searchInput').val(adress);
-        this.collection.fetch({reset: true, data: {latitude: 48.823549172, longitude: 2.302681803}});
+        $('#searchInput').val("adress");
+        this.collection.fetch({reset: true, data: {latitude: lat, longitude: lng}});
     },
 
     gps: function() {
         this.$el.html(_.template($('#businessList').html()));
         $('#searchInput').val("Ma position");
-
-        
     },
 
     render: function() {
