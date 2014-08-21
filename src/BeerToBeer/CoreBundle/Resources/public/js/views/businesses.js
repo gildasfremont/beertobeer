@@ -3,6 +3,9 @@ var app = app || {};
 app.BusinessesView = Backbone.View.extend({
     el: '#general',
 
+    userLat: 0,
+    userLng: 0,
+
     events: {
         "click #link_pressions": "linkPressions",
         "click #link_others": "linkOthers",
@@ -13,39 +16,16 @@ app.BusinessesView = Backbone.View.extend({
         console.log("Init BusinessesView");
         this.collection = new app.Businesses();
         this.listenTo(this.collection, "reset", this.render);
-        this.home();
     },
 
-    focusSearchInput: function() {
-        console.log('"focus #searchInput" triggered');
-        $("#home").switchClass("unfocus", "focus");
-        $("#home.unfocus #labelSearch").hide(400);
-        $("#home.unfocus h2").hide(400);
-        $("#home #gpsContainer").show(400);
-        $("#searchInput").geocomplete();
-    },
-
-    home: function() {
-        if (this.$el.children().attr("id") != "home")
-            this.$el.html(_.template($('#homeTemplate').html()));
-        $("#home.unfocus #labelSearch").show(400);
-    },
-
-    search: function(adress) {
-        console.log("Adresse : "+ adress);
-        this.$el.html(_.template($('#businessList').html()));
-        $('#searchInput').val(adress);
-        this.collection.fetch({reset: true, data: {latitude: 48.823549172, longitude: 2.302681803}});
-    },
-
-    gps: function() {
-        this.$el.html(_.template($('#businessList').html()));
-        $('#searchInput').val("Ma position");
-
+    getUserLocation: function() {
         var errorMessage = "";
         if(navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
-                app.AppView.BusinessesView.collection.fetch({reset: true, data: {latitude: position.coords.latitude, longitude: position.coords.longitude}});
+                app.AppView.BusinessesView.userLat = position.coords.latitude;
+                app.AppView.BusinessesView.userLng = position.coords.longitude;
+                // On redirige le lien "Chercher autour de moi" vers la page de recherche de la position
+                $("#home #gpsContainer").attr("href", "#search/lat/"+result.geometry.location.lat()+"/lng/"+result.geometry.location.lng())
             }, function (error) {
                 switch(error.code) {
                     case error.TIMEOUT:
@@ -65,8 +45,46 @@ app.BusinessesView = Backbone.View.extend({
         } else {
             errorMessage = "Votre navigateur ne semble pas compatible avec la géolocalisation";
         }
-        if (errorMessage != "")
+        if (errorMessage != "") {
             alert(errorMessage);
+            // TODO : afficher un message à la place de "Chercher autour de moi"
+        }
+    }
+
+    focusSearchInput: function() {
+        console.log('"focus #searchInput" triggered');
+        // On anticipe le "Chercher autour de moi" en demandant dès maintenant la géolocalisation
+        this.getUserLocation();
+        $("#home").switchClass("unfocus", "focus");
+        $("#home.unfocus #labelSearch").hide(400);
+        $("#home.unfocus h2").hide(400);
+        $("#home #gpsContainer").show(400);
+        $("#searchInput")
+            .geocomplete()
+            .bind("geocode:result", function(event, result){
+                app.Router.navigate("search/lat/"+result.geometry.location.lat()+"/lng/"+result.geometry.location.lng(), {trigger: true});
+            })
+        ;
+    },
+
+    home: function() {
+        if (this.$el.children().attr("id") != "home")
+            this.$el.html(_.template($('#homeTemplate').html()));
+        $("#home.unfocus #labelSearch").show(400);
+    },
+
+    search: function(adress) {
+        console.log("Adresse : "+ adress);
+        this.$el.html(_.template($('#businessList').html()));
+        $('#searchInput').val(adress);
+        this.collection.fetch({reset: true, data: {latitude: 48.823549172, longitude: 2.302681803}});
+    },
+
+    gps: function() {
+        this.$el.html(_.template($('#businessList').html()));
+        $('#searchInput').val("Ma position");
+
+        
     },
 
     render: function() {
