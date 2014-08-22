@@ -77,7 +77,7 @@ app.BusinessesView = Backbone.View.extend({
     },
 
     focusOutSearchInput: function() {
-        //$("#search #gpsContainer").delay( 800 ).hide();
+        window.setTimeout(function(){$("#search #gpsContainer").hide();}, 50); // Un petit TimeOut pour avoir le temps de cliquer
     },
 
     home: function() {
@@ -88,6 +88,7 @@ app.BusinessesView = Backbone.View.extend({
 
     // Trouver les bars les plus proches de la position donnée
     search: function(lat, lng) {
+        console.log("Searching "+lat);
         if (this.$el.children().attr("id") != "search") {
             this.$el.html(_.template($('#homeTemplate').html()));
             this.focusSearchInput();

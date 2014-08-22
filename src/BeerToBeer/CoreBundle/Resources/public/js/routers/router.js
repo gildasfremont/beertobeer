@@ -18,11 +18,6 @@ $(function() {
 	    app.AppView.BusinessesView.search(lat, lng);
 	  },
 
-	  gps: function() {
-	  	console.log("GPS Route requested.");
-	  	app.AppView.BusinessesView.gps();
-	  },
-
 	  fullBusiness: function(id) {
 		console.log("fullBusiness (id: "+id+") Route requested.");
 		app.AppView.BusinessesView.renderFullBusiness(id);
