@@ -306,6 +306,8 @@ body {
 	margin: 0 12px;
 	font-family: 'Montserrat';
 	position: absolute;
+	background-color: white;
+	z-index: 500;
 }
 #gpsContainer .pac-item {
 	padding: 0;

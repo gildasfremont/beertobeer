@@ -9,7 +9,8 @@ app.BusinessesView = Backbone.View.extend({
     events: {
         "click #link_pressions": "linkPressions",
         "click #link_others": "linkOthers",
-        "focus #searchInput": "focusSearchInput"
+        "focus #searchInput": "focusSearchInput",
+        "focusout #searchInput": "focusOutSearchInput"
     },
 
     initialize: function() {
@@ -25,7 +26,7 @@ app.BusinessesView = Backbone.View.extend({
                 app.AppView.BusinessesView.userLat = position.coords.latitude;
                 app.AppView.BusinessesView.userLng = position.coords.longitude;
                 // On redirige le lien "Chercher autour de moi" vers la page de recherche de la position
-                $("#home #gpsContainer a").attr("href", "#search/lat/"+position.coords.latitude+"/lng/"+position.coords.longitude)
+                $("#search #gpsContainer a").attr("href", "#search/lat/"+position.coords.latitude+"/lng/"+position.coords.longitude)
             }, function (error) {
                 switch(error.code) {
                     case error.TIMEOUT:
@@ -53,8 +54,6 @@ app.BusinessesView = Backbone.View.extend({
 
     focusSearchInput: function() {
         console.log('"focus #searchInput" triggered');
-        // On anticipe le "Chercher autour de moi" en demandant dès maintenant la géolocalisation
-        this.getUserLocation();
         $("#home").switchClass("unfocus", "focus");
         $("#home.unfocus #labelSearch").hide(400);
         $("#home.unfocus h2").hide(400);
@@ -72,7 +71,13 @@ app.BusinessesView = Backbone.View.extend({
             })
             .resize() // Trigger resize
         ;
-        $("#home #gpsContainer").show(400);
+        $("#home").attr("id", "search");
+        this.getUserLocation();
+        $("#search #gpsContainer").show();
+    },
+
+    focusOutSearchInput: function() {
+        //$("#search #gpsContainer").delay( 800 ).hide();
     },
 
     home: function() {
@@ -81,15 +86,35 @@ app.BusinessesView = Backbone.View.extend({
         $("#home.unfocus #labelSearch").show(400);
     },
 
+    // Trouver les bars les plus proches de la position donnée
     search: function(lat, lng) {
-        this.$el.html(_.template($('#businessList').html()));
-        $('#searchInput').val("adress");
+        if (this.$el.children().attr("id") != "search") {
+            this.$el.html(_.template($('#homeTemplate').html()));
+            this.focusSearchInput();
+        } 
+        $("#searchInput").blur(); // Trigger blur pour que le "Chercher autour de moi disparaisse"
+        this.$el.append(_.template($('#businessList').html())); // TODO : vérifier qu'il n'y pas déjà une liste
         this.collection.fetch({reset: true, data: {latitude: lat, longitude: lng}});
+        // Si l'utilisateur a demandé sa position, on tente de trouver son adresse par reverse geocoding
+        if ($('#searchInput').val() == "")
+            $('#searchInput').val(this.reverseGeocoding(lat, lng));
     },
 
-    gps: function() {
-        this.$el.html(_.template($('#businessList').html()));
-        $('#searchInput').val("Ma position");
+    reverseGeocoding: function(lat, lng) {
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({'latLng': new google.maps.LatLng(lat, lng)}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                if (results[1]) {
+                    return results[1].formatted_address;
+                } else {
+                    return false;
+                    alert('No results found');
+                }
+            } else {
+                return false;
+                alert('Geocoder failed due to: ' + status);
+            }
+        });
     },
 
     render: function() {
