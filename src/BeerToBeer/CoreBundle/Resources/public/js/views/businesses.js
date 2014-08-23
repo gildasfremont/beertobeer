@@ -5,12 +5,14 @@ app.BusinessesView = Backbone.View.extend({
 
     userLat: 0,
     userLng: 0,
+    userAdress: "",
 
     events: {
         "click #link_pressions": "linkPressions",
         "click #link_others": "linkOthers",
         "focus #searchInput": "focusSearchInput",
-        "focusout #searchInput": "focusOutSearchInput"
+        "focusout #searchInput": "focusOutSearchInput",
+        "click #gpsLink": "getUserLocation"
     },
 
     initialize: function() {
@@ -19,14 +21,16 @@ app.BusinessesView = Backbone.View.extend({
         this.listenTo(this.collection, "reset", this.render);
     },
 
-    getUserLocation: function() {
+    getUserLocation: function(e) {
+        e.preventDefault();
+        console.log("Getting GPS coordinates...");
         var errorMessage = "";
         if(navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
                 app.AppView.BusinessesView.userLat = position.coords.latitude;
                 app.AppView.BusinessesView.userLng = position.coords.longitude;
                 // On redirige le lien "Chercher autour de moi" vers la page de recherche de la position
-                $("#search #gpsContainer a").attr("href", "#search/lat/"+position.coords.latitude+"/lng/"+position.coords.longitude)
+                app.Router.navigate("#search/lat/"+position.coords.latitude+"/lng/"+position.coords.longitude, {trigger: true});
             }, function (error) {
                 switch(error.code) {
                     case error.TIMEOUT:
@@ -53,7 +57,6 @@ app.BusinessesView = Backbone.View.extend({
     },
 
     focusSearchInput: function() {
-        console.log('"focus #searchInput" triggered');
         $("#home").switchClass("unfocus", "focus");
         $("#home.unfocus #labelSearch").hide(400);
         $("#home.unfocus h2").hide(400);
@@ -65,14 +68,12 @@ app.BusinessesView = Backbone.View.extend({
         ;
         $(window)
             .resize(function() { // Adapter la taille du bloc "Chercher autour de moi" à la largeur du champ de recherche
-                console.log("Sizing gpsContainer...");
                 var width = $("#searchInput").outerWidth();
                 $("#home #gpsContainer a").width(width-4); // -4 pour le fait que Google soit complètement foncedé et me fasse des putains de listes mal dimensionnées
             })
             .resize() // Trigger resize
         ;
         $("#home").attr("id", "search");
-        this.getUserLocation();
         $("#search #gpsContainer").show();
     },
 
@@ -88,7 +89,6 @@ app.BusinessesView = Backbone.View.extend({
 
     // Trouver les bars les plus proches de la position donnée
     search: function(lat, lng) {
-        console.log("Searching "+lat);
         if (this.$el.children().attr("id") != "search") {
             this.$el.html(_.template($('#homeTemplate').html()));
             this.focusSearchInput();
@@ -96,9 +96,10 @@ app.BusinessesView = Backbone.View.extend({
         $("#searchInput").blur(); // Trigger blur pour que le "Chercher autour de moi disparaisse"
         this.$el.append(_.template($('#businessList').html())); // TODO : vérifier qu'il n'y pas déjà une liste
         this.collection.fetch({reset: true, data: {latitude: lat, longitude: lng}});
+
         // Si l'utilisateur a demandé sa position, on tente de trouver son adresse par reverse geocoding
         if ($('#searchInput').val() == "")
-            $('#searchInput').val(this.reverseGeocoding(lat, lng));
+            this.reverseGeocoding(lat, lng);
     },
 
     reverseGeocoding: function(lat, lng) {
@@ -106,7 +107,7 @@ app.BusinessesView = Backbone.View.extend({
         geocoder.geocode({'latLng': new google.maps.LatLng(lat, lng)}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
                 if (results[1]) {
-                    return results[1].formatted_address;
+                    app.AppView.BusinessesView.userAdress = results[1].formatted_address;
                 } else {
                     return false;
                     alert('No results found');
@@ -116,6 +117,7 @@ app.BusinessesView = Backbone.View.extend({
                 alert('Geocoder failed due to: ' + status);
             }
         });
+        return false;
     },
 
     render: function() {
@@ -123,6 +125,11 @@ app.BusinessesView = Backbone.View.extend({
         this.collection.each(function( item ) {
             this.renderBusiness( item );
         }, this );
+
+        // On remplit le champ avec l'adresse de l'utilisateur si besoin
+        if ($("#searchInput").val() == "") {
+            $("#searchInput").val(app.AppView.BusinessesView.userAdress);
+        }
     },
 
     renderBusiness: function( item ) {
