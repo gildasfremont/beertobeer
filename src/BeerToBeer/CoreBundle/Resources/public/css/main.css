@@ -6,14 +6,14 @@
 }
 
 @font-face {
-  font-family: 'Montserrat';
+  font-family: 'MontserratBold';
   font-style: normal;
   font-weight: 700;
   src: local('Montserrat-Bold'), url('../fonts/montserratBold.woff') format('woff');
 }
 
 body {
-	font-family: 'Montserrat';
+	font-family: 'MontserratBold';
 }
 
 /* DESIGN MOBILE */
@@ -27,7 +27,7 @@ body {
 		color: #f96727;
 		text-align: center;
 		font-size: 27px;
-		font-family: 'Montserrat';
+		font-family: 'MontserratBold';
 		font-weight: bold;
 		margin-bottom: 5px;
 	}
@@ -166,6 +166,36 @@ body {
 	    height: 45px;
     	line-height: 45px;
 	}
+	.fullBusiness .horaires .more .moreHoraires {
+		position: absolute;
+		z-index: 20;
+		background-color: white;
+		border-radius: 2px;
+		border: 1px solid #93918a;
+		width: 210px;
+		line-height: 15px;
+		font-family: 'Montserrat';
+		font-size: 0.8em;
+		right: 15px;
+	}
+	.fullBusiness .horaires .more .moreHoraires .row {
+		width: 210px;
+		margin: 0;
+		padding: 0 16px;
+	}
+	.fullBusiness .horaires .more .moreHoraires .row .col-xs-6 {
+		padding: 0;
+	}
+	.fullBusiness .horaires .more .moreHoraires .typeHoraires {
+		height: 40px;
+		line-height: 40px;
+		font-size: 1.2em;
+	}
+	.fullBusiness .horaires .more .moreHoraires .horairesDays .jour {
+		border-top: 1px solid #d4d3d1;
+		line-height: 25px;
+		padding: 16px inherit;
+	}
 	.fullBusiness .location {
 	    border-bottom: 1px solid #d5d5d5;
 	    margin-top: 10px;
@@ -218,7 +248,7 @@ body {
 	z-index:1000;
 	border-radius:0px;
 	border-top: none;
-	font-family: 'Montserrat';
+	font-family: 'MontserratBold';
 	box-shadow: none;
 	overflow:hidden;
 	margin-top: 1px;
@@ -305,7 +335,7 @@ body {
 #gpsContainer {
 	text-align: center;
 	margin: 0 12px;
-	font-family: 'Montserrat';
+	font-family: 'MontserratBold';
 	position: absolute;
 	background-color: white;
 	z-index: 500;
