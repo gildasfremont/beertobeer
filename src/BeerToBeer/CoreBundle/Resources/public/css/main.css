@@ -186,6 +186,7 @@ body {
 	.fullBusiness .beers .type {
 		font-size: 0.95em; /* On réduit un tout petit peu pour éviter le chevauchement */
 		margin-bottom: 12px;
+		height: 20px;
 	}
 	.fullBusiness .beers #beers_container {
 	}
