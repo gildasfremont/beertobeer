@@ -12,7 +12,8 @@ app.BusinessesView = Backbone.View.extend({
         "click #link_others": "linkOthers",
         "focus #searchInput": "focusSearchInput",
         "focusout #searchInput": "focusOutSearchInput",
-        "click #gpsLink": "getUserLocation"
+        "click #gpsLink": "getUserLocation",
+        "click #dropHoraires": "dropHoraires"
     },
 
     initialize: function() {
@@ -177,5 +178,9 @@ app.BusinessesView = Backbone.View.extend({
         $("#link_others").unwrap();
         if ($("#link_pressions").parent().prop("tagName") != "A")
             $("#link_pressions").wrap('<a href="#"></a>');
+    },
+
+    dropHoraires: function(e) {
+        this.fullBusinessView.dropHoraires(e);
     }
 });

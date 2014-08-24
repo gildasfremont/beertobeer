@@ -38,5 +38,9 @@ app.BusinessView = Backbone.View.extend({
         //this.model.beers.fetch({data: {businessId: this.model.id}});
     	app.AppView.BusinessesView.$el.html( this.templateFull( this ) );
         this.renderBeers(this.etatBeersPression);
+    },
+
+    dropHoraires: function(e) {
+        $("#dropHoraires .moreHoraires").toggle();
     }
 });

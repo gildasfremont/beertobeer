@@ -175,8 +175,11 @@ body {
 		width: 210px;
 		line-height: 15px;
 		font-family: 'Montserrat';
-		font-size: 0.8em;
+		font-size: 11px;
 		right: 15px;
+	}
+	.fullBusiness .horaires .more .caretHoraires {
+		cursor: pointer;
 	}
 	.fullBusiness .horaires .more .moreHoraires .row {
 		width: 210px;
@@ -188,13 +191,28 @@ body {
 	}
 	.fullBusiness .horaires .more .moreHoraires .typeHoraires {
 		height: 40px;
-		line-height: 40px;
-		font-size: 1.2em;
+		font-size: 14px;
+		padding: 0 6px;
+	}
+	.fullBusiness .horaires .more .moreHoraires .typeHoraires div {
+		border-radius: 4px;
+		padding: 6px 8px;
+		margin: 7px 0;
+		background-color: transparent;
+		cursor: pointer;
+	}
+	.fullBusiness .horaires .more .moreHoraires .typeHoraires .ouverture.focus {
+		cursor: default;
+		background-color: #ffeeaa;
+	}
+	.fullBusiness .horaires .more .moreHoraires .typeHoraires .happyHour.focus {
+		cursor: default;
+		background-color: #eed7f4;
 	}
 	.fullBusiness .horaires .more .moreHoraires .horairesDays .jour {
 		border-top: 1px solid #d4d3d1;
 		line-height: 25px;
-		padding: 16px inherit;
+		padding: 5px 16px;
 	}
 	.fullBusiness .location {
 	    border-bottom: 1px solid #d5d5d5;
