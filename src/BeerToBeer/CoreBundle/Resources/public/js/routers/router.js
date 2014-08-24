@@ -2,19 +2,20 @@ var app = app || {};
 $(function() {
 	var Router = Backbone.Router.extend({
 	  routes: {
-	    "search/:adress": "search",
+	  	"": "home",
+	    "search/lat/:lat/lng/:lng": "search",
 	    "gps": "gps",
 	    "business/:id": "fullBusiness"
 	  },
 
-	  search: function(adress){
-	    console.log("Search Route requested.");
-	    app.AppView.BusinessesView.search(adress);
+	  home: function() {
+	  	console.log("Home Route requested");
+	  	app.AppView.BusinessesView.home();
 	  },
 
-	  gps: function() {
-	  	console.log("GPS Route requested.");
-	  	app.AppView.BusinessesView.gps();
+	  search: function(lat, lng){
+	    console.log("Search Route requested.");
+	    app.AppView.BusinessesView.search(lat, lng);
 	  },
 
 	  fullBusiness: function(id) {

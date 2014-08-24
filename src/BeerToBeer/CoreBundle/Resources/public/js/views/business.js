@@ -5,6 +5,7 @@ app.BusinessView = Backbone.View.extend({
     className: 'row business',
     template: _.template( $( '#business' ).html() ),
     templateFull: _.template( $( '#fullBusiness' ).html() ),
+    etatBeersPression: true,
 
     events: {
     	"click": "fullBusiness"
@@ -18,6 +19,16 @@ app.BusinessView = Backbone.View.extend({
         return this;
     },
 
+    // Rendu de la liste des bières (la liste pression ou la liste des autres bières)
+    renderBeers: function(pression) {
+        var beers = _.where(this.model.attributes.beers, {pression: pression});
+        var html = "";
+        _.each(beers, function(beer) {
+            html += _.template( $( '#beer' ).html(), beer);
+        });
+        $("#beers_container").html(html);
+    },
+
     fullBusiness: function(e) {
     	location.href = "#business/"+ this.model.get('id');
     },
@@ -25,6 +36,30 @@ app.BusinessView = Backbone.View.extend({
     renderFull: function() {
         //this.model.beers = new app.Beer();
         //this.model.beers.fetch({data: {businessId: this.model.id}});
-    	app.AppView.BusinessesView.$el.html( this.templateFull( this.model.attributes ) );
+    	app.AppView.BusinessesView.$el.html( this.templateFull( this ) );
+        this.renderBeers(this.etatBeersPression);
+        this.renderHoraires(false);
+    },
+
+    dropHoraires: function(e) {
+        $(".horaires .moreHoraires").toggle();
+        $("#dropHoraires").toggleClass("focus");
+    },
+
+    dropHorairesType: function(e) {
+        if (!$(e.target).hasClass("focus")) {
+            $(".dropHorairesType").toggleClass("focus");
+            if ($(".dropHorairesType.ouverture").hasClass("focus"))
+                this.renderHoraires(false);
+            else
+                this.renderHoraires(true);
+        }
+    },
+
+    renderHoraires: function(happyHour) {
+        $("#horairesContainer").html(_.template($('#horairesTemplate').html(), {
+            horaires: this.model.get('horaires'),
+            happyHour: happyHour
+        }));
     }
 });

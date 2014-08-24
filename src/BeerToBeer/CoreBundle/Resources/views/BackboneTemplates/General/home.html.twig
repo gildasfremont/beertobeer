@@ -1,6 +1,13 @@
-<div id="home">
+<div id="home" class="unfocus">
 	<h1>Beer to Beer</h1>
 	<h2>Partageons nos plans bière.</h2>
 
 	{% include 'BeerToBeerCoreBundle:Forms:search.html.twig' %}
+	<div id="gpsContainer" style="display: none;">
+		<a href="#" id="gpsLink" class="text-center pac-item">
+			<span class="text-center pac-item-query">
+				Chercher autour de moi
+			</span>
+		</a>
+	</div>
 </div>

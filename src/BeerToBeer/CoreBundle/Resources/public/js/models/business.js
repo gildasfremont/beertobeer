@@ -8,21 +8,28 @@
     parse: function(response) {
       var normalizedHoraires = [];
       _.each(response.horaires, function(horaire) {
-        normalizedHoraires[horaire.jour] = normalizedHoraires[horaire.jour] || {};
+        normalizedHoraires[horaire.jour] = normalizedHoraires[horaire.jour] || [];
         var ouverture = new Date(horaire.ouverture.date.replace(" ", "T"));
         var fermeture = new Date(ouverture.getTime()+1000*60*horaire.duree);
         if (horaire.happyHour) {
-          normalizedHoraires[horaire.jour].happyHour = {
+          normalizedHoraires[horaire.jour].happyHour = normalizedHoraires[horaire.jour].happyHour || [];
+          normalizedHoraires[horaire.jour].happyHour.push({
             ouverture: ouverture,
             fermeture: fermeture
-          };
+          });
         } else {
-          normalizedHoraires[horaire.jour].normal = {
+          normalizedHoraires[horaire.jour].normal = normalizedHoraires[horaire.jour].normal || [];
+          normalizedHoraires[horaire.jour].normal.push({
             ouverture: ouverture,
             fermeture: fermeture
-          }
-          normalizedHoraires[horaire.jour].normal.ouvert = (horaire.duree > 0)
+          });
+          if (horaire.duree > 0)
+            normalizedHoraires[horaire.jour].ouvert = true;
         }
+      });
+      _.each(normalizedHoraires, function(horaire, index) {
+        if (typeof horaire.ouvert == "undefined")
+          normalizedHoraires[index].ouvert = false;
       });
       response.horaires = normalizedHoraires;
 

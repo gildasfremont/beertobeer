@@ -3,6 +3,7 @@
 namespace BeerToBeer\CoreBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * BusinessRepository
@@ -70,20 +71,51 @@ class BusinessRepository extends EntityRepository
 
 		$result =  $query->getArrayResult();
 
+		if (!isset($result[0]))
+			throw new HttpException(404, "Business inexistant.");
+
 		return $this->parseOneBusinessForApi($result[0]);
 	}
 
 	// S'utilise pour modifier l'array d'un business donné par Doctrine pour l'adapter à l'API
 	private function parseOneBusinessForApi($result) {
-		$result["prixNormal"] = $result["beerBusinesses"][0]["prixNormal"];
-		$result["prixHappyHour"] = $result["beerBusinesses"][0]["prixHappyHour"];
 
+		// Il faut prendre le prix de la "pinte" la moins chère, donc on vérifie que le volume est de 50cl
+		$stop = false;
+		for ($i=0; $stop === false ; $i++) { 
+			if ($result["beerBusinesses"][$i]["volume"] == 50) {
+				$result["prixNormal"] = $result["beerBusinesses"][$i]["prixNormal"];
+				$result["prixHappyHour"] = $result["beerBusinesses"][$i]["prixHappyHour"];
+				$stop = true;
+			} else if (!isset($result["beerBusinesses"][$i]["volume"])) {
+				$result["prixNormal"] = $result["beerBusinesses"][0]["prixNormal"];
+				$result["prixHappyHour"] = $result["beerBusinesses"][0]["prixHappyHour"];
+				$stop = true;
+			}
+		}
+		
 		foreach ($result["beerBusinesses"] as $keyBb => $beerBusiness) {
-			$result["beers"][$keyBb]["name"] = $beerBusiness["beer"]["name"];
-			$result["beers"][$keyBb]["degree"] = $beerBusiness["beer"]["degree"];
-			$result["beers"][$keyBb]["volume"] = $beerBusiness["volume"];
-			$result["beers"][$keyBb]["prixNormal"] = $beerBusiness["prixNormal"];
-			$result["beers"][$keyBb]["prixHappyHour"] = $beerBusiness["prixHappyHour"];
+			if ($beerBusiness["pression"])
+				$id = "p".$beerBusiness["beer"]["id"];
+			else
+				$id = $beerBusiness["beer"]["id"];
+			if (!isset($result["beers"][$id])) {
+				$result["beers"][$id]["name"] = $beerBusiness["beer"]["name"];
+				$result["beers"][$id]["degree"] = $beerBusiness["beer"]["degree"];
+				$result["beers"][$id]["pression"] = $beerBusiness["pression"];
+				$result["beers"][$id]["prix"] = array();
+				$result["beers"][$id]["prix"][] = array(
+					"volume" => $beerBusiness["volume"],
+					"prixHappyHour" => $beerBusiness["prixHappyHour"],
+					"prixNormal" => $beerBusiness["prixNormal"]
+				);
+			} else {
+				$result["beers"][$id]["prix"][] = array(
+					"volume" => $beerBusiness["volume"],
+					"prixHappyHour" => $beerBusiness["prixHappyHour"],
+					"prixNormal" => $beerBusiness["prixNormal"]
+				);
+			}
 		}
 		
 		unset($result["beerBusinesses"]);

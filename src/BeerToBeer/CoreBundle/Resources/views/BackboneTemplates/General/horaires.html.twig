@@ -1,0 +1,41 @@
+<% 
+var displayJours = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
+_.each(horaires, function (horaire, jour) { 
+	if (!happyHour) { %>
+		<div class="row jour">
+			<div class="col-xs-6">
+				<%= displayJours[jour] %>
+			</div>
+			<div class="col-xs-6">
+				<% if (!horaire.ouvert) { %>
+					Fermé
+				<% } else { 
+					_.each(horaire.normal, function(oneHoraire) { %>
+						<%= oneHoraire.ouverture.getHours() %>:<% var minutes = oneHoraire.ouverture.getMinutes();
+						if (minutes < 10) { %>0<%= minutes %><% } else { %><%= minutes %><% } %>
+						-
+						<%= oneHoraire.fermeture.getHours() %>:<% var minutes = oneHoraire.fermeture.getMinutes();
+						if (minutes < 10) { %>0<%= minutes %><% } else { %><%= minutes %><% } 
+					});
+				}
+				%>
+			</div>
+		</div>
+	<% } else if (typeof horaire.happyHour != "undefined") { %>
+		<div class="row jour">
+			<div class="col-xs-6">
+				<%= displayJours[jour] %>
+			</div>
+			<div class="col-xs-6">
+				<% _.each(horaire.happyHour, function(oneHoraire) { %>
+					<%= oneHoraire.ouverture.getHours() %>:<% var minutes = oneHoraire.ouverture.getMinutes();
+					if (minutes < 10) { %>0<%= minutes %><% } else { %><%= minutes %><% } %>
+					-
+					<%= oneHoraire.fermeture.getHours() %>:<% var minutes = oneHoraire.fermeture.getMinutes();
+					if (minutes < 10) { %>0<%= minutes %><% } else { %><%= minutes %><% } 
+				});
+				%>
+			</div>
+		</div>
+	<% }
+}); %>

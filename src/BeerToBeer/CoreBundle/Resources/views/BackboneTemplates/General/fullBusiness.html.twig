@@ -1,42 +1,58 @@
-<div class="fullBusiness">
+<div class="fullBusiness" id="<%= this.model.attributes.id %>">
 	<div class="leftBack"></div>
-	<h1><%- nom %></h1>
-	<h2><%= typeArray[type] %></h2>
+	<h1><%- this.model.attributes.nom %></h1>
+	<h2><%= this.model.attributes.typeArray[this.model.attributes.type] %></h2>
 
 	<div class="container">
 		<div class="row">
 			<div class="horaires col-xs-12">
 				<div class="today pull-left">
-					<% var day = new Date().getDay(); 
+					<% 
+					var nowTime = (new Date).getTime();
+					var day = (new Date).getDay(); 
+					var horaires = this.model.attributes.horaires;
 					if (typeof horaires[day] != 'undefined') {
-						if (horaires[day].normal.ouvert) {
-							%>
-							Ouvert de <%= horaires[day].normal.ouverture.getHours() %>:<% var minutes = horaires[day].normal.ouverture.getMinutes();
-							if (minutes < 10) { %>0<%= minutes %>
-							<% } else { %><%= minutes %>
-							<% } %>
-							à <%= horaires[day].normal.fermeture.getHours() %>:<% var minutes = horaires[day].normal.fermeture.getMinutes();
-							if (minutes < 10) { %>0<%= minutes %>
-							<% } else { %><%= minutes %>
-							<% } 
-						} else { %>
+						var ouvert = false;
+						_.each(horaires[day].normal, function(horaire) {
+							if (nowTime >= horaire.ouverture.getTime() && nowTime <= horaire.fermeture.getTime()) {
+								ouvert = true;
+								%>
+								Ouvert de <%= horaire.ouverture.getHours() %>:<% var minutes = horaire.ouverture.getMinutes();
+								if (minutes < 10) { %>0<%= minutes %><% } else { %><%= minutes %><% } %>
+								à <%= horaire.fermeture.getHours() %>:<% var minutes = horaire.fermeture.getMinutes();
+								if (minutes < 10) { %>0<%= minutes %><% } else { %><%= minutes %><% } 
+							}
+						});
+						if (!ouvert) { %>
 							Fermé
-						<% } 
+						<% }
 					} else { %>
 						Inconnu
 					<% } %>
 				</div>
-				<div class="more pull-right">
-					Horaires
+				<div class="more pull-right" id="dropHoraires">
+					<span class="caretHoraires">Horaires <span class="caret"></span></span>
 				</div>
+				<div class="moreHoraires" style="display: none;">
+						<div class="row typeHoraires">
+							<div class="pull-left ouverture dropHorairesType focus">
+								Ouverture
+							</div>
+							<div class="pull-right happyHour dropHorairesType">
+								Happy-hour
+							</div>
+						</div>
+						<div class="horairesDays" id="horairesContainer">
+						</div>
+					</div>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="location col-xs-12">
 				<div class="adresse pull-left">
-					<%- adresse %><br>
-					<%= codePostal %> <%- ville %>
+					<%- this.model.attributes.adresse %><br>
+					<%= this.model.attributes.codePostal %> <%- this.model.attributes.ville %>
 				</div>
 				<div class="whereIsIt pull-right">
 					<button type="button" class="btn btn-default" id="btnFullBusiness">C'est où ?</button>
@@ -45,14 +61,21 @@
 		</div>
 
 		<div class="beers">
+			<% 
+				var pressions = _.where(this.model.attributes.beers, {pression: true});
+				var others = _.where(this.model.attributes.beers, {pression: false});
+			%>
 			<div class="type">
-				<div class="pull-left">
-					Pressions (2)
+				<div class="pull-left type">
+					<span id="link_pressions">Pressions (<%= pressions.length %>)</span>
 				</div>
-				<div class="pull-right">
-					Canettes et bouteilles (3)
+				<div class="pull-right type">
+					<a href="#"><span id="link_others">Canettes et bouteilles (<%= others.length %>)</span></a>
 				</div>
 			</div>
+			<div id="beers_container">
+			</div>
+
 		</div>
 	</div>
 </div>
