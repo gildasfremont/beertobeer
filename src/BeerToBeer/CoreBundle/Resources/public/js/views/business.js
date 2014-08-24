@@ -41,6 +41,7 @@ app.BusinessView = Backbone.View.extend({
     },
 
     dropHoraires: function(e) {
-        $("#dropHoraires .moreHoraires").toggle();
+        $(".horaires .moreHoraires").toggle();
+        $("#dropHoraires").toggleClass("focus");
     }
 });
