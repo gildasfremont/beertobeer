@@ -38,10 +38,28 @@ app.BusinessView = Backbone.View.extend({
         //this.model.beers.fetch({data: {businessId: this.model.id}});
     	app.AppView.BusinessesView.$el.html( this.templateFull( this ) );
         this.renderBeers(this.etatBeersPression);
+        this.renderHoraires(false);
     },
 
     dropHoraires: function(e) {
         $(".horaires .moreHoraires").toggle();
         $("#dropHoraires").toggleClass("focus");
+    },
+
+    dropHorairesType: function(e) {
+        if (!$(e.target).hasClass("focus")) {
+            $(".dropHorairesType").toggleClass("focus");
+            if ($(".dropHorairesType.ouverture").hasClass("focus"))
+                this.renderHoraires(false);
+            else
+                this.renderHoraires(true);
+        }
+    },
+
+    renderHoraires: function(happyHour) {
+        $("#horairesContainer").html(_.template($('#horairesTemplate').html(), {
+            horaires: this.model.get('horaires'),
+            happyHour: happyHour
+        }));
     }
 });

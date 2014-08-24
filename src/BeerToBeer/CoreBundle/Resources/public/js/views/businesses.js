@@ -13,7 +13,8 @@ app.BusinessesView = Backbone.View.extend({
         "focus #searchInput": "focusSearchInput",
         "focusout #searchInput": "focusOutSearchInput",
         "click #gpsLink": "getUserLocation",
-        "click #dropHoraires": "dropHoraires"
+        "click #dropHoraires": "dropHoraires",
+        "click .dropHorairesType": "dropHorairesType"
     },
 
     initialize: function() {
@@ -182,5 +183,9 @@ app.BusinessesView = Backbone.View.extend({
 
     dropHoraires: function(e) {
         this.fullBusinessView.dropHoraires(e);
+    },
+
+    dropHorairesType: function(e) {
+        this.fullBusinessView.dropHorairesType(e);
     }
 });

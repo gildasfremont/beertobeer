@@ -7,22 +7,25 @@
 		<div class="row">
 			<div class="horaires col-xs-12">
 				<div class="today pull-left">
-					<% var day = new Date().getDay(); 
-						var horaires = this.model.attributes.horaires;
+					<% 
+					var nowTime = (new Date).getTime();
+					var day = (new Date).getDay(); 
+					var horaires = this.model.attributes.horaires;
 					if (typeof horaires[day] != 'undefined') {
-						if (horaires[day].normal.ouvert) {
-							%>
-							Ouvert de <%= horaires[day].normal.ouverture.getHours() %>:<% var minutes = horaires[day].normal.ouverture.getMinutes();
-							if (minutes < 10) { %>0<%= minutes %>
-							<% } else { %><%= minutes %>
-							<% } %>
-							à <%= horaires[day].normal.fermeture.getHours() %>:<% var minutes = horaires[day].normal.fermeture.getMinutes();
-							if (minutes < 10) { %>0<%= minutes %>
-							<% } else { %><%= minutes %>
-							<% } 
-						} else { %>
+						var ouvert = false;
+						_.each(horaires[day].normal, function(horaire) {
+							if (nowTime >= horaire.ouverture.getTime() && nowTime <= horaire.fermeture.getTime()) {
+								ouvert = true;
+								%>
+								Ouvert de <%= horaire.ouverture.getHours() %>:<% var minutes = horaire.ouverture.getMinutes();
+								if (minutes < 10) { %>0<%= minutes %><% } else { %><%= minutes %><% } %>
+								à <%= horaire.fermeture.getHours() %>:<% var minutes = horaire.fermeture.getMinutes();
+								if (minutes < 10) { %>0<%= minutes %><% } else { %><%= minutes %><% } 
+							}
+						});
+						if (!ouvert) { %>
 							Fermé
-						<% } 
+						<% }
 					} else { %>
 						Inconnu
 					<% } %>
@@ -32,31 +35,14 @@
 				</div>
 				<div class="moreHoraires" style="display: none;">
 						<div class="row typeHoraires">
-							<div class="pull-left ouverture">
+							<div class="pull-left ouverture dropHorairesType focus">
 								Ouverture
 							</div>
-							<div class="pull-right happyHour">
+							<div class="pull-right happyHour dropHorairesType">
 								Happy-hour
 							</div>
 						</div>
-						<div class="horairesDays">
-							<div class="row jour">
-								<div class="col-xs-6">
-									lundi
-								</div>
-								<div class="col-xs-6">
-									08:00 - 15:00<br />
-									18:00 - 19:00
-								</div>
-							</div>
-							<div class="row jour">
-								<div class="col-xs-6">
-									mardi
-								</div>
-								<div class="col-xs-6">
-									08:00 - 23:00
-								</div>
-							</div>
+						<div class="horairesDays" id="horairesContainer">
 						</div>
 					</div>
 			</div>
