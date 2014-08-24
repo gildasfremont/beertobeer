@@ -37,6 +37,7 @@
     },
 
     getPrixNow: function() {
+      return "€ " + this.attributes.prixNormal;
       var now = new Date();
       var todayHoraires = this.attributes.horaires[now.getDay()];
       if (typeof todayHoraires.happyHour != "undefined" && now.getTime() >= todayHoraires.happyHour.ouverture.getTime() && now.getTime() <= todayHoraires.happyHour.fermeture.getTime()) {
