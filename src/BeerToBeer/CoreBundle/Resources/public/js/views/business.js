@@ -29,6 +29,22 @@ app.BusinessView = Backbone.View.extend({
         $("#beers_container").html(html);
     },
 
+    renderMap: function() {
+        var positionTopMap = $("#mapFullBusiness").position().top;
+        $("#mapFullBusiness").css({"position": "absolute", "top": positionTopMap, "height": $(window).height() - positionTopMap});
+        var businessPosition = new google.maps.LatLng(this.model.get('latitude'), this.model.get('longitude'));
+        var map = new google.maps.Map(document.getElementById('mapFullBusiness'), {
+            center: businessPosition,
+            zoom: 16
+        });
+        console.log(markerBusinessUrl);
+        var businessMarker = new google.maps.Marker({
+            position: businessPosition,
+            map: map,
+            icon: markerBusinessUrl // L'URL générée par Symfony dans fullBusiness.twig.html
+        });
+    },
+
     fullBusiness: function(e) {
     	location.href = "#business/"+ this.model.get('id');
     },
@@ -39,6 +55,7 @@ app.BusinessView = Backbone.View.extend({
     	app.AppView.BusinessesView.$el.html( this.templateFull( this ) );
         this.renderBeers(this.etatBeersPression);
         this.renderHoraires(false);
+        this.renderMap();
     },
 
     dropHoraires: function(e) {
@@ -61,5 +78,11 @@ app.BusinessView = Backbone.View.extend({
             horaires: this.model.get('horaires'),
             happyHour: happyHour
         }));
+    },
+
+    btnFullBusiness: function(e) {
+        $(".btnFullBusiness").toggle();
+        $(".beers").toggle();
+        $("#mapFullBusiness").toggle();
     }
 });

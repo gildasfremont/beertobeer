@@ -242,7 +242,7 @@ body {
 		color: #666;
 		font-size: 0.9em;
 	}
-	.fullBusiness .location #btnFullBusiness {
+	.fullBusiness .location .btnFullBusiness {
 		background-color: #ffe680;
 		border: 2px solid #ffcc00;
 		text-shadow: none;
@@ -275,6 +275,10 @@ body {
 	}
 	.fullBusiness .beers .beer .prices .lastPrice {
 		border-right: none;
+	}
+	.fullBusiness #mapFullBusiness {
+		width: 100%;
+		height: 1px;
 	}
 }
 

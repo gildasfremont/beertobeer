@@ -55,12 +55,13 @@
 					<%= this.model.attributes.codePostal %> <%- this.model.attributes.ville %>
 				</div>
 				<div class="whereIsIt pull-right">
-					<button type="button" class="btn btn-default" id="btnFullBusiness">C'est où ?</button>
+					<button type="button" class="btn btn-default btnFullBusiness">C'est où ?</button>
+					<button type="button" class="btn btn-default btnFullBusiness" style="display: none;">Bières</button>
 				</div>
 			</div>
 		</div>
 
-		<div class="beers">
+		<div class="beers" style="display: none;">
 			<% 
 				var pressions = _.where(this.model.attributes.beers, {pression: true});
 				var others = _.where(this.model.attributes.beers, {pression: false});
@@ -78,4 +79,11 @@
 
 		</div>
 	</div>
+	<div id="mapFullBusiness">
+	</div>
+
+	<script>
+		// Ceci est l'URL de l'image du markerBusiness.png, on la donne ici pour qu'elle puisse être générée par Symfony
+		var markerBusinessUrl = "{{ asset("bundles/beertobeercore/images/markerBusiness.png") }}";
+	</script>
 </div>
