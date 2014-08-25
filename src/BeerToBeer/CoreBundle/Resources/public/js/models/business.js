@@ -66,6 +66,8 @@
       nom: '',
       type: 1,
       adress: "",
+      latitude: 0,
+      longitude: 0,
       distance: "",
       horaires: {},
       prixNow: 0,
