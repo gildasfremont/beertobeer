@@ -120,6 +120,10 @@ class BusinessRepository extends EntityRepository
 		
 		unset($result["beerBusinesses"]);
 
+		foreach ($result["horaires"] as $key => $value) {
+			$result["horaires"][$key]["ouverture"] = $result["horaires"][$key]["ouverture"]->getTimeStamp();
+		}
+
 		return $result;
 	}
 }
