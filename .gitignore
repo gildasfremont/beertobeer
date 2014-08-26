@@ -21,4 +21,3 @@ app/check.php
 app/SymfonyRequirements.php
 composer.lock
 app/check.php
-web/app_dev.php
