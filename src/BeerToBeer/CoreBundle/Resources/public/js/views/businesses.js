@@ -98,7 +98,8 @@ app.BusinessesView = Backbone.View.extend({
             this.focusSearchInput();
         } 
         $("#searchInput").blur(); // Trigger blur pour que le "Chercher autour de moi disparaisse"
-        this.$el.append(_.template($('#businessList').html())); // TODO : vérifier qu'il n'y pas déjà une liste
+        if (!$('.businessList').length)
+            this.$el.append(_.template($('#businessList').html())); // TODO : vérifier qu'il n'y pas déjà une liste
         this.collection.fetch({reset: true, data: {latitude: lat, longitude: lng}});
 
         // Si l'utilisateur a demandé sa position, on tente de trouver son adresse par reverse geocoding
