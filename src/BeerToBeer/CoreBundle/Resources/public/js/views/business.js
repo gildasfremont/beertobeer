@@ -35,7 +35,8 @@ app.BusinessView = Backbone.View.extend({
         var businessPosition = new google.maps.LatLng(this.model.get('latitude'), this.model.get('longitude'));
         var map = new google.maps.Map(document.getElementById('mapFullBusiness'), {
             center: businessPosition,
-            zoom: 16
+            zoom: 16,
+            disableDefaultUI: true
         });
         console.log(markerBusinessUrl);
         var businessMarker = new google.maps.Marker({
@@ -43,6 +44,7 @@ app.BusinessView = Backbone.View.extend({
             map: map,
             icon: markerBusinessUrl // L'URL générée par Symfony dans fullBusiness.twig.html
         });
+        $("#btnsMap").show();
     },
 
     fullBusiness: function(e) {
@@ -84,5 +86,22 @@ app.BusinessView = Backbone.View.extend({
         $(".btnFullBusiness").toggle();
         $(".beers").toggle();
         $("#mapFullBusiness").toggle();
+    },
+
+    btnCopyAdress: function(e) {
+        var doc = document;
+        var text = doc.getElementById("adressBusiness");    
+
+        if (doc.body.createTextRange) { // ms
+            var range = doc.body.createTextRange();
+            range.moveToElementText(text);
+            range.select();
+        } else if (window.getSelection) { // moz, opera, webkit
+            var selection = window.getSelection();            
+            var range = doc.createRange();
+            range.selectNodeContents(text);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }
     }
 });

@@ -15,7 +15,8 @@ app.BusinessesView = Backbone.View.extend({
         "click #gpsLink": "getUserLocation",
         "click #dropHoraires": "dropHoraires",
         "click .dropHorairesType": "dropHorairesType",
-        "click .btnFullBusiness": "btnFullBusiness"
+        "click .btnFullBusiness": "btnFullBusiness",
+        "click #btnCopyAdress": "btnCopyAdress"
     },
 
     initialize: function() {
@@ -81,7 +82,7 @@ app.BusinessesView = Backbone.View.extend({
     },
 
     focusOutSearchInput: function() {
-        window.setTimeout(function(){$("#search #gpsContainer").hide();}, 50); // Un petit TimeOut pour avoir le temps de cliquer
+        window.setTimeout(function(){$("#search #gpsContainer").hide();}, 100); // Un petit TimeOut pour avoir le temps de cliquer
     },
 
     home: function() {
@@ -192,5 +193,9 @@ app.BusinessesView = Backbone.View.extend({
 
     btnFullBusiness: function(e) {
         this.fullBusinessView.btnFullBusiness(e);
+    },
+
+    btnCopyAdress: function(e) {
+        this.fullBusinessView.btnCopyAdress(e);
     }
 });

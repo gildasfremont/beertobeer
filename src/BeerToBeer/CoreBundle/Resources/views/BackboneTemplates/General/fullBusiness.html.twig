@@ -50,7 +50,7 @@
 
 		<div class="row">
 			<div class="location col-xs-12">
-				<div class="adresse pull-left">
+				<div class="adresse pull-left" id="adressBusiness">
 					<%- this.model.attributes.adresse %><br>
 					<%= this.model.attributes.codePostal %> <%- this.model.attributes.ville %>
 				</div>
@@ -80,6 +80,9 @@
 		</div>
 	</div>
 	<div id="mapFullBusiness">
+	</div>
+	<div id="btnsMap" style="display: none;">
+		<button type="button" class="btn btn-default" id="btnCopyAdress">Copier l'adresse</button>
 	</div>
 
 	<script>
