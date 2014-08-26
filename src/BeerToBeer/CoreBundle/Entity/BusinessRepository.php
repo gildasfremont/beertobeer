@@ -101,6 +101,7 @@ class BusinessRepository extends EntityRepository
 			}
 		}
 		
+		// Ici on transforme la relation Business->BeerBusinesses<-Beer en Business->Beers pour qu'elle soit plus facilement lisible par l'API
 		foreach ($result["beerBusinesses"] as $keyBb => $beerBusiness) {
 			if ($beerBusiness["pression"])
 				$id = "p".$beerBusiness["beer"]["id"];
@@ -123,6 +124,7 @@ class BusinessRepository extends EntityRepository
 		
 		unset($result["beerBusinesses"]);
 
+		// On transforme tous les DateTime en TimeStamp car Javascript ne sais vraiment bien lire que ça
 		foreach ($result["horaires"] as $key => $value) {
 			$result["horaires"][$key]["ouverture"] = $result["horaires"][$key]["ouverture"]->getTimeStamp();
 		}
