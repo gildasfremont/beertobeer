@@ -101,6 +101,7 @@ class BusinessRepository extends EntityRepository
 			else
 				$id = $beerBusiness["beer"]["id"];
 			if (!isset($result["beers"][$id])) {
+				$result["beers"][$id]["id"] = $id;
 				$result["beers"][$id]["name"] = $beerBusiness["beer"]["name"];
 				$result["beers"][$id]["degree"] = $beerBusiness["beer"]["degree"];
 				$result["beers"][$id]["pression"] = $beerBusiness["pression"];
