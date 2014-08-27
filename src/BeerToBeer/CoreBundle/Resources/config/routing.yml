@@ -11,7 +11,11 @@ btb_api_business_id:
     defaults: { _controller: BeerToBeerCoreBundle:Api:getBusinessFromId }
     requirements:
         id: \d+
+        _method: GET
 
-btb_api_beer:
-    path:     /api/beer
-    defaults: { _controller: BeerToBeerCoreBundle:Api:beer }
+btb_api_update_business_id:
+    path:     /api/business/{id}
+    defaults: { _controller: BeerToBeerCoreBundle:Api:updateBusiness }
+    requirements:
+        id: \d+
+        _method: PUT

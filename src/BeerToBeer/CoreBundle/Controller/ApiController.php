@@ -5,6 +5,7 @@ namespace BeerToBeer\CoreBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use BeerToBeer\CoreBundle\Entity\Business;
 
 class ApiController extends Controller
@@ -27,7 +28,7 @@ class ApiController extends Controller
 
     	$repo = $this->getDoctrine()->getManager()->getRepository('BeerToBeerCoreBundle:Business');
 
-    	$results = $repo->getClosestBusinesses(floatval($latitude), floatval($longitude));
+    	$results = $repo->getClosestBusinessesForApi(floatval($latitude), floatval($longitude));
 
         $response = new JsonResponse();
 		return $response->setData($results);
@@ -36,9 +37,23 @@ class ApiController extends Controller
     public function getBusinessFromIdAction($id) {
         $repoBusiness = $this->getDoctrine()->getManager()->getRepository('BeerToBeerCoreBundle:Business');
 
-        $result = $repoBusiness->getBusiness(intval($id));
+        $result = $repoBusiness->getBusinessForApi(intval($id));
 
         $response = new JsonResponse();
         return $response->setData($result);
+    }
+
+    public function updateBusinessAction($id) {
+        // Récupération des paramètres PUT
+        parse_str($this->getRequest()->getContent(), $businessFromApi);
+
+        if($id != $businessFromApi)
+            throw new HttpException(400, "L'entité donnée est différente de celle décrite par la requête.");
+
+        $repoBusiness = $this->getDoctrine()->getManager()->getRepository('BeerToBeerCoreBundle:Business');
+
+        $repoBusiness->updateBusinessFromApi($businessFromApi);
+
+        return new Response("L'établissement a bien été modifié !", 200);
     }
 }

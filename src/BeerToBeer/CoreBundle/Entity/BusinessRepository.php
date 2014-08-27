@@ -24,7 +24,7 @@ class BusinessRepository extends EntityRepository
 	 * int $limit : le nombre d'établissements à afficher
 	 *
 	 **/
-	public function getClosestBusinesses($latitude, $longitude, $offset = 0, $limit = 10) {
+	public function getClosestBusinessesForApi($latitude, $longitude, $offset = 0, $limit = 10) {
 
 		$query = $this->_em->createQuery('
 			SELECT bu, bb, h, be,
@@ -56,7 +56,7 @@ class BusinessRepository extends EntityRepository
 		return $businessesForApi;
 	}
 
-	public function getBusiness($id) {
+	public function getBusinessForApi($id) {
 		$query = $this->_em->createQuery('
 			SELECT bu, h, bb, be
 			FROM BeerToBeerCoreBundle:Business bu
@@ -125,5 +125,28 @@ class BusinessRepository extends EntityRepository
 		}
 
 		return $result;
+	}
+
+	public function updateBusinessFromApi($businessFromApi) {
+		// Pour l'instant on ne modifie que les bières
+		foreach ($businessFromApi["beers"] as $key => $beerFromApi) {
+			$beerBusiness = new BeerBusiness();
+			$beerBusiness->setId($beerFromApi["id"]);
+			$beerBusiness->setPression($beerFromApi["pression"]);
+			$beerBusiness->setVolume($beerFromApi["volume"]);
+			$beerBusiness->setPrixNormal($beerFromApi["prixNormal"]);
+
+			// Vérification de la logique des prix
+			if (isset($beerFromApi["prixHappyHour"])) {
+				if ($beerFromApi["prixHappyHour"] > $beerFromApi["prixNormal"])
+					$beerBusiness->setPrixHappyHour($beerFromApi["prixHappyHour"]);
+				else
+					return "Le prix en happy-hour est supérieur au prix normal.";
+			}
+
+			$this->_em->persist($beerBusiness);
+		}
+
+		return $this->_em->flush();
 	}
 }
