@@ -79,6 +79,7 @@ app.BusinessesView = Backbone.View.extend({
         ;
         $("#home").attr("id", "search");
         $("#search #gpsContainer").show();
+        app.Router.navigate("search");
     },
 
     focusOutSearchInput: function() {

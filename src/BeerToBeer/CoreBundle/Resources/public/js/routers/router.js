@@ -4,6 +4,7 @@ $(function() {
 	  routes: {
 	  	"": "home",
 	    "search/lat/:lat/lng/:lng": "search",
+	    "search": "focusSearchInput",
 	    "gps": "gps",
 	    "business/:id": "fullBusiness"
 	  },
@@ -21,6 +22,13 @@ $(function() {
 	  fullBusiness: function(id) {
 		console.log("fullBusiness (id: "+id+") Route requested.");
 		app.AppView.BusinessesView.renderFullBusiness(id);
+	  },
+
+	  focusSearchInput: function() {
+	  	console.log("focusSearchInput Route requested");
+	  	if(!$("#home").length)
+	  		app.AppView.BusinessesView.home();
+	  	app.AppView.BusinessesView.focusSearchInput();
 	  }
 	});
 
