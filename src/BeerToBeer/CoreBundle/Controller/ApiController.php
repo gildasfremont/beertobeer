@@ -47,12 +47,14 @@ class ApiController extends Controller
         // Récupération des paramètres PUT
         parse_str($this->getRequest()->getContent(), $businessFromApi);
 
-        if($id != $businessFromApi)
+        if($id != $businessFromApi["id"])
             throw new HttpException(400, "L'entité donnée est différente de celle décrite par la requête.");
 
         $repoBusiness = $this->getDoctrine()->getManager()->getRepository('BeerToBeerCoreBundle:Business');
 
-        $repoBusiness->updateBusinessFromApi($businessFromApi);
+        $return = $repoBusiness->updateBusinessFromApi($businessFromApi);
+        if ($return !== true)
+            throw new HttpException(400, $return);
 
         return new Response("L'établissement a bien été modifié !", 200);
     }
