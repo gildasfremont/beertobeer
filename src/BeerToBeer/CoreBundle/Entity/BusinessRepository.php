@@ -104,18 +104,13 @@ class BusinessRepository extends EntityRepository
 				$result["beers"][$id]["degree"] = $beerBusiness["beer"]["degree"];
 				$result["beers"][$id]["pression"] = $beerBusiness["pression"];
 				$result["beers"][$id]["prix"] = array();
-				$result["beers"][$id]["prix"][] = array(
-					"volume" => $beerBusiness["volume"],
-					"prixHappyHour" => $beerBusiness["prixHappyHour"],
-					"prixNormal" => $beerBusiness["prixNormal"]
-				);
-			} else {
-				$result["beers"][$id]["prix"][] = array(
-					"volume" => $beerBusiness["volume"],
-					"prixHappyHour" => $beerBusiness["prixHappyHour"],
-					"prixNormal" => $beerBusiness["prixNormal"]
-				);
 			}
+			$result["beers"][$id]["prix"][] = array(
+				"id" => $beerBusiness["id"],
+				"volume" => $beerBusiness["volume"],
+				"prixHappyHour" => $beerBusiness["prixHappyHour"],
+				"prixNormal" => $beerBusiness["prixNormal"]
+			);
 		}
 		
 		unset($result["beerBusinesses"]);
@@ -129,22 +124,23 @@ class BusinessRepository extends EntityRepository
 
 	public function updateBusinessFromApi($businessFromApi) {
 		// Pour l'instant on ne modifie que les bières
-		foreach ($businessFromApi["beers"] as $key => $beerFromApi) {
-			$beerBusiness = new BeerBusiness();
-			$beerBusiness->setId($beerFromApi["id"]);
-			$beerBusiness->setPression($beerFromApi["pression"]);
-			$beerBusiness->setVolume($beerFromApi["volume"]);
-			$beerBusiness->setPrixNormal($beerFromApi["prixNormal"]);
+		foreach ($businessFromApi["beers"] as $beerFromApi) {
+			foreach ($beerFromApi["prix"] as $prixFromApi) {
+				$beerBusiness = new BeerBusiness();
+				$beerBusiness->setId($prixFromApi["id"]);
+				$beerBusiness->setVolume($prixFromApi["volume"]);
+				$beerBusiness->setPrixNormal($prixFromApi["prixNormal"]);
 
-			// Vérification de la logique des prix
-			if (isset($beerFromApi["prixHappyHour"])) {
-				if ($beerFromApi["prixHappyHour"] > $beerFromApi["prixNormal"])
-					$beerBusiness->setPrixHappyHour($beerFromApi["prixHappyHour"]);
-				else
-					return "Le prix en happy-hour est supérieur au prix normal.";
+				// Vérification de la logique des prix
+				if (isset($prixFromApi["prixHappyHour"])) {
+					if ($prixFromApi["prixHappyHour"] > $prixFromApi["prixNormal"])
+						$beerBusiness->setPrixHappyHour($prixFromApi["prixHappyHour"]);
+					else
+						return "Le prix en happy-hour est supérieur au prix normal.";
+				}
+
+				$this->_em->persist($beerBusiness);
 			}
-
-			$this->_em->persist($beerBusiness);
 		}
 
 		return $this->_em->flush();
