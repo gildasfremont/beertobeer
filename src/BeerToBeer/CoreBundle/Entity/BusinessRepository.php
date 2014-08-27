@@ -4,6 +4,7 @@ namespace BeerToBeer\CoreBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use BeerToBeer\CoreBundle\Entity\BeerBusiness;
 
 /**
  * BusinessRepository
@@ -126,14 +127,13 @@ class BusinessRepository extends EntityRepository
 		// Pour l'instant on ne modifie que les bières
 		foreach ($businessFromApi["beers"] as $beerFromApi) {
 			foreach ($beerFromApi["prix"] as $prixFromApi) {
-				$beerBusiness = new BeerBusiness();
-				$beerBusiness->setId($prixFromApi["id"]);
+				$beerBusiness = $this->_em->getRepository("BeerToBeerCoreBundle:BeerBusiness")->find($prixFromApi["id"]);
 				$beerBusiness->setVolume($prixFromApi["volume"]);
 				$beerBusiness->setPrixNormal($prixFromApi["prixNormal"]);
 
 				// Vérification de la logique des prix
 				if (isset($prixFromApi["prixHappyHour"])) {
-					if ($prixFromApi["prixHappyHour"] > $prixFromApi["prixNormal"])
+					if ($prixFromApi["prixHappyHour"] <= $prixFromApi["prixNormal"])
 						$beerBusiness->setPrixHappyHour($prixFromApi["prixHappyHour"]);
 					else
 						return "Le prix en happy-hour est supérieur au prix normal.";
@@ -143,6 +143,8 @@ class BusinessRepository extends EntityRepository
 			}
 		}
 
-		return $this->_em->flush();
+		$this->_em->flush();
+
+		return true;
 	}
 }

@@ -45,8 +45,9 @@ class ApiController extends Controller
 
     public function updateBusinessAction($id) {
         // Récupération des paramètres PUT
-        parse_str($this->getRequest()->getContent(), $businessFromApi);
-
+        $requestContent = $this->getRequest()->getContent();
+        $businessFromApi = json_decode($requestContent, true);
+        
         if($id != $businessFromApi["id"])
             throw new HttpException(400, "L'entité donnée est différente de celle décrite par la requête.");
 
