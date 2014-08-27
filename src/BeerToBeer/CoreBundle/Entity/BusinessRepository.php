@@ -15,16 +15,13 @@ use BeerToBeer\CoreBundle\Entity\BeerBusiness;
 class BusinessRepository extends EntityRepository
 {
 	/**
-	 * getClosestBusinesses($latitude, $longitude, $offset = 0, $limit = 10)
-	 *
 	 * S'utilise pour trouver les établissements les plus proches d'une position en donnant une limite
-	 *
-	 * float $latitude : la latitude de l'utilisateur
-	 * float $longitude : la longitude de l'utilisateur
-	 * int $offset : par où on commence à lire les résultats, à utiliser lors du lazy loading
-	 * int $limit : le nombre d'établissements à afficher
-	 *
-	 **/
+	 * @param  float  $latitude : la latitude de l'utilisateur
+	 * @param  float  $longitude : la longitude de l'utilisateur
+	 * @param  integer $offset : par où on commence à lire les résultats, à utiliser lors du lazy loading
+	 * @param  integer $limit : le nombre d'établissements à afficher
+	 * @return array
+	 */
 	public function getClosestBusinessesForApi($latitude, $longitude, $offset = 0, $limit = 10) {
 
 		$query = $this->_em->createQuery('
@@ -57,6 +54,11 @@ class BusinessRepository extends EntityRepository
 		return $businessesForApi;
 	}
 
+	/**
+	 * Récupère un Business par son id et le renvoie sous format API
+	 * @param  integer $id
+	 * @return array
+	 */
 	public function getBusinessForApi($id) {
 		$query = $this->_em->createQuery('
 			SELECT bu, h, bb, be
@@ -78,7 +80,11 @@ class BusinessRepository extends EntityRepository
 		return $this->parseOneBusinessForApi($result[0]);
 	}
 
-	// S'utilise pour modifier l'array d'un business donné par Doctrine pour l'adapter à l'API
+	/**
+	 * S'utilise pour modifier l'array d'un business donné par Doctrine pour l'adapter à l'API
+	 * @param  array $result
+	 * @return array
+	 */
 	private function parseOneBusinessForApi($result) {
 
 		// Il faut prendre le prix de la "pinte" la moins chère, donc on vérifie que le volume est de 50cl
