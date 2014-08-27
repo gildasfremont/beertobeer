@@ -89,6 +89,7 @@ app.BusinessView = Backbone.View.extend({
         $(".btnFullBusiness").toggle();
         $(".beers").toggle();
         $("#mapFullBusiness").toggle();
+        $("#btnsMap").toggle();
     },
 
     btnCopyAdress: function(e) {
