@@ -125,9 +125,18 @@ class BusinessRepository extends EntityRepository
 
 	public function updateBusinessFromApi($businessFromApi) {
 		// Pour l'instant on ne modifie que les bières
-		foreach ($businessFromApi["beers"] as $beerFromApi) {
+		foreach ($businessFromApi["beers"] as $idBeerFromApi => $beerFromApi) {
 			foreach ($beerFromApi["prix"] as $prixFromApi) {
-				$beerBusiness = $this->_em->getRepository("BeerToBeerCoreBundle:BeerBusiness")->find($prixFromApi["id"]);
+				if (array_key_exists("id", $prixFromApi))
+					$beerBusiness = $this->_em->getRepository("BeerToBeerCoreBundle:BeerBusiness")->find($prixFromApi["id"]);
+				else {
+					$beerBusiness = new BeerBusiness();
+					$beer = $this->_em->getRepository("BeerToBeerCoreBundle:Beer")->find(str_replace("p", "", $idBeerFromApi));
+					$beerBusiness->setBeer($beer);
+					$business = $this->_em->getRepository("BeerToBeerCoreBundle:Business")->find($businessFromApi["id"]);
+					$beerBusiness->setBusiness($business);
+					$beerBusiness->setPression($beerFromApi["pression"]);
+				}
 				$beerBusiness->setVolume($prixFromApi["volume"]);
 				$beerBusiness->setPrixNormal($prixFromApi["prixNormal"]);
 
