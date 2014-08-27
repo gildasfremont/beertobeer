@@ -305,6 +305,47 @@ body {
 		top: 0;
 		background-color: #f9f9f9;
 	}
+
+	.editBeer form {
+		margin-top: 30px;
+	}
+	.editBeer .typeTarif div {
+		white-space: nowrap;
+		font-size: 0.8em;
+		padding: 0;
+		text-align: center;
+	}
+	.editBeer .oneBeerBusiness {
+		margin: 5px;
+	}
+	.editBeer .oneBeerBusiness .volume {
+		color: #808080;
+	}
+	.editBeer .oneBeerBusiness .col-xs-3 {
+		height: 40px;
+		line-height: 40px;
+	}
+	.editBeer form .oneBeerBusiness input[type=number] {
+		height: 40px;
+		width: 42px;
+		border-radius: 2px;
+		padding: 0;
+		text-align: center;
+		font-size: 1.3em;
+	}
+	
+}
+
+/* Ici on supprime les boutons chelous des input de type "number" */
+/* Pour Webkit : */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+/* Pour Firefox */
+input[type=number] {
+    -moz-appearance:textfield;
 }
 
 /* Google Places autocomplete */

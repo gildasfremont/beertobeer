@@ -1,29 +1,35 @@
 <div class="editBeer">
-	<h3>Lagunitas IPA</h3>
-
-	<form>
-		Prix en euros
+	<div class="container">
 		<div class="row">
-			<div class="col-xs-offset-3 col-xs-3">
-				Tarif normal
-			</div>
-			<div class="col-xs-3">
-				Happy-Hour
+			<div class="col-xs-12">
+				<h3>Lagunitas IPA</h3>
 			</div>
 		</div>
-		<% var oneBeerTemplate = _.template($("#oneBeerBusinessForm").html()); %>
-		<%= oneBeerTemplate({
-			id: 1,
-			volume: 25
-		}) %>
-		<%= oneBeerTemplate({
-			id: 2,
-			volume: 33,
-			prixNormal: 6
-		}) %>
-		<a href="#" id="addVolume">+ Ajouter un volume</a>
 
-		<button class="btn btn-default">Supprimer cette bière</button>
-		<button class="btn btn-default">Modifications terminées</button>
-	</form>
+		<form>
+			Prix en euros
+			<div class="row typeTarif">
+				<div class="col-xs-offset-3 col-xs-3">
+					Tarif normal
+				</div>
+				<div class="col-xs-3">
+					Happy-Hour
+				</div>
+			</div>
+			<% var oneBeerTemplate = _.template($("#oneBeerBusinessForm").html()); %>
+			<%= oneBeerTemplate({
+				id: 1,
+				volume: 25
+			}) %>
+			<%= oneBeerTemplate({
+				id: 2,
+				volume: 33,
+				prixNormal: 6
+			}) %>
+			<a href="#" id="addVolume">+ Ajouter un volume</a>
+
+			<button class="btn btn-default">Supprimer cette bière</button>
+			<button class="btn btn-default">Modifications terminées</button>
+		</form>
+	</div>
 </div>
