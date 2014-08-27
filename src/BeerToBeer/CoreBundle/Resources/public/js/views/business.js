@@ -5,6 +5,8 @@ app.BusinessView = Backbone.View.extend({
     className: 'row business',
     template: _.template( $( '#business' ).html() ),
     templateFull: _.template( $( '#fullBusiness' ).html() ),
+    horairesTemplate: _.template($('#horairesTemplate').html()),
+    beerTemplate: _.template($('#beer').html()),
     etatBeersPression: true,
 
     events: {
@@ -23,8 +25,9 @@ app.BusinessView = Backbone.View.extend({
     renderBeers: function(pression) {
         var beers = _.where(this.model.attributes.beers, {pression: pression});
         var html = "";
+        var beerTemplate = this.beerTemplate;
         _.each(beers, function(beer) {
-            html += _.template( $( '#beer' ).html(), beer);
+            html += beerTemplate(beer);
         });
         $("#beers_container").html(html);
     },
@@ -76,8 +79,8 @@ app.BusinessView = Backbone.View.extend({
     },
 
     renderHoraires: function(happyHour) {
-        $("#horairesContainer").html(_.template($('#horairesTemplate').html(), {
-            horaires: this.model.get('horaires'),
+        $("#horairesContainer").html(this.horairesTemplate({
+            horaires: this.model.attributes.horaires,
             happyHour: happyHour
         }));
     },
@@ -103,5 +106,12 @@ app.BusinessView = Backbone.View.extend({
             selection.removeAllRanges();
             selection.addRange(range);
         }
-    }
+    },
+
+    editBeerLink: function(e) {
+        e.preventDefault();
+        var beerId = $(e.target).attr("id");
+        console.log('Edit Beer with id "'+beerId+'"');
+        $(".fullBusiness").append( _.template( $("#editBeerForm").html(), this.model.attributes ) );
+    } 
 });
