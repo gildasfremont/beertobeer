@@ -116,9 +116,37 @@ app.BusinessView = Backbone.View.extend({
         console.log('Edit Beer with id "'+beerId+'"');
         $(".fullBusiness").append( this.editBeerFormTemplate( this.model.attributes.beers[beerId] ) );
 
+        // Event for "Annuler" link
         $("#cancelEditBeers").click(function(event) {
             event.preventDefault();
             $(".editBeer").remove();
         });
+
+        $("#submitEditBeers").click(function(event) {
+            var error = false;
+            var change = false;
+            _.each(app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix, function(price, index, prix) {
+                var prixNormal = parseFloat($("#" + price.id + ".inputNormal").val());
+                var prixHappyHour = parseFloat($("#" + price.id + ".inputHappyHour").val());
+                if (prixNormal < prixHappyHour) {
+                    alert("Le prix Happy-Hour doit être inférieur au prix Normal");
+                    error = true;
+                }
+                else if (prixNormal != price.prixNormal || prixHappyHour != price.prixHappyHour) {
+                    change = true;
+                    app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix[index].prixNormal = prixNormal;
+                    app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix[index].prixHappyHour = prixHappyHour;
+                }
+            });
+            if (!error && change) {
+                app.AppView.BusinessesView.fullBusinessView.model.save();
+                app.AppView.BusinessesView.collection.set(app.AppView.BusinessesView.fullBusinessView.model.get("id"), app.AppView.BusinessesView.fullBusinessView.model);
+                app.AppView.BusinessesView.fullBusinessView.renderBeers(app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].pression);
+                $(".editBeer").remove();
+            } else if (!error && !change)
+                $(".editBeer").remove();
+        });
+        $("#formEditBeers").submit(function(e) {$("#submitEditBeers").click();});
+
     } 
 });
