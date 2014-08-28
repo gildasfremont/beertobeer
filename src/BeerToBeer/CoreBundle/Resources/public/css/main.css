@@ -327,6 +327,7 @@ body {
 	}
 	.editBeer .oneBeerBusiness .volume {
 		color: #808080;
+		opacity: 0.7;
 	}
 	.editBeer .oneBeerBusiness .col-xs-3 {
 		height: 40px;
@@ -339,6 +340,13 @@ body {
 		background-repeat: no-repeat;
 		background-position: right;
 	}
+
+	/* Pour faire en sorte que le tiret disparaisse lors du focus */
+	input[type=number]:focus::-webkit-input-placeholder { color:transparent; }
+	input[type=number]:focus::-moz-placeholder { color:transparent; }
+	input[type=number]:focus:-ms-input-placeholder { color:transparent; } /* ie */
+	input[type=number]:focus:-moz-placeholder { color:transparent; }
+
 	.editBeer .oneBeerBusiness .col-xs-3.volume {
 		width: 25%;
 	}
@@ -353,7 +361,24 @@ body {
 		text-align: center;
 		font-size: 1.3em;
 	}
-	
+	.editBeer form .buttons {
+		position: absolute;
+		bottom: 20px;
+		z-index: 210;
+		width: 100%;
+		text-align: center;
+	}
+	.editBeer form .buttons .btn {
+	    width: 280px;
+		height: 30px;
+	    border-radius: 0;
+	    padding-top: 5px;
+	    text-transform: uppercase;
+	}
+	.editBeer form .buttons .btn.delete {
+		border: 1px solid #ff6600;
+		color: #ff6600;
+	}
 }
 
 /* Ici on supprime les boutons chelous des input de type "number" */
