@@ -313,7 +313,14 @@ body {
 		white-space: nowrap;
 		font-size: 0.8em;
 		padding: 0;
-		text-align: center;
+		width: 29%;
+	}
+	.editBeer .typeTarif .col-xs-offset-3 {
+		padding-left: 8px;
+	}
+	.editBeer #addVolume {
+		margin-top: 6px;
+		font-size: 0.9em;
 	}
 	.editBeer .oneBeerBusiness {
 		margin: 5px;
@@ -324,6 +331,19 @@ body {
 	.editBeer .oneBeerBusiness .col-xs-3 {
 		height: 40px;
 		line-height: 40px;
+	}
+	.editBeer .oneBeerBusiness .col-xs-3.prix {
+		width: 30%;
+		padding-left: 10px;
+		background-image: url("../images/crayon.png");
+		background-repeat: no-repeat;
+		background-position: right;
+	}
+	.editBeer .oneBeerBusiness .col-xs-3.volume {
+		width: 25%;
+	}
+	.editBeer .oneBeerBusiness .col-xs-3.remove {
+		width: 15%;
 	}
 	.editBeer form .oneBeerBusiness input[type=number] {
 		height: 40px;
