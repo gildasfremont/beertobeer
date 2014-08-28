@@ -16,23 +16,16 @@
 					Happy-Hour
 				</div>
 			</div>
-			<% var oneBeerTemplate = _.template($("#oneBeerBusinessForm").html()); %>
-			<%= oneBeerTemplate({
-				id: 1,
-				volume: 25
-			}) %>
-			<%= oneBeerTemplate({
-				id: 2,
-				volume: 33,
-				prixNormal: 6
-			}) %>
+			<% var oneBeerTemplate = _.template($("#oneBeerBusinessForm").html()); 
+			_.each(prix, function(price) { %>
+				<%= oneBeerTemplate(price) %>
+			<% }); %>
 			<a href="#" id="addVolume">+ Ajouter un volume</a>
-
-			
 		</form>
 	</div>
 	<div class="buttons">
 		<button class="btn btn-default delete">Supprimer cette bière</button>
-		<button class="btn btn-default">Modifications terminées</button>
+		<button class="btn btn-default submit">Modifications terminées</button>
+		<a href="#" id="cancelEditBeers" class="cancel">Annuler</a>
 	</div> 
 </div>

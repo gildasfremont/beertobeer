@@ -7,6 +7,7 @@ app.BusinessView = Backbone.View.extend({
     templateFull: _.template( $( '#fullBusiness' ).html() ),
     horairesTemplate: _.template($('#horairesTemplate').html()),
     beerTemplate: _.template($('#beer').html()),
+    editBeerFormTemplate: _.template( $("#editBeerForm").html() ),
     etatBeersPression: true,
 
     events: {
@@ -113,6 +114,6 @@ app.BusinessView = Backbone.View.extend({
         e.preventDefault();
         var beerId = $(e.target).attr("id");
         console.log('Edit Beer with id "'+beerId+'"');
-        $(".fullBusiness").append( _.template( $("#editBeerForm").html(), this.model.attributes ) );
+        $(".fullBusiness").append( this.editBeerFormTemplate( this.model.attributes.beers[beerId] ) );
     } 
 });
