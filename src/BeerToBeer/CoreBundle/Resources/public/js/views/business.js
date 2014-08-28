@@ -115,5 +115,10 @@ app.BusinessView = Backbone.View.extend({
         var beerId = $(e.target).attr("id");
         console.log('Edit Beer with id "'+beerId+'"');
         $(".fullBusiness").append( this.editBeerFormTemplate( this.model.attributes.beers[beerId] ) );
+
+        $("#cancelEditBeers").click(function(event) {
+            event.preventDefault();
+            $(".editBeer").remove();
+        });
     } 
 });
