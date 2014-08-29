@@ -11,7 +11,7 @@ app.BusinessView = Backbone.View.extend({
     etatBeersPression: true,
 
     events: {
-    	"click": "fullBusiness"
+        "click": "fullBusiness"
     },
 
     render: function() {
@@ -52,13 +52,13 @@ app.BusinessView = Backbone.View.extend({
     },
 
     fullBusiness: function(e) {
-    	location.href = "#business/"+ this.model.get('id');
+        location.href = "#business/"+ this.model.get('id');
     },
 
     renderFull: function() {
         //this.model.beers = new app.Beer();
         //this.model.beers.fetch({data: {businessId: this.model.id}});
-    	app.AppView.BusinessesView.$el.html( this.templateFull( this ) );
+        app.AppView.BusinessesView.$el.html( this.templateFull( this ) );
         this.renderBeers(this.etatBeersPression);
         this.renderHoraires(false);
         this.renderMap();
@@ -116,12 +116,28 @@ app.BusinessView = Backbone.View.extend({
         console.log('Edit Beer with id "'+beerId+'"');
         $(".fullBusiness").append( this.editBeerFormTemplate( this.model.attributes.beers[beerId] ) );
 
+        // Supprimer un champ BeerBusiness
+        $(".oneBeerBusiness .remove a").click(function(event) {
+            event.preventDefault();
+            var idBeerBusiness = $(event.target).attr("id");
+            _.find(app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix, function(price, index) {
+                if (price.id == idBeerBusiness) {
+                    // On ne supprime pas tout de suite, il faut que l'utilisateur confirme plus tard
+                    app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix[index].toRemove = true;
+                    return true;
+                }
+            });
+            
+            $("#" + idBeerBusiness + ".oneBeerBusiness").remove();
+        })
+
         // Event for "Annuler" link
         $("#cancelEditBeers").click(function(event) {
             event.preventDefault();
             $(".editBeer").remove();
         });
 
+        // Soumission du formulaire
         $("#submitEditBeers").click(function(event) {
             var error = false;
             var change = false;
@@ -140,6 +156,13 @@ app.BusinessView = Backbone.View.extend({
             });
             if (!error && change) {
                 app.AppView.BusinessesView.fullBusinessView.model.save();
+
+                // Suppression effective des prix
+                _.each(app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix, function(price, index, prix) {
+                    if (price.toRemove === true) {
+                        app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix.splice(index, 1);
+                    }
+                });
                 app.AppView.BusinessesView.collection.set(app.AppView.BusinessesView.fullBusinessView.model.get("id"), app.AppView.BusinessesView.fullBusinessView.model);
                 app.AppView.BusinessesView.fullBusinessView.renderBeers(app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].pression);
                 $(".editBeer").remove();
@@ -147,6 +170,5 @@ app.BusinessView = Backbone.View.extend({
                 $(".editBeer").remove();
         });
         $("#formEditBeers").submit(function(e) {$("#submitEditBeers").click();});
-
-    } 
+    }
 });

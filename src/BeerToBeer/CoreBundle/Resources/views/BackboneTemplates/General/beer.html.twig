@@ -9,6 +9,9 @@
 			<% } %>
 				<span class="volume"><%= oneprice.volume %> cl</span>
 				<%= oneprice.prixNormal %> €
+				<% if (oneprice.prixNormal > oneprice.prixHappyHour) { %>
+					/ <%= oneprice.prixHappyHour %> €
+				<% } %>
 			</span>
 		<% }); %>
 	</span>
