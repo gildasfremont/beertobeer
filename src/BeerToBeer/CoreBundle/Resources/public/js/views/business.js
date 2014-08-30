@@ -160,16 +160,25 @@ app.BusinessView = Backbone.View.extend({
                 }
             });
             if (!error && change) {
+                var pression = app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].pression;
                 app.AppView.BusinessesView.fullBusinessView.model.save();
 
                 // Suppression effective des prix
                 _.each(app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix, function(price, index, prix) {
                     if (price.toRemove === true) {
                         app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix.splice(index, 1);
+                        if (app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix.length == 0) {
+                            delete app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId];
+                        }
                     }
                 });
                 app.AppView.BusinessesView.collection.set(app.AppView.BusinessesView.fullBusinessView.model.get("id"), app.AppView.BusinessesView.fullBusinessView.model);
-                app.AppView.BusinessesView.fullBusinessView.renderBeers(app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].pression);
+                
+                // Re rendu de l'espace "bières"
+                var idCount = pression ? "link_pressions" : "link_others";
+                var count = _.where(app.AppView.BusinessesView.fullBusinessView.model.attributes.beers, {pression: pression}).length;
+                $("#" + idCount + " span").html(count);
+                app.AppView.BusinessesView.fullBusinessView.renderBeers(pression);
                 $(".editBeer").remove();
             } else if (!error && !change)
                 $(".editBeer").remove();

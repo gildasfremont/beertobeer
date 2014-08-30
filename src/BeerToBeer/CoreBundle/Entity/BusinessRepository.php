@@ -147,15 +147,19 @@ class BusinessRepository extends EntityRepository
 				$beerBusiness->setVolume($prixFromApi["volume"]);
 				$beerBusiness->setPrixNormal($prixFromApi["prixNormal"]);
 
-				// Vérification de la logique des prix
-				if (isset($prixFromApi["prixHappyHour"])) {
-					if ($prixFromApi["prixHappyHour"] <= $prixFromApi["prixNormal"])
-						$beerBusiness->setPrixHappyHour($prixFromApi["prixHappyHour"]);
-					else
-						return "Le prix en happy-hour est supérieur au prix normal.";
+				// Si le prix existe déjà et qu'il est spécifié qu'il doit être supprimé
+				if (isset($prixFromApi["toRemove"]) && $prixFromApi["toRemove"] === true && array_key_exists("id", $prixFromApi))
+					$this->_em->remove($beerBusiness);
+				else {
+					// Vérification de la logique des prix
+					if (isset($prixFromApi["prixHappyHour"])) {
+						if ($prixFromApi["prixHappyHour"] <= $prixFromApi["prixNormal"])
+							$beerBusiness->setPrixHappyHour($prixFromApi["prixHappyHour"]);
+						else
+							return "Le prix en happy-hour est supérieur au prix normal.";
+					}
+					$this->_em->persist($beerBusiness);
 				}
-
-				$this->_em->persist($beerBusiness);
 			}
 		}
 
