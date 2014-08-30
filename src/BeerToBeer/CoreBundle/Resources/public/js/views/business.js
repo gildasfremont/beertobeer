@@ -137,6 +137,14 @@ app.BusinessView = Backbone.View.extend({
             $(".editBeer").remove();
         });
 
+        // Click sur "Supprimer la bière"
+        $("#deleteEditBeers").click(function(event) {
+            _.each(app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix, function(price, index, prix) {
+                app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix[index].toRemove = true;
+            });
+            $("#submitEditBeers").click();
+        })
+
         // Soumission du formulaire
         $("#submitEditBeers").click(function(event) {
             var error = false;
