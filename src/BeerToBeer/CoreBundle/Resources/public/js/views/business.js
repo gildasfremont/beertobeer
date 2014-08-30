@@ -142,16 +142,21 @@ app.BusinessView = Backbone.View.extend({
             var error = false;
             var change = false;
             _.each(app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix, function(price, index, prix) {
-                var prixNormal = parseFloat($("#" + price.id + ".inputNormal").val());
-                var prixHappyHour = parseFloat($("#" + price.id + ".inputHappyHour").val());
-                if (prixNormal < prixHappyHour) {
-                    alert("Le prix Happy-Hour doit être inférieur au prix Normal");
-                    error = true;
+                if (!price.toRemove) {
+                    var prixNormal = parseFloat($("#" + price.id + ".inputNormal").val());
+                    var prixHappyHour = parseFloat($("#" + price.id + ".inputHappyHour").val());
+                    if (prixNormal < prixHappyHour) {
+                        alert("Le prix Happy-Hour doit être inférieur au prix Normal");
+                        error = true;
+                    }
+                    else if (prixNormal != price.prixNormal || prixHappyHour != price.prixHappyHour) {
+                        change = true;
+                        app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix[index].prixNormal = prixNormal;
+                        app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix[index].prixHappyHour = prixHappyHour;
+                    }
                 }
-                else if (prixNormal != price.prixNormal || prixHappyHour != price.prixHappyHour) {
+                else {
                     change = true;
-                    app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix[index].prixNormal = prixNormal;
-                    app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix[index].prixHappyHour = prixHappyHour;
                 }
             });
             if (!error && change) {
