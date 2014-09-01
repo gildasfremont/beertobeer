@@ -9,7 +9,13 @@
 			<% } %>
 				<span class="volume"><%= oneprice.volume %> cl</span>
 				<%= oneprice.prixNormal %> €
+				<% if (oneprice.prixNormal > oneprice.prixHappyHour) { %>
+					/ <%= oneprice.prixHappyHour %> €
+				<% } %>
 			</span>
 		<% }); %>
 	</span>
+	<div class="pull-right">
+		<a href="#" class="editBeerLink" id="<%= id %>">Modifier</a>
+	</div>
 </div>

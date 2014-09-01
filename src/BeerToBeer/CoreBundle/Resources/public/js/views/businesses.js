@@ -15,7 +15,9 @@ app.BusinessesView = Backbone.View.extend({
         "click #gpsLink": "getUserLocation",
         "click #dropHoraires": "dropHoraires",
         "click .dropHorairesType": "dropHorairesType",
-        "click .btnFullBusiness": "btnFullBusiness"
+        "click .btnFullBusiness": "btnFullBusiness",
+        "click #btnCopyAdress": "btnCopyAdress",
+        "click .editBeerLink": "editBeerLink"
     },
 
     initialize: function() {
@@ -78,10 +80,11 @@ app.BusinessesView = Backbone.View.extend({
         ;
         $("#home").attr("id", "search");
         $("#search #gpsContainer").show();
+        app.Router.navigate("search");
     },
 
     focusOutSearchInput: function() {
-        window.setTimeout(function(){$("#search #gpsContainer").hide();}, 50); // Un petit TimeOut pour avoir le temps de cliquer
+        window.setTimeout(function(){$("#search #gpsContainer").hide();}, 100); // Un petit TimeOut pour avoir le temps de cliquer
     },
 
     home: function() {
@@ -97,7 +100,8 @@ app.BusinessesView = Backbone.View.extend({
             this.focusSearchInput();
         } 
         $("#searchInput").blur(); // Trigger blur pour que le "Chercher autour de moi disparaisse"
-        this.$el.append(_.template($('#businessList').html())); // TODO : vérifier qu'il n'y pas déjà une liste
+        if (!$('.businessList').length)
+            this.$el.append(_.template($('#businessList').html())); // TODO : vérifier qu'il n'y pas déjà une liste
         this.collection.fetch({reset: true, data: {latitude: lat, longitude: lng}});
 
         // Si l'utilisateur a demandé sa position, on tente de trouver son adresse par reverse geocoding
@@ -192,5 +196,13 @@ app.BusinessesView = Backbone.View.extend({
 
     btnFullBusiness: function(e) {
         this.fullBusinessView.btnFullBusiness(e);
+    },
+
+    btnCopyAdress: function(e) {
+        this.fullBusinessView.btnCopyAdress(e);
+    },
+
+    editBeerLink: function(e) {
+        this.fullBusinessView.editBeerLink(e);
     }
 });

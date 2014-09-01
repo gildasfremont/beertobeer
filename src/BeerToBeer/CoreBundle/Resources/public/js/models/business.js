@@ -9,7 +9,7 @@
       var normalizedHoraires = [];
       _.each(response.horaires, function(horaire) {
         normalizedHoraires[horaire.jour] = normalizedHoraires[horaire.jour] || [];
-        var ouverture = new Date(horaire.ouverture.date.replace(" ", "T"));
+        var ouverture = new Date(horaire.ouverture*1000);
         var fermeture = new Date(ouverture.getTime()+1000*60*horaire.duree);
         if (horaire.happyHour) {
           normalizedHoraires[horaire.jour].happyHour = normalizedHoraires[horaire.jour].happyHour || [];

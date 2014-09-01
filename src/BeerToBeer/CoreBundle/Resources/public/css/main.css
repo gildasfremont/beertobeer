@@ -1,14 +1,12 @@
 @font-face {
   font-family: 'Montserrat';
   font-style: normal;
-  font-weight: 400;
   src: local('Montserrat-Regular'), url('../fonts/montserrat.woff') format('woff');
 }
 
 @font-face {
   font-family: 'MontserratBold';
   font-style: normal;
-  font-weight: 700;
   src: local('Montserrat-Bold'), url('../fonts/montserratBold.woff') format('woff');
 }
 
@@ -280,6 +278,143 @@ body {
 		width: 100%;
 		height: 1px;
 	}
+	.fullBusiness #btnsMap {
+		position: absolute;
+		bottom: 20px;
+		z-index: 10;
+		width: 100%;
+		text-align: center;
+	}
+	.fullBusiness #btnsMap .btn {
+	    width: 280px;
+		height: 30px;
+	    border: 1px solid #ff6600;
+	    border-radius: 0;
+	    color: #ff6600;
+	    padding-top: 5px;
+	    text-transform: uppercase;
+	}
+
+	.editBeer {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		z-index: 200;
+		top: 0;
+		background-color: #f9f9f9;
+	}
+
+	.editBeer form {
+		margin-top: 30px;
+	}
+	.editBeer .typeTarif div {
+		white-space: nowrap;
+		font-size: 0.8em;
+		padding: 0;
+		width: 29%;
+	}
+	.editBeer .typeTarif .col-xs-offset-3 {
+		padding-left: 8px;
+	}
+	.editBeer #addVolumeEditBeer {
+		margin-top: 6px;
+		font-size: 0.9em;
+	}
+	.editBeer .oneBeerBusiness {
+		margin: 5px;
+	}
+	.editBeer .oneBeerBusiness .volume {
+		color: #808080;
+		opacity: 0.7;
+	}
+	.editBeer .oneBeerBusiness.undefined .volume {
+		padding: 0;
+	}
+	.editBeer .oneBeerBusiness.undefined .volume input {
+		display: inline-block;
+		margin-right: 7px;
+	}
+	.editBeer .oneBeerBusiness .col-xs-3 {
+		height: 40px;
+		line-height: 40px;
+	}
+	.editBeer .oneBeerBusiness .col-xs-3.prix {
+		width: 30%;
+		padding-left: 10px;
+		background-image: url("../images/crayon.png");
+		background-repeat: no-repeat;
+		background-position: right;
+	}
+
+	/* Pour faire en sorte que le tiret disparaisse lors du focus */
+	input[type=number]:focus::-webkit-input-placeholder { color:transparent; }
+	input[type=number]:focus::-moz-placeholder { color:transparent; }
+	input[type=number]:focus:-ms-input-placeholder { color:transparent; } /* ie */
+	input[type=number]:focus:-moz-placeholder { color:transparent; }
+
+	.editBeer .oneBeerBusiness .col-xs-3.volume {
+		width: 25%;
+	}
+	.editBeer .oneBeerBusiness .col-xs-3.remove {
+		width: 15%;
+	}
+	.editBeer form .oneBeerBusiness input[type=number] {
+		height: 40px;
+		width: 42px;
+		border-radius: 2px;
+		padding: 0;
+		text-align: center;
+		font-size: 1.3em;
+	}
+	.editBeer .container {
+		margin-bottom: 130px; /* Pour que ça ne déborde pas sur les boutons */
+	}
+	.editBeer .buttons {
+		position: absolute;
+		bottom: 20px;
+		z-index: 210;
+		width: 100%;
+		text-align: center;
+	}
+	.editBeer .buttons .btn {
+	    width: 280px;
+		height: 30px;
+	    border-radius: 0;
+	    padding-top: 5px;
+	    text-transform: uppercase;
+	    margin-top: 8px;
+		border: 1px solid #ff6600;
+	}
+	.editBeer .buttons .btn:focus, .editBeer .buttons .btn:hover {
+		background-color: white;
+	}
+	.editBeer .buttons .btn.delete {
+		color: #ff6600;
+	}
+	.editBeer .buttons .btn.submit {
+		border-color: #6abacb;
+		background-color: #6abacb;
+		color: white;
+	}
+	.editBeer .buttons a.cancel {
+		display: block;
+		text-transform: uppercase;
+	    margin-top: 12px;
+		color: #b3b3b3;
+		text-align: center;
+	}
+}
+
+/* Ici on supprime les boutons chelous des input de type "number" */
+/* Pour Webkit : */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+/* Pour Firefox */
+input[type=number] {
+    -moz-appearance:textfield;
 }
 
 /* Google Places autocomplete */

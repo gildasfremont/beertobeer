@@ -50,13 +50,13 @@
 
 		<div class="row">
 			<div class="location col-xs-12">
-				<div class="adresse pull-left">
+				<div class="adresse pull-left" id="adressBusiness">
 					<%- this.model.attributes.adresse %><br>
 					<%= this.model.attributes.codePostal %> <%- this.model.attributes.ville %>
 				</div>
 				<div class="whereIsIt pull-right">
-					<button type="button" class="btn btn-default btnFullBusiness">C'est où ?</button>
-					<button type="button" class="btn btn-default btnFullBusiness" style="display: none;">Bières</button>
+					<button type="button" class="btn btn-default btnFullBusiness" style="display: none;">C'est où ?</button>
+					<button type="button" class="btn btn-default btnFullBusiness">Bières</button>
 				</div>
 			</div>
 		</div>
@@ -68,10 +68,10 @@
 			%>
 			<div class="type">
 				<div class="pull-left type">
-					<span id="link_pressions">Pressions (<%= pressions.length %>)</span>
+					<span id="link_pressions">Pressions (<span><%= pressions.length %></span>)</span>
 				</div>
 				<div class="pull-right type">
-					<a href="#"><span id="link_others">Canettes et bouteilles (<%= others.length %>)</span></a>
+					<a href="#"><span id="link_others">Canettes et bouteilles (<span><%= others.length %></span>)</span></a>
 				</div>
 			</div>
 			<div id="beers_container">
@@ -80,6 +80,9 @@
 		</div>
 	</div>
 	<div id="mapFullBusiness">
+	</div>
+	<div id="btnsMap" style="display: none;">
+		<button type="button" class="btn btn-default" id="btnCopyAdress">Copier l'adresse</button>
 	</div>
 
 	<script>
