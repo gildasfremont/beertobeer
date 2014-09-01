@@ -8,6 +8,7 @@ app.BusinessView = Backbone.View.extend({
     horairesTemplate: _.template($('#horairesTemplate').html()),
     beerTemplate: _.template($('#beer').html()),
     editBeerFormTemplate: _.template( $("#editBeerForm").html() ),
+    oneBeerTemplate: _.template($("#oneBeerBusinessForm").html()),
     etatBeersPression: true,
 
     events: {
@@ -117,7 +118,7 @@ app.BusinessView = Backbone.View.extend({
         $(".fullBusiness").append( this.editBeerFormTemplate( this.model.attributes.beers[beerId] ) );
 
         // Supprimer un champ BeerBusiness
-        $(".oneBeerBusiness .remove a").click(function(event) {
+        $(".editBeer").on("click", ".oneBeerBusiness .remove a", function(event) { 
             event.preventDefault();
             var idBeerBusiness = $(event.target).attr("id");
             _.find(app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix, function(price, index) {
@@ -128,7 +129,16 @@ app.BusinessView = Backbone.View.extend({
                 }
             });
             
-            $("#" + idBeerBusiness + ".oneBeerBusiness").remove();
+            $(".editBeer #" + idBeerBusiness + ".oneBeerBusiness").remove();
+        });
+
+        $("#addVolumeEditBeer").click(function(event) {
+            event.preventDefault();
+            var newId = -1;
+            while ($("#"+newId+".oneBeerBusiness").length) {
+                newId--;
+            }
+            $(".editBeer .BeerBusinesses_container").append(app.AppView.BusinessesView.fullBusinessView.oneBeerTemplate({id: newId}));
         })
 
         // Event for "Annuler" link
@@ -167,6 +177,8 @@ app.BusinessView = Backbone.View.extend({
                     change = true;
                 }
             });
+            // Ajout des nouveaux volumes
+
             if (!error && change) {
                 var pression = app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].pression;
                 app.AppView.BusinessesView.fullBusinessView.model.save();

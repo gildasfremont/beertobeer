@@ -316,7 +316,7 @@ body {
 	.editBeer .typeTarif .col-xs-offset-3 {
 		padding-left: 8px;
 	}
-	.editBeer #addVolume {
+	.editBeer #addVolumeEditBeer {
 		margin-top: 6px;
 		font-size: 0.9em;
 	}
@@ -326,6 +326,13 @@ body {
 	.editBeer .oneBeerBusiness .volume {
 		color: #808080;
 		opacity: 0.7;
+	}
+	.editBeer .oneBeerBusiness.undefined .volume {
+		padding: 0;
+	}
+	.editBeer .oneBeerBusiness.undefined .volume input {
+		display: inline-block;
+		margin-right: 7px;
 	}
 	.editBeer .oneBeerBusiness .col-xs-3 {
 		height: 40px;
