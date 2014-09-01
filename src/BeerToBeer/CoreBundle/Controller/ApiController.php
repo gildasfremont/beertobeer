@@ -44,6 +44,15 @@ class ApiController extends Controller
     }
 
     public function updateBusinessAction($id) {
+        $request = $this->getRequest();
+        if ($request->cookies->has("identifier"))
+            $identifier = $request->cookies->get("identifier");
+        else {
+            $identifier = uniqid($request->getClientIp()."_")."_".$request->headers->get('User-Agent');
+            $request->cookies->set("identifier", $identifier);
+        }
+        $this->container->get('simplethings_entityaudit.config')->setCurrentUsername($identifier);
+
         // Récupération des paramètres PUT
         $requestContent = $this->getRequest()->getContent();
         $businessFromApi = json_decode($requestContent, true);
