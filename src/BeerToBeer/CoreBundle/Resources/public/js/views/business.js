@@ -163,11 +163,17 @@ app.BusinessView = Backbone.View.extend({
                 if (!price.toRemove) {
                     var prixNormal = parseFloat($("#" + price.id + ".inputNormal").val());
                     var prixHappyHour = parseFloat($("#" + price.id + ".inputHappyHour").val());
-                    if (prixNormal < prixHappyHour) {
+                    if (prixNormal == null) {
+                        alert("Vous devez rentrer un prix normal.")
+                        error = true;
+                    }
+                    else if (prixNormal < prixHappyHour) {
                         alert("Le prix Happy-Hour doit être inférieur au prix Normal");
                         error = true;
                     }
                     else if (prixNormal != price.prixNormal || prixHappyHour != price.prixHappyHour) {
+                        if (prixHappyHour == null)
+                            prixHappyHour = prixNormal;
                         change = true;
                         app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix[index].prixNormal = prixNormal;
                         app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix[index].prixHappyHour = prixHappyHour;
@@ -178,7 +184,41 @@ app.BusinessView = Backbone.View.extend({
                 }
             });
             // Ajout des nouveaux volumes
+            if ($(".editBeer .oneBeerBusiness.undefined").length) {
+                change = true;
+                $(".editBeer .oneBeerBusiness.undefined").each(function () {
+                    var prixNormal = parseFloat($("#" + $(this).attr('id') + ".inputNormal").val());
+                    var prixHappyHour = parseFloat($("#" + $(this).attr('id') + ".inputHappyHour").val());
+                    var volume = parseInt($("#" + $(this).attr('id') + ".inputVolume").val());
 
+                    if (isNaN(volume)) {
+                        alert("Vous devez rentrer un volume.");
+                        error = true;
+                    }
+                    else if (_.some(app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix, function(prix) { return (prix.volume == volume ); })) {
+                        alert("Vous tentez de faire 2 prix pour un même volume.");
+                        error = true;
+                    }
+                    else if (isNaN(prixNormal)) {
+                        alert("Vous devez rentrer un prix normal.")
+                        error = true;
+                    }
+                    else if (prixNormal < prixHappyHour) {
+                        alert("Le prix Happy-Hour doit être inférieur au prix Normal");
+                        error = true;
+                    }
+                    else {
+                        if (isNaN(prixHappyHour)) {
+                            prixHappyHour = prixNormal;
+                        }
+                        app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix.push({
+                            volume: volume,
+                            prixHappyHour: prixHappyHour,
+                            prixNormal: prixNormal
+                        });
+                    }
+                });
+            }
             if (!error && change) {
                 var pression = app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].pression;
                 app.AppView.BusinessesView.fullBusinessView.model.save();
