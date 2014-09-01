@@ -2,7 +2,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12">
-				<h3>Lagunitas IPA</h3>
+				<h3><%= name %></h3>
 			</div>
 		</div>
 
@@ -16,10 +16,12 @@
 					Happy-Hour
 				</div>
 			</div>
-			<% var oneBeerTemplate = _.template($("#oneBeerBusinessForm").html()); 
-			_.each(prix, function(price) { %>
-				<%= oneBeerTemplate(price) %>
-			<% }); %>
+			<div class="BeerBusinesses_container">
+				<% var oneBeerTemplate = _.template($("#oneBeerBusinessForm").html()); 
+				_.each(prix, function(price) { %>
+					<%= oneBeerTemplate(price) %>
+				<% }); %>
+			</div>
 			<a href="#" id="addVolume">+ Ajouter un volume</a>
 		</form>
 	</div>
