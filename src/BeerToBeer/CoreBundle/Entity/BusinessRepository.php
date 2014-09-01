@@ -134,7 +134,7 @@ class BusinessRepository extends EntityRepository
 		// Pour l'instant on ne modifie que les bières
 		foreach ($businessFromApi["beers"] as $idBeerFromApi => $beerFromApi) {
 			foreach ($beerFromApi["prix"] as $prixFromApi) {
-				if ($beerFromApi["pression"] == null || $beerFromApi["volume"] == null || $beerFromApi["prixNormal"] == null || $beerFromApi["prixHappyHour"] == null)
+				if ($beerFromApi["pression"] === null || $prixFromApi["volume"] === null || $prixFromApi["prixNormal"] === null || $prixFromApi["prixHappyHour"] === null)
 					return "Il manque des informations.";
 				if (array_key_exists("id", $prixFromApi))
 					$beerBusiness = $this->_em->getRepository("BeerToBeerCoreBundle:BeerBusiness")->find($prixFromApi["id"]);
