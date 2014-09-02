@@ -5,6 +5,7 @@ namespace BeerToBeer\CoreBundle\Entity;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use BeerToBeer\CoreBundle\Entity\BeerBusiness;
+use BeerToBeer\CoreBundle\Entity\Beer;
 
 /**
  * BusinessRepository
@@ -132,6 +133,15 @@ class BusinessRepository extends EntityRepository
 	public function updateBusinessFromApi($businessFromApi) {
 		// Pour l'instant on ne modifie que les bières
 		foreach ($businessFromApi["beers"] as $idBeerFromApi => $beerFromApi) {
+			// Création d'une nouvelle bière. On essaie d'en trouver une avec le même nom. Si elle n'existe pas on la crée.
+			if ($idBeerFromApi == -1) {
+				$beer = $this->_em->getRepository("BeerToBeerCoreBundle:Beer")->findBy(array("name" => $beerFromApi["name"]));
+				if ($beer == null) {
+					$beer = new Beer();
+					$beer->setName($beerFromApi["name"]);
+					$this->_em->persist($beer);
+				}
+			}
 			foreach ($beerFromApi["prix"] as $prixFromApi) {
 				if ($beerFromApi["pression"] === null || $prixFromApi["volume"] === null || $prixFromApi["prixNormal"] === null || $prixFromApi["prixHappyHour"] === null)
 					return "Il manque des informations.";
@@ -139,7 +149,8 @@ class BusinessRepository extends EntityRepository
 					$beerBusiness = $this->_em->getRepository("BeerToBeerCoreBundle:BeerBusiness")->find($prixFromApi["id"]);
 				else {
 					$beerBusiness = new BeerBusiness();
-					$beer = $this->_em->getRepository("BeerToBeerCoreBundle:Beer")->find(str_replace("p", "", $idBeerFromApi));
+					if (!isset($beer))
+						$beer = $this->_em->getRepository("BeerToBeerCoreBundle:Beer")->find(str_replace("p", "", $idBeerFromApi));
 					$beerBusiness->setBeer($beer);
 					$business = $this->_em->getRepository("BeerToBeerCoreBundle:Business")->find($businessFromApi["id"]);
 					$beerBusiness->setBusiness($business);
