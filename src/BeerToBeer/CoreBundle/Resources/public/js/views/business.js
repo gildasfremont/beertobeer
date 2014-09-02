@@ -153,6 +153,7 @@ app.BusinessView = Backbone.View.extend({
 
         // Soumission du formulaire
         $("#submitBeers").click(function(event) {
+            console.log('Beer submitted...');
             var error = false;
             var change = false;
             _.each(app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix, function(price, index, prix) {
@@ -265,5 +266,8 @@ app.BusinessView = Backbone.View.extend({
 
         this.formBeer(beerId);
 
+        $("#submitBeers").click(function(e) {
+
+        });
     }
 });
