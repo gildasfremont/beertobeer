@@ -278,14 +278,15 @@ body {
 		width: 100%;
 		height: 1px;
 	}
-	.fullBusiness #btnsMap {
+	.fullBusiness #btnsMap, .fullBusiness .btnsBeer {
 		position: absolute;
 		bottom: 20px;
+		left: 0;
 		z-index: 10;
 		width: 100%;
 		text-align: center;
 	}
-	.fullBusiness #btnsMap .btn {
+	.fullBusiness #btnsMap .btn, .fullBusiness .btnsBeer .btn {
 	    width: 280px;
 		height: 30px;
 	    border: 1px solid #ff6600;
@@ -293,6 +294,10 @@ body {
 	    color: #ff6600;
 	    padding-top: 5px;
 	    text-transform: uppercase;
+	}
+	.fullBusiness .btnsBeer #btnAddBeer.btn {
+		background-color: #ff6600;
+		color: white;
 	}
 
 	.editBeer {
