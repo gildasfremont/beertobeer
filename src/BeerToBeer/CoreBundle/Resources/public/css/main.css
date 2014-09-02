@@ -263,6 +263,11 @@ body {
 		font-size: 0.9em;
 		color: #808080;
 	}
+	.fullBusiness .beers .beer .degree {
+		font-size: 0.8em;
+		color: #808080;
+		margin-left: 10px;
+	}
 	.fullBusiness .beers .beer .prices .price .volume {
 		margin-right: 6px;
 	}
