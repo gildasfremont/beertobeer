@@ -1,0 +1,34 @@
+<div class="addBeer">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<h3>Blonde classique</h3>
+			</div>
+		</div>
+
+		<form id="formAddBeers">
+			Prix en euros
+			<div class="row typeTarif">
+				<div class="col-xs-offset-3 col-xs-3">
+					Tarif normal
+				</div>
+				<div class="col-xs-3">
+					Happy-Hour
+				</div>
+			</div>
+			<div class="BeerBusinesses_container">
+				<% var oneBeerTemplate = _.template($("#oneBeerBusinessForm").html()); %>
+				<%= oneBeerTemplate({
+					id: -1,
+					volume: 50
+				}); %>
+			</div>
+			<a href="#" id="addVolumeAddBeer">+ Ajouter un volume</a>
+		</form>
+	</div>
+	<div class="buttons">
+		<button class="btn btn-default delete" id="deleteAddBeers">Supprimer cette bière</button>
+		<button class="btn btn-default submit" id="submitAddBeers">Ajouter la bière</button>
+		<a href="#" id="cancelAddBeers" class="cancel">Annuler</a>
+	</div> 
+</div>
