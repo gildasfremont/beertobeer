@@ -305,7 +305,7 @@ body {
 		color: white;
 	}
 
-	.editBeer {
+	.formBeer {
 		position: absolute;
 		height: 100%;
 		width: 100%;
@@ -314,41 +314,41 @@ body {
 		background-color: #f9f9f9;
 	}
 
-	.editBeer form {
+	.formBeer form {
 		margin-top: 30px;
 	}
-	.editBeer .typeTarif div {
+	.formBeer .typeTarif div {
 		white-space: nowrap;
 		font-size: 0.8em;
 		padding: 0;
 		width: 29%;
 	}
-	.editBeer .typeTarif .col-xs-offset-3 {
+	.formBeer .typeTarif .col-xs-offset-3 {
 		padding-left: 8px;
 	}
-	.editBeer #addVolumeEditBeer {
+	.formBeer #addVolumeBeer {
 		margin-top: 6px;
 		font-size: 0.9em;
 	}
-	.editBeer .oneBeerBusiness {
+	.formBeer .oneBeerBusiness {
 		margin: 5px;
 	}
-	.editBeer .oneBeerBusiness .volume {
+	.formBeer .oneBeerBusiness .volume {
 		color: #808080;
 		opacity: 0.7;
 	}
-	.editBeer .oneBeerBusiness.undefined .volume {
+	.formBeer .oneBeerBusiness.undefined .volume {
 		padding: 0;
 	}
-	.editBeer .oneBeerBusiness.undefined .volume input {
+	.formBeer .oneBeerBusiness.undefined .volume input {
 		display: inline-block;
 		margin-right: 7px;
 	}
-	.editBeer .oneBeerBusiness .col-xs-3 {
+	.formBeer .oneBeerBusiness .col-xs-3 {
 		height: 40px;
 		line-height: 40px;
 	}
-	.editBeer .oneBeerBusiness .col-xs-3.prix {
+	.formBeer .oneBeerBusiness .col-xs-3.prix {
 		width: 30%;
 		padding-left: 10px;
 		background-image: url("../images/crayon.png");
@@ -362,13 +362,13 @@ body {
 	input[type=number]:focus:-ms-input-placeholder { color:transparent; } /* ie */
 	input[type=number]:focus:-moz-placeholder { color:transparent; }
 
-	.editBeer .oneBeerBusiness .col-xs-3.volume {
+	.formBeer .oneBeerBusiness .col-xs-3.volume {
 		width: 25%;
 	}
-	.editBeer .oneBeerBusiness .col-xs-3.remove {
+	.formBeer .oneBeerBusiness .col-xs-3.remove {
 		width: 15%;
 	}
-	.editBeer form .oneBeerBusiness input[type=number] {
+	.formBeer form .oneBeerBusiness input[type=number] {
 		height: 40px;
 		width: 42px;
 		border-radius: 2px;
@@ -376,17 +376,17 @@ body {
 		text-align: center;
 		font-size: 1.3em;
 	}
-	.editBeer .container {
+	.formBeer .container {
 		margin-bottom: 130px; /* Pour que ça ne déborde pas sur les boutons */
 	}
-	.editBeer .buttons {
+	.formBeer .buttons {
 		position: absolute;
 		bottom: 20px;
 		z-index: 210;
 		width: 100%;
 		text-align: center;
 	}
-	.editBeer .buttons .btn {
+	.formBeer .buttons .btn {
 	    width: 280px;
 		height: 30px;
 	    border-radius: 0;
@@ -395,18 +395,18 @@ body {
 	    margin-top: 8px;
 		border: 1px solid #ff6600;
 	}
-	.editBeer .buttons .btn:focus, .editBeer .buttons .btn:hover {
+	.formBeer .buttons .btn:focus, .formBeer .buttons .btn:hover {
 		background-color: white;
 	}
-	.editBeer .buttons .btn.delete {
+	.formBeer .buttons .btn.delete {
 		color: #ff6600;
 	}
-	.editBeer .buttons .btn.submit {
+	.formBeer .buttons .btn.submit {
 		border-color: #6abacb;
 		background-color: #6abacb;
 		color: white;
 	}
-	.editBeer .buttons a.cancel {
+	.formBeer .buttons a.cancel {
 		display: block;
 		text-transform: uppercase;
 	    margin-top: 12px;

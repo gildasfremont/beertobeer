@@ -8,6 +8,7 @@ app.BusinessView = Backbone.View.extend({
     horairesTemplate: _.template($('#horairesTemplate').html()),
     beerTemplate: _.template($('#beer').html()),
     editBeerFormTemplate: _.template( $("#editBeerForm").html() ),
+    addBeerFormTemplate: _.template( $("#addBeerForm").html() ),
     oneBeerTemplate: _.template($("#oneBeerBusinessForm").html()),
     etatBeersPression: true,
 
@@ -111,14 +112,9 @@ app.BusinessView = Backbone.View.extend({
         }
     },
 
-    editBeerLink: function(e) {
-        e.preventDefault();
-        var beerId = $(e.target).attr("id");
-        console.log('Edit Beer with id "'+beerId+'"');
-        $(".fullBusiness").append( this.editBeerFormTemplate( this.model.attributes.beers[beerId] ) );
-
+    formBeer: function(beerId) {
         // Supprimer un champ BeerBusiness
-        $(".editBeer").on("click", ".oneBeerBusiness .remove a", function(event) { 
+        $(".formBeer").on("click", ".oneBeerBusiness .remove a", function(event) { 
             event.preventDefault();
             var idBeerBusiness = $(event.target).attr("id");
             _.find(app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix, function(price, index) {
@@ -129,34 +125,34 @@ app.BusinessView = Backbone.View.extend({
                 }
             });
             
-            $(".editBeer #" + idBeerBusiness + ".oneBeerBusiness").remove();
+            $(".formBeer #" + idBeerBusiness + ".oneBeerBusiness").remove();
         });
 
-        $("#addVolumeEditBeer").click(function(event) {
+        $("#addVolumeBeer").click(function(event) {
             event.preventDefault();
             var newId = -1;
             while ($("#"+newId+".oneBeerBusiness").length) {
                 newId--;
             }
-            $(".editBeer .BeerBusinesses_container").append(app.AppView.BusinessesView.fullBusinessView.oneBeerTemplate({id: newId}));
+            $(".formBeer .BeerBusinesses_container").append(app.AppView.BusinessesView.fullBusinessView.oneBeerTemplate({id: newId}));
         })
 
         // Event for "Annuler" link
-        $("#cancelEditBeers").click(function(event) {
+        $("#cancelBeers").click(function(event) {
             event.preventDefault();
-            $(".editBeer").remove();
+            $(".formBeer").remove();
         });
 
         // Click sur "Supprimer la bière"
-        $("#deleteEditBeers").click(function(event) {
+        $("#deleteBeers").click(function(event) {
             _.each(app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix, function(price, index, prix) {
                 app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix[index].toRemove = true;
             });
-            $("#submitEditBeers").click();
+            $("#submitBeers").click();
         })
 
         // Soumission du formulaire
-        $("#submitEditBeers").click(function(event) {
+        $("#submitBeers").click(function(event) {
             var error = false;
             var change = false;
             _.each(app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix, function(price, index, prix) {
@@ -184,9 +180,9 @@ app.BusinessView = Backbone.View.extend({
                 }
             });
             // Ajout des nouveaux volumes
-            if ($(".editBeer .oneBeerBusiness.undefined").length) {
+            if ($(".formBeer .oneBeerBusiness.undefined").length) {
                 change = true;
-                $(".editBeer .oneBeerBusiness.undefined").each(function () {
+                $(".formBeer .oneBeerBusiness.undefined").each(function () {
                     var prixNormal = parseFloat($("#" + $(this).attr('id') + ".inputNormal").val());
                     var prixHappyHour = parseFloat($("#" + $(this).attr('id') + ".inputHappyHour").val());
                     var volume = parseInt($("#" + $(this).attr('id') + ".inputVolume").val());
@@ -223,15 +219,17 @@ app.BusinessView = Backbone.View.extend({
                 var pression = app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].pression;
                 app.AppView.BusinessesView.fullBusinessView.model.save();
 
-                // Suppression effective des prix
-                _.each(app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix, function(price, index, prix) {
-                    if (price.toRemove === true) {
-                        app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix.splice(index, 1);
-                        if (app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix.length == 0) {
-                            delete app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId];
+                // Suppression effective des prix (si pas nouvelle bière)
+                if (beerId > -1) {
+                    _.each(app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix, function(price, index, prix) {
+                        if (price.toRemove === true) {
+                            app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix.splice(index, 1);
+                            if (app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix.length == 0) {
+                                delete app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId];
+                            }
                         }
-                    }
-                });
+                    });
+                }
                 app.AppView.BusinessesView.collection.set(app.AppView.BusinessesView.fullBusinessView.model.get("id"), app.AppView.BusinessesView.fullBusinessView.model);
                 
                 // Re rendu de l'espace "bières"
@@ -239,10 +237,33 @@ app.BusinessView = Backbone.View.extend({
                 var count = _.where(app.AppView.BusinessesView.fullBusinessView.model.attributes.beers, {pression: pression}).length;
                 $("#" + idCount + " span").html(count);
                 app.AppView.BusinessesView.fullBusinessView.renderBeers(pression);
-                $(".editBeer").remove();
+                $(".formBeer").remove();
             } else if (!error && !change)
-                $(".editBeer").remove();
+                $(".formBeer").remove();
         });
+    },
+
+    editBeerLink: function(e) {
+        e.preventDefault();
+        var beerId = $(e.target).attr("id");
+        console.log('Edit Beer with id "'+beerId+'"');
+        $(".fullBusiness").append( this.editBeerFormTemplate( this.model.attributes.beers[beerId] ) );
+
+        this.formBeer(beerId);
+
         $("#formEditBeers").submit(function(e) {$("#submitEditBeers").click();});
+    },
+
+    btnAddBeer: function(e) {
+        var beerId = -1;
+
+        this.model.attributes.beers[beerId] = {
+            id: beerId,
+            prix: []
+        };
+        $(".fullBusiness").append( this.addBeerFormTemplate( this.model.attributes.beers[beerId] ) );
+
+        this.formBeer(beerId);
+
     }
 });

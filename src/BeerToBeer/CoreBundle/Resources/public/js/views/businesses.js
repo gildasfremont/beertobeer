@@ -17,7 +17,8 @@ app.BusinessesView = Backbone.View.extend({
         "click .dropHorairesType": "dropHorairesType",
         "click .btnFullBusiness": "btnFullBusiness",
         "click #btnCopyAdress": "btnCopyAdress",
-        "click .editBeerLink": "editBeerLink"
+        "click .editBeerLink": "editBeerLink",
+        "click #btnAddBeer": "btnAddBeer"
     },
 
     initialize: function() {
@@ -211,5 +212,9 @@ app.BusinessesView = Backbone.View.extend({
 
     editBeerLink: function(e) {
         this.fullBusinessView.editBeerLink(e);
+    },
+
+    btnAddBeer: function(e) {
+        this.fullBusinessView.btnAddBeer(e);
     }
 });

@@ -1,4 +1,4 @@
-<div class="editBeer">
+<div class="editBeer formBeer">
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12">
@@ -6,7 +6,7 @@
 			</div>
 		</div>
 
-		<form id="formEditBeers">
+		<form id="formBeers">
 			Prix en euros
 			<div class="row typeTarif">
 				<div class="col-xs-offset-3 col-xs-3">
@@ -22,12 +22,12 @@
 					<%= oneBeerTemplate(price) %>
 				<% }); %>
 			</div>
-			<a href="#" id="addVolumeEditBeer">+ Ajouter un volume</a>
+			<a href="#" id="addVolumeBeer">+ Ajouter un volume</a>
 		</form>
 	</div>
 	<div class="buttons">
-		<button class="btn btn-default delete" id="deleteEditBeers">Supprimer cette bière</button>
-		<button class="btn btn-default submit" id="submitEditBeers">Modifications terminées</button>
-		<a href="#" id="cancelEditBeers" class="cancel">Annuler</a>
+		<button class="btn btn-default delete" id="deleteBeers">Supprimer cette bière</button>
+		<button class="btn btn-default submit" id="submitBeers">Modifications terminées</button>
+		<a href="#" id="cancelBeers" class="cancel">Annuler</a>
 	</div> 
 </div>
