@@ -86,7 +86,6 @@ class BusinessRepository extends EntityRepository
 	 * @return array
 	 */
 	private function parseOneBusinessForApi($result) {
-
 		// Il faut prendre le prix de la "pinte" la moins chère, donc on vérifie que le volume est de 50cl
 		$stop = false;
 		for ($i=0; $stop === false ; $i++) { 

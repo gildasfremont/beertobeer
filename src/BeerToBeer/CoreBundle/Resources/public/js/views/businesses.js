@@ -103,6 +103,13 @@ app.BusinessesView = Backbone.View.extend({
         if (!$('.businessList').length)
             this.$el.append(_.template($('#businessList').html())); // TODO : vérifier qu'il n'y pas déjà une liste
         this.collection.fetch({reset: true, data: {latitude: lat, longitude: lng}});
+        $('.businessList').waypoint(function() {
+            app.AppView.BusinessesView.collection.fetch({data: {latitude: lat, longitude: lng, offset: app.AppView.BusinessesView.collection.length}});
+        }, {
+          offset: function() {
+            return -$(this).height() + 50;
+          }
+        });
 
         // Si l'utilisateur a demandé sa position, on tente de trouver son adresse par reverse geocoding
         if ($('#searchInput').val() == "")
