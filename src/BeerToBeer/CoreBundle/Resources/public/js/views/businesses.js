@@ -18,13 +18,18 @@ app.BusinessesView = Backbone.View.extend({
         "click .btnFullBusiness": "btnFullBusiness",
         "click #btnCopyAdress": "btnCopyAdress",
         "click .editBeerLink": "editBeerLink",
-        "click #btnAddBeer": "btnAddBeer"
+        "click #btnAddBeer": "btnAddBeer",
+        "click .leftBack": "takeTardis"
     },
 
     initialize: function() {
         console.log("Init BusinessesView");
         this.collection = new app.Businesses();
         this.listenTo(this.collection, "reset", this.render);
+    },
+
+    takeTardis: function(e) {
+        Backbone.history.history.back();
     },
 
     getUserLocation: function(e) {

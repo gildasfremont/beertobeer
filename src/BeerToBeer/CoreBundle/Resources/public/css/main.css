@@ -99,6 +99,16 @@ body {
 	.left-icon button  { left:  0px;}
 	.right-icon button { right: 0px;}
 
+	.leftBack {
+		position: absolute;
+		top: 22px;
+		left: 15px;
+		height: 20px;
+		width: 44px;
+		background-image: url('../images/back.png');
+		cursor: pointer;
+	}
+
 	.businessList .infosPrix {
 		border: 1px solid #eeeeee;
 		margin: 20px 5px;
