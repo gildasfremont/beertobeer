@@ -40,7 +40,9 @@ body {
 		margin: 0 12px;
 		text-align: center;
 	}
-	#searchForm label {
+	#home.unfocus label {
+		text-align: center;
+		width: 100%;
 		font-weight: normal;
 		font-size: 13px;
 	}
