@@ -68,4 +68,11 @@ class ApiController extends Controller
 
         return new Response("L'établissement a bien été modifié !", 200);
     }
+
+    public function getAllBeersAction() {
+        $beers = $this->getDoctrine()->getManager()->getRepository('BeerToBeerCoreBundle:Beer')->getAllBeersArray();
+
+        $response = new JsonResponse();
+        return $response->setData($beers);
+    }
 }

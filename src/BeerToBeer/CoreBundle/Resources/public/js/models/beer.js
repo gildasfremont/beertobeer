@@ -7,6 +7,8 @@
       name: "",
       degree: "",
       prix: {}
+    },
+    label: function () {
+        return this.get("name");
     }
-
   });

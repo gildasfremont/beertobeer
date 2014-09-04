@@ -266,6 +266,16 @@ app.BusinessView = Backbone.View.extend({
 
         this.formBeer(beerId);
 
+        var beers = new app.Beers();
+        beers.fetch();
+
+        var autocomplete = new app.AutoCompleteView({
+            input: $("#beerNameInput"),
+            model: beers,
+            minKeywordLength: -1
+        }).render();
+        $("#beerNameInput").focus(function() { autocomplete.focus(); });
+
         $("#submitBeers").click(function(e) {
 
         });

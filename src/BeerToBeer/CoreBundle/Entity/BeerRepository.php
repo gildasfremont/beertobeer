@@ -12,4 +12,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class BeerRepository extends EntityRepository
 {
+	public function getAllBeersArray() {
+		$query = $this->_em->createQuery('
+			SELECT be
+			FROM BeerToBeerCoreBundle:Beer be
+			')
+		;
+
+		return $query->getArrayResult();
+	}
 }
