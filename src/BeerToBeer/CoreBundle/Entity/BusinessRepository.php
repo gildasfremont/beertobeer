@@ -136,6 +136,7 @@ class BusinessRepository extends EntityRepository
 			// Création d'une nouvelle bière. On essaie d'en trouver une avec le même nom. Si elle n'existe pas on la crée.
 			if ($idBeerFromApi == -1) {
 				$beer = $this->_em->getRepository("BeerToBeerCoreBundle:Beer")->findBy(array("name" => $beerFromApi["name"]));
+				$beer = $beer[0];
 				if ($beer == null) {
 					$beer = new Beer();
 					$beer->setName($beerFromApi["name"]);
@@ -151,6 +152,7 @@ class BusinessRepository extends EntityRepository
 					$beerBusiness = new BeerBusiness();
 					if (!isset($beer))
 						$beer = $this->_em->getRepository("BeerToBeerCoreBundle:Beer")->find(str_replace("p", "", $idBeerFromApi));
+					var_dump($beer);
 					$beerBusiness->setBeer($beer);
 					$business = $this->_em->getRepository("BeerToBeerCoreBundle:Business")->find($businessFromApi["id"]);
 					$beerBusiness->setBusiness($business);
