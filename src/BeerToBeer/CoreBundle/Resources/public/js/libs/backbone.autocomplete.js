@@ -50,7 +50,10 @@ app.AutoCompleteView = Backbone.View.extend({
         this.input
             .keyup(_.bind(this.keyup, this))
             .keydown(_.bind(this.keydown, this))
-            .after(this.$el);
+            .after(this.$el)
+            .focus($.proxy(this.focus, this))
+            //.blur($.proxy(this.blur, this))
+        ;
 
         return this;
     },
@@ -75,6 +78,10 @@ app.AutoCompleteView = Backbone.View.extend({
 
     focus: function() {
     	this.loadResult(this.model.first(5), "");
+    },
+
+    blur: function() {
+    	this.hide();
     },
 
     filter: function (keyword) {
@@ -141,7 +148,7 @@ app.AutoCompleteView = Backbone.View.extend({
     },
 
     select: function (model) {
-        var label = model.label();
+        var label = model.get("name");
         this.input.val(label);
         this.currentText = label;
         this.onSelect(model);

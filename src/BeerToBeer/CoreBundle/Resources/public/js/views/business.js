@@ -156,6 +156,16 @@ app.BusinessView = Backbone.View.extend({
             console.log('Beer submitted...');
             var error = false;
             var change = false;
+
+            // Vérification du champ de la bière si c'est un ajout
+            if ($("#beerNameInput").length) {
+                change = true;
+                if ($("#beerNameInput").val().length < 1) {
+                    alert("Vous n'avez pas entré le nom de la bière");
+                    error = true;
+                } else
+                    app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].name = $("#beerNameInput").val();
+            }
             _.each(app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix, function(price, index, prix) {
                 if (!price.toRemove) {
                     var prixNormal = parseFloat($("#" + price.id + ".inputNormal").val());
@@ -231,6 +241,12 @@ app.BusinessView = Backbone.View.extend({
                         }
                     });
                 }
+
+                // Actualisation de la bière nouvellement créée
+                if ($("#beerNameInput").length) {
+                    app.AppView.BusinessesView.fullBusinessView.model.fetch();
+                }
+
                 app.AppView.BusinessesView.collection.set(app.AppView.BusinessesView.fullBusinessView.model.get("id"), app.AppView.BusinessesView.fullBusinessView.model);
                 
                 // Re rendu de l'espace "bières"
@@ -260,6 +276,7 @@ app.BusinessView = Backbone.View.extend({
 
         this.model.attributes.beers[beerId] = {
             id: beerId,
+            pression: true,
             prix: []
         };
         $(".fullBusiness").append( this.addBeerFormTemplate( this.model.attributes.beers[beerId] ) );
@@ -274,10 +291,5 @@ app.BusinessView = Backbone.View.extend({
             model: beers,
             minKeywordLength: -1
         }).render();
-        $("#beerNameInput").focus(function() { autocomplete.focus(); });
-
-        $("#submitBeers").click(function(e) {
-
-        });
     }
 });

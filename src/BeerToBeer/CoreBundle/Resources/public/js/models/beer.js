@@ -9,6 +9,6 @@
       prix: {}
     },
     label: function () {
-        return this.get("name");
+      return this.get("name") + ' <span class="degree">' + this.get("degree") + '°</span>';
     }
   });
