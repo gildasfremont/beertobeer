@@ -242,18 +242,19 @@ app.BusinessView = Backbone.View.extend({
                     });
                 }
 
-                // Actualisation de la bière nouvellement créée
-                if ($("#beerNameInput").length) {
-                    app.AppView.BusinessesView.fullBusinessView.model.fetch();
-                }
+                // Actualisation du bar pour récupérer toutes les infos
+                app.AppView.BusinessesView.fullBusinessView.model.fetch();
 
                 app.AppView.BusinessesView.collection.set(app.AppView.BusinessesView.fullBusinessView.model.get("id"), app.AppView.BusinessesView.fullBusinessView.model);
                 
-                // Re rendu de l'espace "bières"
-                var idCount = pression ? "link_pressions" : "link_others";
-                var count = _.where(app.AppView.BusinessesView.fullBusinessView.model.attributes.beers, {pression: pression}).length;
-                $("#" + idCount + " span").html(count);
-                app.AppView.BusinessesView.fullBusinessView.renderBeers(pression);
+                app.AppView.BusinessesView.fullBusinessView.model.on("sync", function() {
+                    console.log("Business successfully synced !")
+                    // Re rendu de l'espace "bières"
+                    var idCount = pression ? "link_pressions" : "link_others";
+                    var count = _.where(app.AppView.BusinessesView.fullBusinessView.model.attributes.beers, {pression: pression}).length;
+                    $("#" + idCount + " span").html(count);
+                    app.AppView.BusinessesView.fullBusinessView.renderBeers(pression);
+                });
                 $(".formBeer").remove();
             } else if (!error && !change)
                 $(".formBeer").remove();
