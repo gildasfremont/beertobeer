@@ -425,6 +425,14 @@ body {
 		color: #b3b3b3;
 		text-align: center;
 	}
+	.formBeer #beerNameInput {
+		background-image: url("../images/crayon.png");
+		background-repeat: no-repeat;
+		background-position: calc(100% - 5px);
+	}
+	.formBeer.addBeer {
+		padding-top: 40px;
+	}
 }
 
 ul.autocomplete {
