@@ -1,5 +1,5 @@
 <div class="beer">
-	<%= name %><br />
+	<%- name %> <span class="degree"><%= degree %>°</span><br />
 	<span class="prices">
 		<% _.each(prix, function (oneprice, key, list) { 
 			if (key == list.length-1) { %>

@@ -1,12 +1,13 @@
-<div class="editBeer formBeer">
+<div class="addBeer formBeer">
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12">
-				<h3><%= name %></h3>
+				<label for="beerNameInput">Choisir la bière à ajouter</label>
+				<input type="text" placeholder="Nom de la bière" class="form-control" id="beerNameInput">
 			</div>
 		</div>
 
-		<form id="formBeers">
+		<form id="formAddBeers">
 			Prix en euros
 			<div class="row typeTarif">
 				<div class="col-xs-offset-3 col-xs-3">
@@ -17,17 +18,16 @@
 				</div>
 			</div>
 			<div class="BeerBusinesses_container">
-				<% var oneBeerTemplate = _.template($("#oneBeerBusinessForm").html()); 
-				_.each(prix, function(price) { %>
-					<%= oneBeerTemplate(price) %>
-				<% }); %>
+				<% var oneBeerTemplate = _.template($("#oneBeerBusinessForm").html()); %>
+				<%= oneBeerTemplate({
+					id: -1
+				}) %>
 			</div>
 			<a href="#" id="addVolumeBeer">+ Ajouter un volume</a>
 		</form>
 	</div>
 	<div class="buttons">
-		<button class="btn btn-default delete" id="deleteBeers">Supprimer cette bière</button>
-		<button class="btn btn-default submit" id="submitBeers">Modifications terminées</button>
+		<button class="btn btn-default submit" id="submitBeers">Ajouter la bière</button>
 		<a href="#" id="cancelBeers" class="cancel">Annuler</a>
 	</div> 
 </div>

@@ -19,3 +19,9 @@ btb_api_update_business_id:
     requirements:
         id: \d+
         _method: PUT
+
+btb_api_beers:
+    path:     /api/beer
+    defaults: { _controller: BeerToBeerCoreBundle:Api:getAllBeers }
+    requirements:
+        _method: GET

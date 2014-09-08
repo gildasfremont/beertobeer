@@ -8,8 +8,8 @@ app.BusinessesView = Backbone.View.extend({
     userAdress: "",
 
     events: {
-        "click #link_pressions": "linkPressions",
-        "click #link_others": "linkOthers",
+        "click a #link_pressions": "linkPressions",
+        "click a #link_others": "linkOthers",
         "focus #searchInput": "focusSearchInput",
         "focusout #searchInput": "focusOutSearchInput",
         "click #gpsLink": "getUserLocation",
@@ -17,13 +17,19 @@ app.BusinessesView = Backbone.View.extend({
         "click .dropHorairesType": "dropHorairesType",
         "click .btnFullBusiness": "btnFullBusiness",
         "click #btnCopyAdress": "btnCopyAdress",
-        "click .editBeerLink": "editBeerLink"
+        "click .editBeerLink": "editBeerLink",
+        "click #btnAddBeer": "btnAddBeer",
+        "click .leftBack": "takeTardis"
     },
 
     initialize: function() {
         console.log("Init BusinessesView");
         this.collection = new app.Businesses();
         this.listenTo(this.collection, "reset", this.render);
+    },
+
+    takeTardis: function(e) {
+        Backbone.history.history.back();
     },
 
     getUserLocation: function(e) {
@@ -61,10 +67,7 @@ app.BusinessesView = Backbone.View.extend({
         }
     },
 
-    focusSearchInput: function() {
-        $("#home").switchClass("unfocus", "focus");
-        $("#home.unfocus #labelSearch").hide(400);
-        $("#home.unfocus h2").hide(400);
+    prepareSearchInput: function() {
         $("#searchInput")
             .geocomplete()
             .bind("geocode:result", function(event, result){
@@ -78,9 +81,15 @@ app.BusinessesView = Backbone.View.extend({
             })
             .resize() // Trigger resize
         ;
+    },
+
+    focusSearchInput: function() {
+        $("#home").switchClass("unfocus", "focus");
+        $("#home.unfocus #labelSearch").hide(400);
+        $("#home.unfocus h2").hide(400);
+        this.prepareSearchInput();
         $("#home").attr("id", "search");
         $("#search #gpsContainer").show();
-        app.Router.navigate("search");
     },
 
     focusOutSearchInput: function() {
@@ -90,19 +99,37 @@ app.BusinessesView = Backbone.View.extend({
     home: function() {
         if (this.$el.children().attr("id") != "home")
             this.$el.html(_.template($('#homeTemplate').html()));
-        $("#home.unfocus #labelSearch").show(400);
+        $("#home.unfocus #labelSearch").show();
     },
 
     // Trouver les bars les plus proches de la position donnée
     search: function(lat, lng) {
         if (this.$el.children().attr("id") != "search") {
-            this.$el.html(_.template($('#homeTemplate').html()));
-            this.focusSearchInput();
+            this.$el.html(_.template($('#searchTemplate').html()));
+            this.prepareSearchInput();
         } 
-        $("#searchInput").blur(); // Trigger blur pour que le "Chercher autour de moi disparaisse"
+        $("#search #gpsContainer").hide(0);
         if (!$('.businessList').length)
             this.$el.append(_.template($('#businessList').html())); // TODO : vérifier qu'il n'y pas déjà une liste
-        this.collection.fetch({reset: true, data: {latitude: lat, longitude: lng}});
+        
+        // Si la liste demandée est déjà chargée, on ne la redemande pas au serveur
+        if (this.collection.lastLat == lat && this.collection.lastLng == lng)
+            this.collection.trigger("reset");
+        else {
+            this.collection.fetch({reset: true, data: {latitude: lat, longitude: lng},
+                success: function(collection) {
+                    app.AppView.BusinessesView.collection.lastLat = lat;
+                    app.AppView.BusinessesView.collection.lastLng = lng;
+                }
+            });
+        }
+        /*$('.businessList').waypoint(function() {
+            app.AppView.BusinessesView.collection.fetch({data: {latitude: lat, longitude: lng, offset: app.AppView.BusinessesView.collection.length}});
+        }, {
+          offset: function() {
+            return -$(this).height() + 50;
+          }
+        });*/
 
         // Si l'utilisateur a demandé sa position, on tente de trouver son adresse par reverse geocoding
         if ($('#searchInput').val() == "")
@@ -113,7 +140,7 @@ app.BusinessesView = Backbone.View.extend({
         var geocoder = new google.maps.Geocoder();
         geocoder.geocode({'latLng': new google.maps.LatLng(lat, lng)}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
-                if (results[1]) {
+                if (results[0]) {
                     app.AppView.BusinessesView.userAdress = results[1].formatted_address;
                 } else {
                     return false;
@@ -204,5 +231,9 @@ app.BusinessesView = Backbone.View.extend({
 
     editBeerLink: function(e) {
         this.fullBusinessView.editBeerLink(e);
+    },
+
+    btnAddBeer: function(e) {
+        this.fullBusinessView.btnAddBeer(e);
     }
 });

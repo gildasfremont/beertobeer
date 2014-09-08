@@ -44,6 +44,15 @@ class ApiController extends Controller
     }
 
     public function updateBusinessAction($id) {
+        $request = $this->getRequest();
+        if ($request->cookies->has("identifier"))
+            $identifier = $request->cookies->get("identifier");
+        else {
+            $identifier = uniqid($request->getClientIp()."_")."_".$request->headers->get('User-Agent');
+            $request->cookies->set("identifier", $identifier);
+        }
+        $this->container->get('simplethings_entityaudit.config')->setCurrentUsername($identifier);
+
         // Récupération des paramètres PUT
         $requestContent = $this->getRequest()->getContent();
         $businessFromApi = json_decode($requestContent, true);
@@ -54,9 +63,18 @@ class ApiController extends Controller
         $repoBusiness = $this->getDoctrine()->getManager()->getRepository('BeerToBeerCoreBundle:Business');
 
         $return = $repoBusiness->updateBusinessFromApi($businessFromApi);
-        if ($return !== true)
-            throw new HttpException(400, $return);
+        if (gettype($return) == "string")
+           throw new HttpException(400, $return);
 
-        return new Response("L'établissement a bien été modifié !", 200);
+        // On renvoie l'entité pour qu'elle soit actualisée
+        $response = new JsonResponse();
+        return $response->setData($return);
+    }
+
+    public function getAllBeersAction() {
+        $beers = $this->getDoctrine()->getManager()->getRepository('BeerToBeerCoreBundle:Beer')->getAllBeersArray();
+
+        $response = new JsonResponse();
+        return $response->setData($beers);
     }
 }

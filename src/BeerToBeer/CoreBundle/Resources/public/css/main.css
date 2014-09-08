@@ -40,7 +40,9 @@ body {
 		margin: 0 12px;
 		text-align: center;
 	}
-	#searchForm label {
+	#home.unfocus label {
+		text-align: center;
+		width: 100%;
 		font-weight: normal;
 		font-size: 13px;
 	}
@@ -98,6 +100,16 @@ body {
 	/* align icon */
 	.left-icon button  { left:  0px;}
 	.right-icon button { right: 0px;}
+
+	.leftBack {
+		position: absolute;
+		top: 22px;
+		left: 15px;
+		height: 20px;
+		width: 44px;
+		background-image: url('../images/back.png');
+		cursor: pointer;
+	}
 
 	.businessList .infosPrix {
 		border: 1px solid #eeeeee;
@@ -263,6 +275,11 @@ body {
 		font-size: 0.9em;
 		color: #808080;
 	}
+	.fullBusiness .beers .beer .degree {
+		font-size: 0.8em;
+		color: #808080;
+		margin-left: 10px;
+	}
 	.fullBusiness .beers .beer .prices .price .volume {
 		margin-right: 6px;
 	}
@@ -278,14 +295,15 @@ body {
 		width: 100%;
 		height: 1px;
 	}
-	.fullBusiness #btnsMap {
+	.fullBusiness #btnsMap, .fullBusiness .btnsBeer {
 		position: absolute;
 		bottom: 20px;
+		left: 0;
 		z-index: 10;
 		width: 100%;
 		text-align: center;
 	}
-	.fullBusiness #btnsMap .btn {
+	.fullBusiness #btnsMap .btn, .fullBusiness .btnsBeer .btn {
 	    width: 280px;
 		height: 30px;
 	    border: 1px solid #ff6600;
@@ -294,8 +312,12 @@ body {
 	    padding-top: 5px;
 	    text-transform: uppercase;
 	}
+	.fullBusiness .btnsBeer #btnAddBeer.btn {
+		background-color: #ff6600;
+		color: white;
+	}
 
-	.editBeer {
+	.formBeer {
 		position: absolute;
 		height: 100%;
 		width: 100%;
@@ -304,41 +326,41 @@ body {
 		background-color: #f9f9f9;
 	}
 
-	.editBeer form {
+	.formBeer form {
 		margin-top: 30px;
 	}
-	.editBeer .typeTarif div {
+	.formBeer .typeTarif div {
 		white-space: nowrap;
 		font-size: 0.8em;
 		padding: 0;
 		width: 29%;
 	}
-	.editBeer .typeTarif .col-xs-offset-3 {
+	.formBeer .typeTarif .col-xs-offset-3 {
 		padding-left: 8px;
 	}
-	.editBeer #addVolumeEditBeer {
+	.formBeer #addVolumeBeer {
 		margin-top: 6px;
 		font-size: 0.9em;
 	}
-	.editBeer .oneBeerBusiness {
+	.formBeer .oneBeerBusiness {
 		margin: 5px;
 	}
-	.editBeer .oneBeerBusiness .volume {
+	.formBeer .oneBeerBusiness .volume {
 		color: #808080;
 		opacity: 0.7;
 	}
-	.editBeer .oneBeerBusiness.undefined .volume {
+	.formBeer .oneBeerBusiness.undefined .volume {
 		padding: 0;
 	}
-	.editBeer .oneBeerBusiness.undefined .volume input {
+	.formBeer .oneBeerBusiness.undefined .volume input {
 		display: inline-block;
 		margin-right: 7px;
 	}
-	.editBeer .oneBeerBusiness .col-xs-3 {
+	.formBeer .oneBeerBusiness .col-xs-3 {
 		height: 40px;
 		line-height: 40px;
 	}
-	.editBeer .oneBeerBusiness .col-xs-3.prix {
+	.formBeer .oneBeerBusiness .col-xs-3.prix {
 		width: 30%;
 		padding-left: 10px;
 		background-image: url("../images/crayon.png");
@@ -352,13 +374,13 @@ body {
 	input[type=number]:focus:-ms-input-placeholder { color:transparent; } /* ie */
 	input[type=number]:focus:-moz-placeholder { color:transparent; }
 
-	.editBeer .oneBeerBusiness .col-xs-3.volume {
+	.formBeer .oneBeerBusiness .col-xs-3.volume {
 		width: 25%;
 	}
-	.editBeer .oneBeerBusiness .col-xs-3.remove {
+	.formBeer .oneBeerBusiness .col-xs-3.remove {
 		width: 15%;
 	}
-	.editBeer form .oneBeerBusiness input[type=number] {
+	.formBeer form .oneBeerBusiness input[type=number] {
 		height: 40px;
 		width: 42px;
 		border-radius: 2px;
@@ -366,17 +388,17 @@ body {
 		text-align: center;
 		font-size: 1.3em;
 	}
-	.editBeer .container {
+	.formBeer .container {
 		margin-bottom: 130px; /* Pour que ça ne déborde pas sur les boutons */
 	}
-	.editBeer .buttons {
+	.formBeer .buttons {
 		position: absolute;
 		bottom: 20px;
 		z-index: 210;
 		width: 100%;
 		text-align: center;
 	}
-	.editBeer .buttons .btn {
+	.formBeer .buttons .btn {
 	    width: 280px;
 		height: 30px;
 	    border-radius: 0;
@@ -385,25 +407,65 @@ body {
 	    margin-top: 8px;
 		border: 1px solid #ff6600;
 	}
-	.editBeer .buttons .btn:focus, .editBeer .buttons .btn:hover {
+	.formBeer .buttons .btn:focus, .formBeer .buttons .btn:hover {
 		background-color: white;
 	}
-	.editBeer .buttons .btn.delete {
+	.formBeer .buttons .btn.delete {
 		color: #ff6600;
 	}
-	.editBeer .buttons .btn.submit {
+	.formBeer .buttons .btn.submit {
 		border-color: #6abacb;
 		background-color: #6abacb;
 		color: white;
 	}
-	.editBeer .buttons a.cancel {
+	.formBeer .buttons a.cancel {
 		display: block;
 		text-transform: uppercase;
 	    margin-top: 12px;
 		color: #b3b3b3;
 		text-align: center;
 	}
+	.formBeer #beerNameInput {
+		background-image: url("../images/crayon.png");
+		background-repeat: no-repeat;
+		background-position: calc(100% - 5px);
+	}
+	.formBeer.addBeer {
+		padding-top: 40px;
+	}
 }
+
+ul.autocomplete {
+	display: none;
+	position: absolute;
+	background-color: #fff;
+	z-index: 20;
+	margin: 0;
+	padding: 3px 0;
+}
+ul.autocomplete li {
+	list-style: none;
+	background-color: #fff;
+	margin: 0;
+	padding: 5px 7px;
+	border: 1px solid #eaeaea;
+	border-top: none;
+	line-height: 40px;
+}
+ul.autocomplete li.active, ul.autocomplete li:hover {
+	cursor: pointer;
+	background-color: #d3d3d3;
+}
+ul.autocomplete li a {
+	color: #3d3d3d;
+	text-decoration: none;
+}
+ul.autocomplete li a .degree {
+	margin-left: 5px;
+	font-size: 0.7em;
+	color: #808080;
+}
+
 
 /* Ici on supprime les boutons chelous des input de type "number" */
 /* Pour Webkit : */

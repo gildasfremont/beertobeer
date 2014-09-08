@@ -1,5 +1,7 @@
 <div class="fullBusiness" id="<%= this.model.attributes.id %>">
-	<div class="leftBack"></div>
+	<% if (app.AppView.BusinessesView.collection.length > 1) { // Seulement si une page recherche a déjà été chargée %>
+		<div class="leftBack"></div>
+	<% } %>
 	<h1><%- this.model.attributes.nom %></h1>
 	<h2><%= this.model.attributes.typeArray[this.model.attributes.type] %></h2>
 
@@ -76,7 +78,9 @@
 			</div>
 			<div id="beers_container">
 			</div>
-
+			<div class="btnsBeer">
+				<button type="button" class="btn btn-default" id="btnAddBeer">Ajouter une bière</button>
+			</div>
 		</div>
 	</div>
 	<div id="mapFullBusiness">
