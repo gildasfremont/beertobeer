@@ -8,8 +8,8 @@ app.BusinessesView = Backbone.View.extend({
     userAdress: "",
 
     events: {
-        "click #link_pressions": "linkPressions",
-        "click #link_others": "linkOthers",
+        "click a #link_pressions": "linkPressions",
+        "click a #link_others": "linkOthers",
         "focus #searchInput": "focusSearchInput",
         "focusout #searchInput": "focusOutSearchInput",
         "click #gpsLink": "getUserLocation",
