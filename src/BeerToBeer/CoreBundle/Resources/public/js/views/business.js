@@ -228,7 +228,23 @@ app.BusinessView = Backbone.View.extend({
             }
             if (!error && change) {
                 var pression = app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].pression;
-                app.AppView.BusinessesView.fullBusinessView.model.save();
+                app.AppView.BusinessesView.fullBusinessView.model.save({pression: "yahho"}, { 
+                    datatype: 'text',
+                    success: function() {
+                        console.log("Business successfully synced !")
+                        // Re rendu de l'espace "bières"
+                        var idCount = pression ? "link_pressions" : "link_others";
+                        var count = _.where(app.AppView.BusinessesView.fullBusinessView.model.attributes.beers, {pression: pression}).length;
+                        $("#" + idCount + " span").html(count);
+                        app.AppView.BusinessesView.fullBusinessView.renderBeers(pression);
+
+                        app.AppView.BusinessesView.collection.set(app.AppView.BusinessesView.fullBusinessView.model.get("id"), app.AppView.BusinessesView.fullBusinessView.model);
+                    },
+                    error: function(error, domain) {
+                        console.log(error);
+                        console.log(domain);
+                    }
+                });
 
                 // Suppression effective des prix (si pas nouvelle bière)
                 if (beerId > -1) {
@@ -241,20 +257,7 @@ app.BusinessView = Backbone.View.extend({
                         }
                     });
                 }
-
-                // Actualisation du bar pour récupérer toutes les infos
-                app.AppView.BusinessesView.fullBusinessView.model.fetch();
-
-                app.AppView.BusinessesView.collection.set(app.AppView.BusinessesView.fullBusinessView.model.get("id"), app.AppView.BusinessesView.fullBusinessView.model);
                 
-                app.AppView.BusinessesView.fullBusinessView.model.on("sync", function() {
-                    console.log("Business successfully synced !")
-                    // Re rendu de l'espace "bières"
-                    var idCount = pression ? "link_pressions" : "link_others";
-                    var count = _.where(app.AppView.BusinessesView.fullBusinessView.model.attributes.beers, {pression: pression}).length;
-                    $("#" + idCount + " span").html(count);
-                    app.AppView.BusinessesView.fullBusinessView.renderBeers(pression);
-                });
                 $(".formBeer").remove();
             } else if (!error && !change)
                 $(".formBeer").remove();

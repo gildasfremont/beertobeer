@@ -152,7 +152,7 @@ class BusinessRepository extends EntityRepository
 					$beerBusiness = new BeerBusiness();
 					if (!isset($beer))
 						$beer = $this->_em->getRepository("BeerToBeerCoreBundle:Beer")->find(str_replace("p", "", $idBeerFromApi));
-					var_dump($beer);
+					
 					$beerBusiness->setBeer($beer);
 					$business = $this->_em->getRepository("BeerToBeerCoreBundle:Business")->find($businessFromApi["id"]);
 					$beerBusiness->setBusiness($business);
@@ -179,6 +179,6 @@ class BusinessRepository extends EntityRepository
 
 		$this->_em->flush();
 
-		return true;
+		return $this->getBusinessForApi($businessFromApi["id"]);
 	}
 }

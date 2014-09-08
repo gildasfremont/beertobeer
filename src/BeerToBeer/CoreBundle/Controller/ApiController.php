@@ -63,10 +63,12 @@ class ApiController extends Controller
         $repoBusiness = $this->getDoctrine()->getManager()->getRepository('BeerToBeerCoreBundle:Business');
 
         $return = $repoBusiness->updateBusinessFromApi($businessFromApi);
-        if ($return !== true)
-            throw new HttpException(400, $return);
+        if (gettype($return) == "string")
+           throw new HttpException(400, $return);
 
-        return new Response("L'établissement a bien été modifié !", 200);
+        // On renvoie l'entité pour qu'elle soit actualisée
+        $response = new JsonResponse();
+        return $response->setData($return);
     }
 
     public function getAllBeersAction() {
