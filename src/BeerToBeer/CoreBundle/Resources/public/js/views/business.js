@@ -66,11 +66,6 @@ app.BusinessView = Backbone.View.extend({
         this.renderMap();
     },
 
-    dropHoraires: function(e) {
-        $(".horaires .moreHoraires").toggle();
-        $("#dropHoraires").toggleClass("focus");
-    },
-
     dropHorairesType: function(e) {
         if (!$(e.target).hasClass("focus")) {
             $(".dropHorairesType").toggleClass("focus");
@@ -86,6 +81,19 @@ app.BusinessView = Backbone.View.extend({
             horaires: this.model.attributes.horaires,
             happyHour: happyHour
         }));
+
+        $(document).click(function(){
+          $(".horaires .moreHoraires").hide();
+          $("#dropHoraires").removeClass("focus");
+        });
+        $("#dropHoraires").click(function(e) {
+            e.stopPropagation();
+            $(".horaires .moreHoraires").toggle();
+            $("#dropHoraires").toggleClass("focus");
+        });
+        $(".horaires .moreHoraires").click(function(e) {
+            e.stopPropagation();
+        });
     },
 
     btnFullBusiness: function(e) {

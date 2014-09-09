@@ -13,7 +13,6 @@ app.BusinessesView = Backbone.View.extend({
         "focus #searchInput": "focusSearchInput",
         "focusout #searchInput": "focusOutSearchInput",
         "click #gpsLink": "getUserLocation",
-        "click #dropHoraires": "dropHoraires",
         "click .dropHorairesType": "dropHorairesType",
         "click .btnFullBusiness": "btnFullBusiness",
         "click #btnCopyAdress": "btnCopyAdress",
