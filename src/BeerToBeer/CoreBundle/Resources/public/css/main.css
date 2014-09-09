@@ -16,6 +16,11 @@ body {
 
 /* DESIGN MOBILE */
 @media (max-width: 767px) {
+	#loaderLoop {
+		text-align: center;
+		margin-top: 10%;
+		color: #f96727;
+	}
 	#home.unfocus {
 	    position: absolute;
 	    top: 20%;

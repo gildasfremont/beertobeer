@@ -33,6 +33,7 @@ app.BusinessesView = Backbone.View.extend({
 
     getUserLocation: function(e) {
         e.preventDefault();
+        $("#loaderLoop").show();
         console.log("Getting GPS coordinates...");
         var errorMessage = "";
         if(navigator.geolocation) {
@@ -103,6 +104,7 @@ app.BusinessesView = Backbone.View.extend({
 
     // Trouver les bars les plus proches de la position donnée
     search: function(lat, lng) {
+        $("#loaderLoop").hide();
         if (this.$el.children().attr("id") != "search") {
             this.$el.html(_.template($('#searchTemplate').html()));
             this.prepareSearchInput();
