@@ -14,22 +14,6 @@ class BeerBusinesses implements FixtureInterface, OrderedFixtureInterface
   {
     $items = array(
         array(
-          "business" => "Dirty Dick",
-          "beer" => "Stella Artois",
-          "prixNormal" => 2,
-          "prixHappyHour" => 2,
-          "volume" => 50,
-          "pression" => true
-        ),
-        array(
-          "business" => "Le Cabaret Michou",
-          "beer" => "Stella Artois",
-          "prixNormal" => 8,
-          "prixHappyHour" => 8,
-          "volume" => 50,
-          "pression" => true
-        ),
-        array(
           "business" => "Le Timbre Poste",
           "beer" => "Stella Artois",
           "prixNormal" => 4.5,
@@ -69,43 +53,29 @@ class BeerBusinesses implements FixtureInterface, OrderedFixtureInterface
           "volume" => 33,
           "pression" => false
         ),
-        array(
-          "business" => "James Hetfeeld's Pub",
-          "beer" => "Stella Artois",
-          "prixNormal" => 7,
-          "prixHappyHour" => 3,
-          "volume" => 50,
-          "pression" => true
-        ),
-        array(
-          "business" => "Les tonneaux parisiens",
-          "beer" => "Stella Artois",
-          "prixNormal" => 5,
-          "prixHappyHour" => 2,
-          "volume" => 50,
-          "pression" => true
-        ),
 
       );
 
+    $businesses = $manager->getRepository('BeerToBeerCoreBundle:Business')->findAll();
+
     foreach($items as $i => $item)
     {
-      $liste_items[$i] = new BeerBusiness();
 
       $beer = $manager->getRepository('BeerToBeerCoreBundle:Beer')->findBy(array("name" => $item["beer"]));
       $beer = $beer[0];
-      $liste_items[$i]->setBeer($beer);
 
-      $business = $manager->getRepository('BeerToBeerCoreBundle:Business')->findBy(array("nom" => $item["business"]));
-      $business = $business[0];
-      $liste_items[$i]->setBusiness($business);
+      foreach ($businesses as $i2 => $business) {
+        $id = $i.":".$i2;
+        $liste_items[$id] = new BeerBusiness();
+        $liste_items[$id]->setBeer($beer);
+        $liste_items[$id]->setBusiness($business);
+        $liste_items[$id]->setPrixNormal($item["prixNormal"]);
+        $liste_items[$id]->setPrixHappyHour($item["prixHappyHour"]);
+        $liste_items[$id]->setVolume($item["volume"]);
+        $liste_items[$id]->setPression($item["pression"]);
+        $manager->persist($liste_items[$id]);
+      }
 
-      $liste_items[$i]->setPrixNormal($item["prixNormal"]);
-      $liste_items[$i]->setPrixHappyHour($item["prixHappyHour"]);
-      $liste_items[$i]->setVolume($item["volume"]);
-      $liste_items[$i]->setPression($item["pression"]);
-
-      $manager->persist($liste_items[$i]);
     }
 
     // On déclenche l'enregistrement

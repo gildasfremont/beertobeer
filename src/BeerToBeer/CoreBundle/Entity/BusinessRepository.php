@@ -33,11 +33,12 @@ class BusinessRepository extends EntityRepository
 			JOIN bb.beer be
 			LEFT JOIN bu.horaires h
 			ORDER BY distance, bb.prixHappyHour
+			LIMIT 20
 			')
 			->setParameter('latitude', $latitude)
 		    ->setParameter('longitude', $longitude)
 			->setFirstResult($offset)
-			//->setMaxResults($limit)
+			->setMaxResults($limit)
 		;
 
 		$results =  $query->getArrayResult();
