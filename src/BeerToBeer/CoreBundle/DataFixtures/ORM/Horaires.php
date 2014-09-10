@@ -11,7 +11,7 @@ class Horaires implements FixtureInterface, OrderedFixtureInterface
 {
   // Dans l'argument de la méthode load, l'objet $manager est l'EntityManager
   public function load(ObjectManager $manager)
-  {
+  {/*
 
     $businesses = $manager->getRepository('BeerToBeerCoreBundle:Business')->findAll();
 
@@ -55,7 +55,7 @@ class Horaires implements FixtureInterface, OrderedFixtureInterface
     }
 
     // On déclenche l'enregistrement
-    $manager->flush();
+    $manager->flush();*/
   }
   public function getOrder()
   {
