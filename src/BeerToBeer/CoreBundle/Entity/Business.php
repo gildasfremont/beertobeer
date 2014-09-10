@@ -22,6 +22,13 @@ class Business
     private $id;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="osm_id", type="integer", nullable=true)
+     */
+    private $osmId;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255)
@@ -38,6 +45,9 @@ class Business
     private $type;
 
     const TYPE_BAR = 1;
+    const TYPE_RESTAURANT = 2;
+    const TYPE_CAFE = 3;
+    const TYPE_PUB = 4;
 
     /**
      * @var string
@@ -337,5 +347,28 @@ class Business
     public function getHoraires()
     {
         return $this->horaires;
+    }
+
+    /**
+     * Set osmId
+     *
+     * @param integer $osmId
+     * @return Business
+     */
+    public function setOsmId($osmId)
+    {
+        $this->osmId = $osmId;
+
+        return $this;
+    }
+
+    /**
+     * Get osmId
+     *
+     * @return integer 
+     */
+    public function getOsmId()
+    {
+        return $this->osmId;
     }
 }
