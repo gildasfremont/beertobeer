@@ -103,24 +103,30 @@ app.BusinessesView = Backbone.View.extend({
     },
 
     // Trouver les bars les plus proches de la position donnée
-    search: function(lat, lng) {
+    search: function(lat, lng, forAdd) {
+        if (typeof forAdd == 'undefined')
+            var forAdd = false;
         $("#loaderLoop").hide();
-        if (this.$el.children().attr("id") != "search") {
+        if (this.$el.children().attr("id") != "search" && !forAdd) {
             this.$el.html(_.template($('#searchTemplate').html()));
             this.prepareSearchInput();
-        } 
+        } else if (this.$el.children().attr("id") != "searchAddBusiness" && forAdd) {
+            this.$el.html(_.template($('#searchAddBusinessTemplate').html()));
+            this.prepareSearchInput();
+        }
         $("#search #gpsContainer").hide(0);
         if (!$('.businessList').length)
             this.$el.append(_.template($('#businessList').html())); // TODO : vérifier qu'il n'y pas déjà une liste
         
         // Si la liste demandée est déjà chargée, on ne la redemande pas au serveur
-        if (this.collection.lastLat == lat && this.collection.lastLng == lng)
+        if (this.collection.lastLat == lat && this.collection.lastLng == lng && this.collection.forAdd === forAdd)
             this.collection.trigger("reset");
         else {
-            this.collection.fetch({reset: true, data: {latitude: lat, longitude: lng},
+            this.collection.fetch({reset: true, data: {latitude: lat, longitude: lng, forAdd: forAdd},
                 success: function(collection) {
                     app.AppView.BusinessesView.collection.lastLat = lat;
                     app.AppView.BusinessesView.collection.lastLng = lng;
+                    app.AppView.BusinessesView.collection.forAdd = forAdd;
                 }
             });
         }
@@ -136,6 +142,8 @@ app.BusinessesView = Backbone.View.extend({
         if ($('#searchInput').val() == "")
             this.reverseGeocoding(lat, lng);
     },
+
+
 
     reverseGeocoding: function(lat, lng) {
         var geocoder = new google.maps.Geocoder();

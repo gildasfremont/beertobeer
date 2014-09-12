@@ -7,7 +7,17 @@
     <br>
     <span class="adress"><%= distance %> m - <%- adresse %>, <%= codePostal %> <%- ville %></span>
 </div>
-<div class="col-xs-2 prix">
-    <span class="prixHappyHour">€ <%= prixHappyHour %></span><br>
-    <span class="prixNow"><%= prixNow %></span>
-</div>
+<% if (app.AppView.BusinessesView.collection.forAdd) { %>
+	<div class="col-xs-2 prix">
+		<% if (typeof prix != "undefined" && prix.length) { %>
+			OK
+		<% } else { %>
+			<a href="#" class="addThisBusiness" id="<%= id %>">Ajouter</a>
+		<% } %>
+	</div>
+<% } else { %>
+	<div class="col-xs-2 prix">
+	    <span class="prixHappyHour">€ <%= prixHappyHour %></span><br>
+	    <span class="prixNow"><%= prixNow %></span>
+	</div>
+<% } %>
