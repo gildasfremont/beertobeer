@@ -14,12 +14,12 @@ class ApiController extends Controller
 		$request = $this->getRequest();
 
 		if ($request->query->get('latitude') != null && $request->query->get('longitude') != null)
-			return $this->searchFromGpsAction($request->query->get('latitude'), $request->query->get('longitude'));
+			return $this->searchFromGpsAction($request->query->get('latitude'), $request->query->get('longitude'), $request->query->get('forAdd'), $request->query->get('offset'));
 
 		throw new HttpException(404, "Page introuvable.");
 	}
 
-    public function searchFromGpsAction($latitude, $longitude)
+    public function searchFromGpsAction($latitude, $longitude, $forAdd = false, $offset = 0)
     {
     	if (!is_numeric($latitude) || !is_numeric($longitude)) {
     		// Throw 400 BAD REQUEST puisqu'il manque des informations ou qu'elles sont mal données
@@ -28,7 +28,7 @@ class ApiController extends Controller
 
     	$repo = $this->getDoctrine()->getManager()->getRepository('BeerToBeerCoreBundle:Business');
 
-    	$results = $repo->getClosestBusinessesForApi(floatval($latitude), floatval($longitude));
+    	$results = $repo->getClosestBusinessesForApi(floatval($latitude), floatval($longitude), $forAdd, $offset);
 
         $response = new JsonResponse();
 		return $response->setData($results);

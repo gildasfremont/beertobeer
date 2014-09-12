@@ -24,7 +24,7 @@ app.BusinessesView = Backbone.View.extend({
     initialize: function() {
         console.log("Init BusinessesView");
         this.collection = new app.Businesses();
-        this.listenTo(this.collection, "reset", this.render);
+        this.listenTo(this.collection, "sync", this.render);
     },
 
     takeTardis: function(e) {
@@ -130,13 +130,11 @@ app.BusinessesView = Backbone.View.extend({
                 }
             });
         }
-        /*$('.businessList').waypoint(function() {
-            app.AppView.BusinessesView.collection.fetch({data: {latitude: lat, longitude: lng, offset: app.AppView.BusinessesView.collection.length}});
+        $('#businessesContainer').waypoint(function() {
+            app.AppView.BusinessesView.collection.fetch({remove: false, data: {latitude: lat, longitude: lng, forAdd: forAdd, offset: app.AppView.BusinessesView.collection.length}});
         }, {
-          offset: function() {
-            return -$(this).height() + 50;
-          }
-        });*/
+          offset: 'bottom-in-view'
+        });
 
         // Si l'utilisateur a demandé sa position, on tente de trouver son adresse par reverse geocoding
         if ($('#searchInput').val() == "")
