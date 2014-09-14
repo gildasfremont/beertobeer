@@ -23,14 +23,17 @@ class BusinessRepository extends EntityRepository
 	 * @param  integer $limit : le nombre d'établissements à afficher
 	 * @return array
 	 */
-	public function getClosestBusinessesForApi($latitude, $longitude, $offset = 0, $limit = 15) {
-
+	public function getClosestBusinessesForApi($latitude, $longitude, $forAdd = false, $offset = 0, $limit = 15) {
+		if ($forAdd)
+			$leftJoin = "LEFT ";
+		else
+			$leftJoin = "";
 		$query = $this->_em->createQuery('
 			SELECT bu, bb, h, be,
 			GEO_DISTANCE(:latitude, :longitude, bu.latitude, bu.longitude) AS distance 
 			FROM BeerToBeerCoreBundle:Business bu
-			JOIN bu.beerBusinesses bb
-			JOIN bb.beer be
+			' . $leftJoin . 'JOIN bu.beerBusinesses bb
+			' . $leftJoin . 'JOIN bb.beer be
 			LEFT JOIN bu.horaires h
 			ORDER BY distance, bb.prixHappyHour
 			')

@@ -13,8 +13,13 @@ class ApiController extends Controller
 	public function businessAction() {
 		$request = $this->getRequest();
 
+        if ($request->query->get('forAdd') == "true")
+            $forAdd = true;
+        else
+            $forAdd = false;
+
 		if ($request->query->get('latitude') != null && $request->query->get('longitude') != null)
-			return $this->searchFromGpsAction($request->query->get('latitude'), $request->query->get('longitude'), $request->query->get('forAdd'), $request->query->get('offset'));
+			return $this->searchFromGpsAction($request->query->get('latitude'), $request->query->get('longitude'), $forAdd, $request->query->get('offset'));
 
 		throw new HttpException(404, "Page introuvable.");
 	}
