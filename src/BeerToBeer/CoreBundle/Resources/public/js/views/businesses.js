@@ -134,6 +134,7 @@ app.BusinessesView = Backbone.View.extend({
                 app.AppView.BusinessesView.collection.trigger("sync");
                 app.AppView.BusinessesView.infiniteScrollWaypoint(lat, lng, forAdd, false);
             } else {
+                $("#businessLoading").show();
                 app.AppView.BusinessesView.collection.fetch({
                     remove: false, 
                     data: {
@@ -143,6 +144,10 @@ app.BusinessesView = Backbone.View.extend({
                         offset: app.AppView.BusinessesView.collection.length
                     },
                     success: function() {
+                        $("#businessLoading").hide();
+                        app.AppView.BusinessesView.collection.lastLat = lat;
+                        app.AppView.BusinessesView.collection.lastLng = lng;
+                        app.AppView.BusinessesView.collection.forAdd = forAdd;
                         app.AppView.BusinessesView.infiniteScrollWaypoint(lat, lng, forAdd, false);
                     }
                 });
