@@ -118,30 +118,39 @@ app.BusinessesView = Backbone.View.extend({
         if (!$('.businessList').length)
             this.$el.append(_.template($('#businessList').html())); // TODO : vérifier qu'il n'y pas déjà une liste
         
-        // Si la liste demandée est déjà chargée, on ne la redemande pas au serveur
-        if (this.collection.lastLat == lat && this.collection.lastLng == lng && this.collection.forAdd === forAdd)
-            this.collection.trigger("reset");
-        else {
-            this.collection.fetch({reset: true, data: {latitude: lat, longitude: lng, forAdd: forAdd},
-                success: function(collection) {
-                    app.AppView.BusinessesView.collection.lastLat = lat;
-                    app.AppView.BusinessesView.collection.lastLng = lng;
-                    app.AppView.BusinessesView.collection.forAdd = forAdd;
-                }
-            });
-        }
-        $('#businessesContainer').waypoint(function() {
-            app.AppView.BusinessesView.collection.fetch({remove: false, data: {latitude: lat, longitude: lng, forAdd: forAdd, offset: app.AppView.BusinessesView.collection.length}});
-        }, {
-          offset: 'bottom-in-view'
-        });
-
+        // On initialise l'infinite scroll (qui s'occupe de remplir la liste)
+        this.infiniteScrollWaypoint(lat, lng, forAdd, true);
+        
         // Si l'utilisateur a demandé sa position, on tente de trouver son adresse par reverse geocoding
         if ($('#searchInput').val() == "")
             this.reverseGeocoding(lat, lng);
     },
 
-
+    infiniteScrollWaypoint: function(lat, lng, forAdd, init) {
+        $('#businessesContainer').waypoint('destroy');
+        $('#businessesContainer').waypoint(function() {
+            // Si c'est l'initialisation, et que les coordonnées sont les mêmes, on ne redemande rien au serveur
+            if (init && app.AppView.BusinessesView.collection.lastLat == lat && app.AppView.BusinessesView.collection.lastLng == lng && app.AppView.BusinessesView.collection.forAdd === forAdd) {
+                app.AppView.BusinessesView.collection.trigger("sync");
+                app.AppView.BusinessesView.infiniteScrollWaypoint(lat, lng, forAdd, false);
+            } else {
+                app.AppView.BusinessesView.collection.fetch({
+                    remove: false, 
+                    data: {
+                        latitude: lat, 
+                        longitude: lng, 
+                        forAdd: forAdd, 
+                        offset: app.AppView.BusinessesView.collection.length
+                    },
+                    success: function() {
+                        app.AppView.BusinessesView.infiniteScrollWaypoint(lat, lng, forAdd, false);
+                    }
+                });
+            }
+        }, {
+          offset: 'bottom-in-view'
+        });
+    },
 
     reverseGeocoding: function(lat, lng) {
         var geocoder = new google.maps.Geocoder();
