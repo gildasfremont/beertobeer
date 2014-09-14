@@ -130,10 +130,12 @@ app.BusinessesView = Backbone.View.extend({
         $('#businessesContainer').waypoint('destroy');
         $('#businessesContainer').waypoint(function() {
             // Si c'est l'initialisation, et que les coordonnées sont les mêmes, on ne redemande rien au serveur
-            if (init && app.AppView.BusinessesView.collection.lastLat == lat && app.AppView.BusinessesView.collection.lastLng == lng && app.AppView.BusinessesView.collection.forAdd === forAdd) {
+            if (init && app.AppView.BusinessesView.collection.length > 1 /* Pour recharger quand même s'il n'y a eu qu'un seul bar de chargé (il manque la distance) */ && app.AppView.BusinessesView.collection.lastLat == lat && app.AppView.BusinessesView.collection.lastLng == lng && app.AppView.BusinessesView.collection.forAdd === forAdd) {
                 app.AppView.BusinessesView.collection.trigger("sync");
                 app.AppView.BusinessesView.infiniteScrollWaypoint(lat, lng, forAdd, false);
             } else {
+                if (app.AppView.BusinessesView.collection.length == 1)
+                    app.AppView.BusinessesView.collection.remove(app.AppView.BusinessesView.collection.at(0));
                 $("#businessLoading").show();
                 app.AppView.BusinessesView.collection.fetch({
                     remove: false, 
