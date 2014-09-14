@@ -167,7 +167,7 @@ class BusinessRepository extends EntityRepository
 				}
 			}
 			foreach ($beerFromApi["prix"] as $prixFromApi) {
-				if ($beerFromApi["pression"] === null || $prixFromApi["volume"] === null || $prixFromApi["prixNormal"] === null || $prixFromApi["prixHappyHour"] === null)
+				if ($prixFromApi["pression"] === null || $prixFromApi["volume"] === null || $prixFromApi["prixNormal"] === null || $prixFromApi["prixHappyHour"] === null)
 					return "Il manque des informations.";
 				if (array_key_exists("id", $prixFromApi))
 					$beerBusiness = $this->_em->getRepository("BeerToBeerCoreBundle:BeerBusiness")->find($prixFromApi["id"]);
@@ -179,7 +179,7 @@ class BusinessRepository extends EntityRepository
 					$beerBusiness->setBeer($beer);
 					$business = $this->_em->getRepository("BeerToBeerCoreBundle:Business")->find($businessFromApi["id"]);
 					$beerBusiness->setBusiness($business);
-					$beerBusiness->setPression($beerFromApi["pression"]);
+					$beerBusiness->setPression($prixFromApi["pression"]);
 				}
 				$beerBusiness->setVolume($prixFromApi["volume"]);
 				$beerBusiness->setPrixNormal($prixFromApi["prixNormal"]);
