@@ -9,10 +9,10 @@
 </div>
 <% if (app.AppView.BusinessesView.collection.forAdd) { %>
 	<div class="col-xs-2 prix">
-		<% if (typeof prix != "undefined" && prix.length) { %>
+		<% if (typeof beers != "undefined" && !_.isEmpty(beers)) { %>
 			OK
 		<% } else { %>
-			<a href="#" class="addThisBusiness" id="<%= id %>">Ajouter</a>
+			<a href="#business/<%= id %>" class="addThisBusiness">Ajouter</a>
 		<% } %>
 	</div>
 <% } else { %>

@@ -12,17 +12,20 @@ $(function() {
 
 	  home: function() {
 	  	console.log("Home Route requested");
+	  	app.AppView.BusinessesView.forAdd = false;;
 	  	app.AppView.BusinessesView.home();
 	  },
 
 	  search: function(lat, lng){
 	    console.log("Search Route requested.");
-	    app.AppView.BusinessesView.search(lat, lng, false);
+	  	app.AppView.BusinessesView.forAdd = false;;
+	    app.AppView.BusinessesView.search(lat, lng);
 	  },
 
 	  searchAddBusiness: function(lat, lng) {
 	  	console.log("searchAdd Route requested.");
-	  	app.AppView.BusinessesView.search(lat, lng, true);
+	  	app.AppView.BusinessesView.forAdd = true;
+	  	app.AppView.BusinessesView.search(lat, lng);
 	  } ,
 
 	  fullBusiness: function(id) {

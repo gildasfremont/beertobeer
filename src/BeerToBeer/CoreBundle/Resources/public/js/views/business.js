@@ -13,7 +13,8 @@ app.BusinessView = Backbone.View.extend({
     etatBeersPression: true,
 
     events: {
-        "click": "fullBusiness"
+        "click": "fullBusiness",
+        "click .addThisBusiness": "fullBusiness"
     },
 
     render: function() {
@@ -82,7 +83,8 @@ app.BusinessView = Backbone.View.extend({
     },
 
     fullBusiness: function(e) {
-        location.href = "#business/"+ this.model.get('id');
+        if (!app.AppView.BusinessesView.forAdd)
+            location.href = "#business/"+ this.model.get('id');
     },
 
     renderFull: function() {
@@ -273,7 +275,7 @@ app.BusinessView = Backbone.View.extend({
                         $("#" + idCount + " span").html(count);
                         app.AppView.BusinessesView.fullBusinessView.renderBeers(pression);
 
-                        app.AppView.BusinessesView.collection.set(app.AppView.BusinessesView.fullBusinessView.model.get("id"), app.AppView.BusinessesView.fullBusinessView.model);
+                        app.AppView.BusinessesView.collection.reset();
                     },
                     error: function(error, domain) {
                         console.log(error);
