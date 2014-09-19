@@ -52,7 +52,7 @@ app.AutoCompleteView = Backbone.View.extend({
             .keydown(_.bind(this.keydown, this))
             .after(this.$el)
             .focus($.proxy(this.focus, this))
-            //.blur($.proxy(this.blur, this))
+            .blur($.proxy(this.blur, this))
         ;
 
         return this;

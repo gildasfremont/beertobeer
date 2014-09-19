@@ -340,5 +340,9 @@ app.BusinessView = Backbone.View.extend({
             model: beers,
             minKeywordLength: -1
         }).render();
+        beers.on("sync", function() {
+            if ($("#beerNameInput").is(":focus"))
+                autocomplete.focus();
+        });
     }
 });
