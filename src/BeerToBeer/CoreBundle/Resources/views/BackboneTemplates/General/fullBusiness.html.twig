@@ -64,6 +64,11 @@
 		</div>
 
 		<div class="beers" style="display: none;">
+			<div id="noBeers" style="display: none;">
+				<img src="{{ asset('bundles/beertobeercore/images/nobeers.png') }}" alt="Pas de bières"><br><br>
+				L'établissement sera dans BeerToBeer dès qu'une bière aura été ajoutée<br><br>
+				<span class="glyphicon glyphicon-chevron-down"></span>
+			</div>
 			<% 
 				var pressions = _.where(this.model.attributes.beers, {pression: true});
 				var others = _.where(this.model.attributes.beers, {pression: false});

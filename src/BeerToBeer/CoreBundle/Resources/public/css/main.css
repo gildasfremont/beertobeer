@@ -300,6 +300,13 @@ body {
 	.fullBusiness .beers .beer .prices .lastPrice {
 		border-right: none;
 	}
+	.fullBusiness .beers #noBeers {
+		text-align: center;
+		font-size: 1.4em;
+		color: #666666;
+		margin-top: 20%;
+		padding: 0 50px;
+	}
 	.fullBusiness #mapFullBusiness {
 		width: 100%;
 		height: 1px;
