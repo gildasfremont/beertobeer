@@ -8,6 +8,10 @@
 		{
 			"follow_symlinks": true,
 			"path": "src\\BeerToBeer\\CoreBundle\\Resources\\public"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "C:\\Users\\Ilan\\Documents\\GitHub\\OpenBeerMap.github.io"
 		}
 	]
 }

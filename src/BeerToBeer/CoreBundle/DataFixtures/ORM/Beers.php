@@ -29,6 +29,10 @@ class Beers implements FixtureInterface, OrderedFixtureInterface
           "name" => "Leffe Blonde",
           "degree" => 6.6
         ),
+        array(
+          "name" => "Blonde Classique",
+          "degree" => 4.2
+        ),
 
       );
 

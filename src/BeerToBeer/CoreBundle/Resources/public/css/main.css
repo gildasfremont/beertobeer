@@ -16,6 +16,11 @@ body {
 
 /* DESIGN MOBILE */
 @media (max-width: 767px) {
+	#loaderLoop {
+		text-align: center;
+		margin-top: 10%;
+		color: #f96727;
+	}
 	#home.unfocus {
 	    position: absolute;
 	    top: 20%;
@@ -28,6 +33,10 @@ body {
 		font-family: 'MontserratBold';
 		font-weight: bold;
 		margin-bottom: 5px;
+	}
+	h1 a, h1 a:hover, h1 a:focus {
+		color: inherit;
+		text-decoration: none;
 	}
 	h2 {
 		color: #f96727;
@@ -291,19 +300,26 @@ body {
 	.fullBusiness .beers .beer .prices .lastPrice {
 		border-right: none;
 	}
+	.fullBusiness .beers #noBeers {
+		text-align: center;
+		font-size: 1.4em;
+		color: #666666;
+		margin-top: 20%;
+		padding: 0 50px;
+	}
 	.fullBusiness #mapFullBusiness {
 		width: 100%;
 		height: 1px;
 	}
-	.fullBusiness #btnsMap, .fullBusiness .btnsBeer {
+	.fullBusiness #btnsMap, .fullBusiness .btnsBeer, .btnsHome {
 		position: absolute;
-		bottom: 20px;
+		top: calc(100% - 50px);
 		left: 0;
 		z-index: 10;
 		width: 100%;
 		text-align: center;
 	}
-	.fullBusiness #btnsMap .btn, .fullBusiness .btnsBeer .btn {
+	.fullBusiness #btnsMap .btn, .fullBusiness .btnsBeer .btn, .btnsHome .btn {
 	    width: 280px;
 		height: 30px;
 	    border: 1px solid #ff6600;

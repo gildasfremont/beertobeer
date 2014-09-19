@@ -13,7 +13,8 @@ app.BusinessView = Backbone.View.extend({
     etatBeersPression: true,
 
     events: {
-        "click": "fullBusiness"
+        "click": "fullBusiness",
+        "click .addThisBusiness": "fullBusiness"
     },
 
     render: function() {
@@ -26,10 +27,46 @@ app.BusinessView = Backbone.View.extend({
 
     // Rendu de la liste des bières (la liste pression ou la liste des autres bières)
     renderBeers: function(pression) {
-        var beers = _.where(this.model.attributes.beers, {pression: pression});
+        var beersPression = _.filter(this.model.attributes.beers, function(beer) {
+            return _.some(beer.prix, function(price) {
+                return price.pression == true;
+            });
+        });
+        var beersOthers = _.filter(this.model.attributes.beers, function(beer) {
+            return _.some(beer.prix, function(price) {
+                return price.pression == false;
+            });
+        });
+
+        // On affiche directement bières non pression si pas de pression
+        pression = (beersPression.length == true);
+
+        if (!beersPression.length && !beersOthers.length)
+            $("#noBeers").show();
+        else
+            $("#noBeers").hide();
+
+        if (!beersPression.length && $("#link_pressions").css('display') == 'inline')
+            $("#link_pressions").hide();
+        else if (beersPression.length && $("#link_pressions").css('display') == 'none')
+            $("#link_pressions").show();
+
+        if (!beersOthers.length && $("#link_others").css('display') == 'inline')
+            $("#link_others").hide();
+        else if (beersOthers.length && $("#link_others").css('display') == 'none')
+            $("#link_others").show();
+
+        $("#link_pressions span").html(beersPression.length);
+        $("#link_others span").html(beersOthers.length);
+        if (pression)
+            var beers = beersPression;
+        else
+            var beers = beersOthers;
+
         var html = "";
         var beerTemplate = this.beerTemplate;
         _.each(beers, function(beer) {
+            beer.pression = pression
             html += beerTemplate(beer);
         });
         $("#beers_container").html(html);
@@ -54,21 +91,15 @@ app.BusinessView = Backbone.View.extend({
     },
 
     fullBusiness: function(e) {
-        location.href = "#business/"+ this.model.get('id');
+        if (!app.AppView.BusinessesView.forAdd)
+            location.href = "#business/"+ this.model.get('id');
     },
 
     renderFull: function() {
-        //this.model.beers = new app.Beer();
-        //this.model.beers.fetch({data: {businessId: this.model.id}});
         app.AppView.BusinessesView.$el.html( this.templateFull( this ) );
         this.renderBeers(this.etatBeersPression);
         this.renderHoraires(false);
         this.renderMap();
-    },
-
-    dropHoraires: function(e) {
-        $(".horaires .moreHoraires").toggle();
-        $("#dropHoraires").toggleClass("focus");
     },
 
     dropHorairesType: function(e) {
@@ -86,6 +117,19 @@ app.BusinessView = Backbone.View.extend({
             horaires: this.model.attributes.horaires,
             happyHour: happyHour
         }));
+
+        $(document).click(function(){
+          $(".horaires .moreHoraires").hide();
+          $("#dropHoraires").removeClass("focus");
+        });
+        $("#dropHoraires").click(function(e) {
+            e.stopPropagation();
+            $(".horaires .moreHoraires").toggle();
+            $("#dropHoraires").toggleClass("focus");
+        });
+        $(".horaires .moreHoraires").click(function(e) {
+            e.stopPropagation();
+        });
     },
 
     btnFullBusiness: function(e) {
@@ -219,6 +263,7 @@ app.BusinessView = Backbone.View.extend({
                             prixHappyHour = prixNormal;
                         }
                         app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix.push({
+                            pression: true, // TODO: permettre de choisir si pression ou non !
                             volume: volume,
                             prixHappyHour: prixHappyHour,
                             prixNormal: prixNormal
@@ -228,7 +273,7 @@ app.BusinessView = Backbone.View.extend({
             }
             if (!error && change) {
                 var pression = app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].pression;
-                app.AppView.BusinessesView.fullBusinessView.model.save({pression: "yahho"}, { 
+                app.AppView.BusinessesView.fullBusinessView.model.save(null, { 
                     datatype: 'text',
                     success: function() {
                         console.log("Business successfully synced !")
@@ -238,7 +283,7 @@ app.BusinessView = Backbone.View.extend({
                         $("#" + idCount + " span").html(count);
                         app.AppView.BusinessesView.fullBusinessView.renderBeers(pression);
 
-                        app.AppView.BusinessesView.collection.set(app.AppView.BusinessesView.fullBusinessView.model.get("id"), app.AppView.BusinessesView.fullBusinessView.model);
+                        app.AppView.BusinessesView.collection.reset();
                     },
                     error: function(error, domain) {
                         console.log(error);
@@ -247,7 +292,7 @@ app.BusinessView = Backbone.View.extend({
                 });
 
                 // Suppression effective des prix (si pas nouvelle bière)
-                if (beerId > -1) {
+                /*if (beerId > -1) {
                     _.each(app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix, function(price, index, prix) {
                         if (price.toRemove === true) {
                             app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix.splice(index, 1);
@@ -256,7 +301,7 @@ app.BusinessView = Backbone.View.extend({
                             }
                         }
                     });
-                }
+                }*/
                 
                 $(".formBeer").remove();
             } else if (!error && !change)
@@ -295,5 +340,9 @@ app.BusinessView = Backbone.View.extend({
             model: beers,
             minKeywordLength: -1
         }).render();
+        beers.on("sync", function() {
+            if ($("#beerNameInput").is(":focus"))
+                autocomplete.focus();
+        });
     }
 });

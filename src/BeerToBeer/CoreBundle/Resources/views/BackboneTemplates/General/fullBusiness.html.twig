@@ -7,7 +7,7 @@
 
 	<div class="container">
 		<div class="row">
-			<div class="horaires col-xs-12">
+			{# <div class="horaires col-xs-12">
 				<div class="today pull-left">
 					<% 
 					var nowTime = (new Date).getTime();
@@ -47,7 +47,7 @@
 						<div class="horairesDays" id="horairesContainer">
 						</div>
 					</div>
-			</div>
+			</div>#}
 		</div>
 
 		<div class="row">
@@ -64,16 +64,21 @@
 		</div>
 
 		<div class="beers" style="display: none;">
+			<div id="noBeers" style="display: none;">
+				<img src="{{ asset('bundles/beertobeercore/images/nobeers.png') }}" alt="Pas de bières"><br><br>
+				L'établissement sera dans Beer To Beer dès qu'une bière aura été ajoutée<br><br>
+				<span class="glyphicon glyphicon-chevron-down"></span>
+			</div>
 			<% 
 				var pressions = _.where(this.model.attributes.beers, {pression: true});
 				var others = _.where(this.model.attributes.beers, {pression: false});
 			%>
 			<div class="type">
 				<div class="pull-left type">
-					<span id="link_pressions">Pressions (<span><%= pressions.length %></span>)</span>
+					<span id="link_pressions">Pressions (<span>0</span>)</span>
 				</div>
 				<div class="pull-right type">
-					<a href="#"><span id="link_others">Canettes et bouteilles (<span><%= others.length %></span>)</span></a>
+					<a href="#"><span id="link_others">Canettes et bouteilles (<span>0</span>)</span></a>
 				</div>
 			</div>
 			<div id="beers_container">

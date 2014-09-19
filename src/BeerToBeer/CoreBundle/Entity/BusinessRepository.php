@@ -23,24 +23,26 @@ class BusinessRepository extends EntityRepository
 	 * @param  integer $limit : le nombre d'établissements à afficher
 	 * @return array
 	 */
-	public function getClosestBusinessesForApi($latitude, $longitude, $offset = 0, $limit = 10) {
-
+	public function getClosestBusinessesForApi($latitude, $longitude, $forAdd = false, $offset = 0, $limit = 15) {
+		if ($forAdd)
+			$leftJoin = "LEFT ";
+		else
+			$leftJoin = "";
 		$query = $this->_em->createQuery('
 			SELECT bu, bb, h, be,
 			GEO_DISTANCE(:latitude, :longitude, bu.latitude, bu.longitude) AS distance 
 			FROM BeerToBeerCoreBundle:Business bu
-			JOIN bu.beerBusinesses bb
-			JOIN bb.beer be
+			' . $leftJoin . 'JOIN bu.beerBusinesses bb
+			' . $leftJoin . 'JOIN bb.beer be
 			LEFT JOIN bu.horaires h
 			ORDER BY distance, bb.prixHappyHour
 			')
 			->setParameter('latitude', $latitude)
 		    ->setParameter('longitude', $longitude)
-			->setFirstResult($offset)
-			//->setMaxResults($limit)
 		;
 
-		$results =  $query->getArrayResult();
+		$results = $query->getArrayResult();
+		$results = array_slice($results, $offset, $limit);
 
 		// Render the results as the API wants it
 		$businessesForApi = array();
@@ -55,6 +57,23 @@ class BusinessRepository extends EntityRepository
 		return $businessesForApi;
 	}
 
+	public function getCloseBusiness($latitude, $longitude) {
+		$query = $this->_em->createQuery('
+			SELECT bu,
+			GEO_DISTANCE(:latitude, :longitude, bu.latitude, bu.longitude) AS distance 
+			FROM BeerToBeerCoreBundle:Business bu
+			HAVING distance <= 0.005
+			ORDER BY distance
+			')
+			->setParameter('latitude', $latitude)
+		    ->setParameter('longitude', $longitude)
+		;
+
+		$business = $query->getResult();
+		if (isset($business[0]))
+			return $business[0];
+	}
+
 	/**
 	 * Récupère un Business par son id et le renvoie sous format API
 	 * @param  integer $id
@@ -64,8 +83,8 @@ class BusinessRepository extends EntityRepository
 		$query = $this->_em->createQuery('
 			SELECT bu, h, bb, be
 			FROM BeerToBeerCoreBundle:Business bu
-			JOIN bu.beerBusinesses bb
-			JOIN bb.beer be
+			LEFT JOIN bu.beerBusinesses bb
+			LEFT JOIN bb.beer be
 			LEFT JOIN bu.horaires h
 			WHERE bu.id = :id
 			ORDER BY bb.prixHappyHour
@@ -90,31 +109,34 @@ class BusinessRepository extends EntityRepository
 		// Il faut prendre le prix de la "pinte" la moins chère, donc on vérifie que le volume est de 50cl
 		$stop = false;
 		for ($i=0; $stop === false ; $i++) { 
-			if ($result["beerBusinesses"][$i]["volume"] == 50) {
+			if (!isset($result["beerBusinesses"][$i])) {
+				$result["prixNormal"] = "?";
+				$result["prixHappyHour"] = "?";
+				$stop = true;
+			}
+			else if ($result["beerBusinesses"][$i]["volume"] == 50) {
 				$result["prixNormal"] = $result["beerBusinesses"][$i]["prixNormal"];
 				$result["prixHappyHour"] = $result["beerBusinesses"][$i]["prixHappyHour"];
 				$stop = true;
 			} else if (!isset($result["beerBusinesses"][$i]["volume"])) {
-				$result["prixNormal"] = $result["beerBusinesses"][0]["prixNormal"];
-				$result["prixHappyHour"] = $result["beerBusinesses"][0]["prixHappyHour"];
+				$result["prixNormal"] = "?";
+				$result["prixHappyHour"] = "?";
 				$stop = true;
 			}
 		}
 		
+		// Ici on transforme la relation Business->BeerBusinesses<-Beer en Business->Beers pour qu'elle soit plus facilement lisible par l'API
 		foreach ($result["beerBusinesses"] as $keyBb => $beerBusiness) {
-			if ($beerBusiness["pression"])
-				$id = "p".$beerBusiness["beer"]["id"];
-			else
-				$id = $beerBusiness["beer"]["id"];
+			$id = $beerBusiness["beer"]["id"];
 			if (!isset($result["beers"][$id])) {
 				$result["beers"][$id]["id"] = $id;
 				$result["beers"][$id]["name"] = $beerBusiness["beer"]["name"];
 				$result["beers"][$id]["degree"] = $beerBusiness["beer"]["degree"];
-				$result["beers"][$id]["pression"] = $beerBusiness["pression"];
 				$result["beers"][$id]["prix"] = array();
 			}
 			$result["beers"][$id]["prix"][] = array(
 				"id" => $beerBusiness["id"],
+				"pression" => $beerBusiness["pression"],
 				"volume" => $beerBusiness["volume"],
 				"prixHappyHour" => $beerBusiness["prixHappyHour"],
 				"prixNormal" => $beerBusiness["prixNormal"]
@@ -123,6 +145,7 @@ class BusinessRepository extends EntityRepository
 		
 		unset($result["beerBusinesses"]);
 
+		// On transforme tous les DateTime en TimeStamp car Javascript ne sais vraiment bien lire que ça
 		foreach ($result["horaires"] as $key => $value) {
 			$result["horaires"][$key]["ouverture"] = $result["horaires"][$key]["ouverture"]->getTimeStamp();
 		}
@@ -144,7 +167,7 @@ class BusinessRepository extends EntityRepository
 				}
 			}
 			foreach ($beerFromApi["prix"] as $prixFromApi) {
-				if ($beerFromApi["pression"] === null || $prixFromApi["volume"] === null || $prixFromApi["prixNormal"] === null || $prixFromApi["prixHappyHour"] === null)
+				if ($prixFromApi["pression"] === null || $prixFromApi["volume"] === null || $prixFromApi["prixNormal"] === null || $prixFromApi["prixHappyHour"] === null)
 					return "Il manque des informations.";
 				if (array_key_exists("id", $prixFromApi))
 					$beerBusiness = $this->_em->getRepository("BeerToBeerCoreBundle:BeerBusiness")->find($prixFromApi["id"]);
@@ -156,7 +179,7 @@ class BusinessRepository extends EntityRepository
 					$beerBusiness->setBeer($beer);
 					$business = $this->_em->getRepository("BeerToBeerCoreBundle:Business")->find($businessFromApi["id"]);
 					$beerBusiness->setBusiness($business);
-					$beerBusiness->setPression($beerFromApi["pression"]);
+					$beerBusiness->setPression($prixFromApi["pression"]);
 				}
 				$beerBusiness->setVolume($prixFromApi["volume"]);
 				$beerBusiness->setPrixNormal($prixFromApi["prixNormal"]);

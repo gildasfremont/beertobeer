@@ -1,8 +1,8 @@
 <div id="home" class="unfocus">
-	<h1>Beer to Beer</h1>
-	<h2>Partageons nos plans bière.</h2>
+	<h1><a href="#">Beer to Beer</a></h1>
+	<h2>Trouver une bière</h2>
 
-	<label for="search" id="labelSearch" style="display: none;">Cherchez une adresse, un métro à Paris</label>
+	<label for="search" id="labelSearch" style="display: none;">Où ça ?</label>
 	{% include 'BeerToBeerCoreBundle:Forms:search.html.twig' %}
 	<div id="gpsContainer" style="display: none;">
 		<a href="#" id="gpsLink" class="text-center pac-item">
@@ -11,4 +11,11 @@
 			</span>
 		</a>
 	</div>
+	<div id="loaderLoop" style="display: none;">
+		<img src="{{ asset('bundles/beertobeercore/images/loader.gif') }}" alt="Chargement en cours..."><br><br>
+		Où êtes-vous ?..
+	</div>
+</div>
+<div class="btnsHome">
+	<button type="button" class="btn btn-default" id="btnAddBusiness">+ Ajouter un établissement</button>
 </div>
