@@ -11,7 +11,7 @@ class BeerBusinesses implements FixtureInterface, OrderedFixtureInterface
 {
   // Dans l'argument de la méthode load, l'objet $manager est l'EntityManager
   public function load(ObjectManager $manager)
-  {
+  {/*
     $items = array(
         array(
           "business" => "Le Timbre Poste",
@@ -79,7 +79,7 @@ class BeerBusinesses implements FixtureInterface, OrderedFixtureInterface
     }
 
     // On déclenche l'enregistrement
-    $manager->flush();
+    $manager->flush();*/
   }
   public function getOrder()
   {
