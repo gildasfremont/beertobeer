@@ -83,8 +83,8 @@ class BusinessRepository extends EntityRepository
 		$query = $this->_em->createQuery('
 			SELECT bu, h, bb, be
 			FROM BeerToBeerCoreBundle:Business bu
-			JOIN bu.beerBusinesses bb
-			JOIN bb.beer be
+			LEFT JOIN bu.beerBusinesses bb
+			LEFT JOIN bb.beer be
 			LEFT JOIN bu.horaires h
 			WHERE bu.id = :id
 			ORDER BY bb.prixHappyHour
