@@ -38,6 +38,9 @@ app.BusinessView = Backbone.View.extend({
             });
         });
 
+        // On affiche directement bières non pression si pas de pression
+        pression = (beersPression.length == true);
+
         if (!beersPression.length && $("#link_pressions").css('display') == 'inline')
             $("#link_pressions").hide();
         else if (beersPression.length && $("#link_pressions").css('display') == 'none')
