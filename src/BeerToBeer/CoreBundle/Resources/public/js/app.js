@@ -2,16 +2,34 @@ var app = app || {};
 
 $(function() {
 	var AppView = Backbone.View.extend({
-	    el: '#general',
+        el: '#general',
 
 	    events: {
 	        'submit #searchForm': 'submitSearch'
 	    },
 
 	    initialize: function() {
-			console.log("Init App");
-	        this.BusinessesView = new app.BusinessesView();
+		    console.log("Init App");
+            this.BusinessesView = new app.BusinessesView();
+            this.fixPositionFixedForTouchKeyboard();
 	    },
+
+        // Cette fonction permet de corriger un bug sur mobile avec écran tactile. Lors du focus sur un input, des éléments comme les boutons qui était fixés en bas étaient déplacés avec le clavier qui apparaît. Cette fonction ajoute une classe spéciale lors du focus pour gérer ce bug en css. Ce "fix" a été trouvé ici : http://dansajin.com/2012/12/07/fix-position-fixed/
+        fixPositionFixedForTouchKeyboard: function() {
+            if ('ontouchstart' in window) { // On vérifie que c'est bien pour les terminaux tactiles (ce test n'a pas l'air de fonctionner très correctement, on le garde pour l'instant, étant donné que Beer To Beer ne sera utilisé que sur terminaux mobiles et tactiles pour l'instant)
+                /* cache dom references */ 
+                var $body = jQuery('body'); 
+
+                /* bind events */
+                $(document)
+                .on('focus', 'input', function(e) {
+                    $body.addClass('fixfixed');
+                })
+                .on('blur', 'input', function(e) {
+                    $body.removeClass('fixfixed');
+                });
+            } 
+        },
 
 	    submitSearch: function(e) {
 	        e.preventDefault();
