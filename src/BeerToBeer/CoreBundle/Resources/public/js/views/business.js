@@ -39,7 +39,8 @@ app.BusinessView = Backbone.View.extend({
         });
 
         // On affiche directement bières non pression si pas de pression
-        pression = (beersPression.length == true);
+        if (!beersPression.length)
+            pression = false;
 
         if (!beersPression.length && !beersOthers.length)
             $("#noBeers").show();
@@ -157,6 +158,15 @@ app.BusinessView = Backbone.View.extend({
     },
 
     formBeer: function(beerId) {
+        // On stocke le type courant dans une variable pour pouvoir y accéder facilement
+        var currentPression = true;
+
+        // Choisir le type de prix à ajouter
+        $(".formBeer #changeType").click(function(event) {
+            $("#BeerBusinesses_container div").toggle();
+            currentPression = !($("#BeerBusinesses_container .pressions").css('display') == 'none');
+        });
+
         // Supprimer un champ BeerBusiness
         $(".formBeer").on("click", ".oneBeerBusiness .remove a", function(event) { 
             event.preventDefault();
@@ -178,7 +188,11 @@ app.BusinessView = Backbone.View.extend({
             while ($("#"+newId+".oneBeerBusiness").length) {
                 newId--;
             }
-            $(".formBeer .BeerBusinesses_container").append(app.AppView.BusinessesView.fullBusinessView.oneBeerTemplate({id: newId}));
+            if (currentPression)
+                var divTypeClass = "pressions";
+            else
+                var divTypeClass = "others";
+            $(".formBeer #BeerBusinesses_container ." + divTypeClass).append(app.AppView.BusinessesView.fullBusinessView.oneBeerTemplate({id: newId}));
         })
 
         // Event for "Annuler" link
@@ -237,7 +251,8 @@ app.BusinessView = Backbone.View.extend({
             // Ajout des nouveaux volumes
             if ($(".formBeer .oneBeerBusiness.undefined").length) {
                 change = true;
-                $(".formBeer .oneBeerBusiness.undefined").each(function () {
+                $(".formBeer .oneBeerBusiness.undefined").each(function (index, item) {
+                    var pression = $(item).parent().attr("class") == "pressions";
                     var prixNormal = parseFloat($("#" + $(this).attr('id') + ".inputNormal").val());
                     var prixHappyHour = parseFloat($("#" + $(this).attr('id') + ".inputHappyHour").val());
                     var volume = parseInt($("#" + $(this).attr('id') + ".inputVolume").val());
@@ -263,7 +278,7 @@ app.BusinessView = Backbone.View.extend({
                             prixHappyHour = prixNormal;
                         }
                         app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix.push({
-                            pression: true, // TODO: permettre de choisir si pression ou non !
+                            pression: pression,
                             volume: volume,
                             prixHappyHour: prixHappyHour,
                             prixNormal: prixNormal

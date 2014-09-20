@@ -6,6 +6,8 @@
 			</div>
 		</div>
 
+		<span id="changeType">Change type</span>
+
 		<form id="formBeers">
 			Prix en euros
 			<div class="row typeTarif">
@@ -16,11 +18,20 @@
 					Happy-Hour
 				</div>
 			</div>
-			<div class="BeerBusinesses_container">
-				<% var oneBeerTemplate = _.template($("#oneBeerBusinessForm").html()); 
-				_.each(prix, function(price) { %>
-					<%= oneBeerTemplate(price) %>
-				<% }); %>
+			<div id="BeerBusinesses_container">
+				<% var oneBeerTemplate = _.template($("#oneBeerBusinessForm").html()); %>
+				<div class="pressions">
+					<% _.each(prix, function(price) { 
+						if (price.pression)
+							print(oneBeerTemplate(price));
+					}); %>
+				</div>
+				<div class="others" style="display: none;">
+					<% _.each(prix, function(price) { 
+						if (!price.pression)
+							print(oneBeerTemplate(price));
+					}); %>
+				</div>
 			</div>
 			<a href="#" id="addVolumeBeer">+ Ajouter un volume</a>
 		</form>
