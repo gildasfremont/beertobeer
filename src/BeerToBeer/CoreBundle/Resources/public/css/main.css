@@ -467,6 +467,31 @@ body {
         padding: 0;
         text-align: center;
     }
+
+    /* Ici création du petit triangle trop soin full-CSS */
+    .formBeer #changeType .current:before, .formBeer #changeType .current:after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-color: transparent;
+        border-top: 0;
+    }
+    .formBeer #changeType .current:before {
+        bottom: -15px;
+        left: calc(50% - 15px);
+
+        border-bottom-color: #e6e6e6;
+        border-width: 12px;
+    }
+    .formBeer #changeType .current:after {
+        bottom: -16px;
+        left: calc(50% - 14px);
+        border-bottom-color: #f9f9f9;
+        border-width: 11px;
+    }
+
     .formBeer .labelPrix {
         margin-top: 20px;
     }

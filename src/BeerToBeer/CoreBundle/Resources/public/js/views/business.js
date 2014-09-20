@@ -167,9 +167,12 @@ app.BusinessView = Backbone.View.extend({
 
             // Ces 4 lignes permettent de changer le lien de place
             $(event.target).addClass("toDisable");
-            $(".formBeer #changeType span:not(.toDisable)").wrap('<a href="#"></a>');
-            $(event.target).removeClass("toDisable");
-            $(event.target).unwrap();
+            $(".formBeer #changeType span:not(.toDisable)").removeClass("current")
+                                                           .wrap('<a href="#"></a>');
+            $(event.target).removeClass("toDisable")
+                           .unwrap()
+                           .addClass("current");
+            ;
 
             $("#BeerBusinesses_container div").toggle();
             currentPression = !($("#BeerBusinesses_container .pressions").css('display') == 'none');
