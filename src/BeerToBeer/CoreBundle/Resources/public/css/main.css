@@ -355,8 +355,12 @@ body {
         padding-left: 8px;
     }
     .formBeer #addVolumeBeer {
+        display: block;
         margin-top: 6px;
         font-size: 0.9em;
+        width: 100%;
+        margin-top: 10px;
+        text-align: center;
     }
     .formBeer .oneBeerBusiness {
         margin: 5px;
@@ -452,6 +456,19 @@ body {
     }
     .formBeer.addBeer {
         padding-top: 40px;
+    }
+    .formBeer #changeType {
+        margin: 10px 0;
+        padding: 15px 0;
+        border: 1px solid #e6e6e6;
+        background-color: white;
+    }
+    .formBeer #changeType div {
+        padding: 0;
+        text-align: center;
+    }
+    .formBeer .labelPrix {
+        margin-top: 20px;
     }
 }
 

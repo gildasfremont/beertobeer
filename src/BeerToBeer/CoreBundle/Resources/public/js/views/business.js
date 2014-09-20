@@ -162,7 +162,15 @@ app.BusinessView = Backbone.View.extend({
         var currentPression = true;
 
         // Choisir le type de prix à ajouter
-        $(".formBeer #changeType").click(function(event) {
+        $(".formBeer #changeType").on("click", "a", function(event) {
+            event.preventDefault();
+
+            // Ces 4 lignes permettent de changer le lien de place
+            $(event.target).addClass("toDisable");
+            $(".formBeer #changeType span:not(.toDisable)").wrap('<a href="#"></a>');
+            $(event.target).removeClass("toDisable");
+            $(event.target).unwrap();
+
             $("#BeerBusinesses_container div").toggle();
             currentPression = !($("#BeerBusinesses_container .pressions").css('display') == 'none');
         });
