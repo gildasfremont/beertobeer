@@ -81,7 +81,8 @@ app.AutoCompleteView = Backbone.View.extend({
     },
 
     blur: function() {
-    	this.hide();
+        var hide = $.proxy(this.hide, this);
+    	window.setTimeout(hide, 200);
     },
 
     filter: function (keyword) {
