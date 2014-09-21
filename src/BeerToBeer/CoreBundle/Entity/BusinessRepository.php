@@ -159,13 +159,16 @@ class BusinessRepository extends EntityRepository
 			// Création d'une nouvelle bière. On essaie d'en trouver une avec le même nom. Si elle n'existe pas on la crée.
 			if ($idBeerFromApi == -1) {
 				$beer = $this->_em->getRepository("BeerToBeerCoreBundle:Beer")->findBy(array("name" => $beerFromApi["name"]));
-				$beer = $beer[0];
-				if ($beer == null) {
+				if (isset($beer[0]))
+					$beer = $beer[0];
+				else {
 					$beer = new Beer();
 					$beer->setName($beerFromApi["name"]);
 					$this->_em->persist($beer);
 				}
 			}
+			else
+				$beer = $this->_em->getRepository("BeerToBeerCoreBundle:Beer")->find($idBeerFromApi);
 			foreach ($beerFromApi["prix"] as $prixFromApi) {
 				if ($prixFromApi["pression"] === null || $prixFromApi["volume"] === null || $prixFromApi["prixNormal"] === null || $prixFromApi["prixHappyHour"] === null)
 					return "Il manque des informations.";
@@ -173,8 +176,6 @@ class BusinessRepository extends EntityRepository
 					$beerBusiness = $this->_em->getRepository("BeerToBeerCoreBundle:BeerBusiness")->find($prixFromApi["id"]);
 				else {
 					$beerBusiness = new BeerBusiness();
-					if (!isset($beer))
-						$beer = $this->_em->getRepository("BeerToBeerCoreBundle:Beer")->find(str_replace("p", "", $idBeerFromApi));
 					
 					$beerBusiness->setBeer($beer);
 					$business = $this->_em->getRepository("BeerToBeerCoreBundle:Business")->find($businessFromApi["id"]);

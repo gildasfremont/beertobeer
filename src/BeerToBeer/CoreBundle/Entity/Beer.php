@@ -31,7 +31,7 @@ class Beer
     /**
      * @var float
      *
-     * @ORM\Column(name="degree", type="float")
+     * @ORM\Column(name="degree", type="float", nullable=true)
      */
     private $degree;
 
