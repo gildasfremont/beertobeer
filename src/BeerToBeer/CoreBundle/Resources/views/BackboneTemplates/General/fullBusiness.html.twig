@@ -57,13 +57,13 @@
 					<%= this.model.attributes.codePostal %> <%- this.model.attributes.ville %>
 				</div>
 				<div class="whereIsIt pull-right">
-					<button type="button" class="btn btn-default btnFullBusiness" style="display: none;">C'est où ?</button>
-					<button type="button" class="btn btn-default btnFullBusiness">Bières</button>
+					<button type="button" class="btn btn-default btnFullBusiness">C'est où ?</button>
+					<button type="button" class="btn btn-default btnFullBusiness" style="display: none;">Bières</button>
 				</div>
 			</div>
 		</div>
 
-		<div class="beers" style="display: none;">
+		<div class="beers">
 			<div id="noBeers" style="display: none;">
 				<img src="{{ asset('bundles/beertobeercore/images/nobeers.png') }}" alt="Pas de bières"><br><br>
 				L'établissement sera dans Beer To Beer dès qu'une bière aura été ajoutée<br><br>
@@ -88,7 +88,7 @@
 			</div>
 		</div>
 	</div>
-	<div id="mapFullBusiness">
+	<div id="mapFullBusiness" style="display: none;">
 	</div>
 	<div id="btnsMap" style="display: none;">
 		<button type="button" class="btn btn-default" id="btnCopyAdress">Copier l'adresse</button>
