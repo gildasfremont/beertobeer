@@ -174,7 +174,7 @@ app.BusinessView = Backbone.View.extend({
                            .addClass("current");
             ;
 
-            $("#BeerBusinesses_container div").toggle();
+            $("#BeerBusinesses_container .pressions, #BeerBusinesses_container .others").toggle();
             currentPression = !($("#BeerBusinesses_container .pressions").css('display') == 'none');
         });
 
