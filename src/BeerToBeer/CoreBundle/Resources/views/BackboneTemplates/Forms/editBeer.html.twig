@@ -6,8 +6,22 @@
 			</div>
 		</div>
 
+        <div class="row labelPrix">
+            <div class="col-xs-12">
+                Prix (en euros)
+            </div>
+        </div>
+
+        <div class="row" id="changeType">
+            <div class="col-xs-5">
+                <span class="current">Pressions</span>
+            </div>
+            <div class="col-xs-7">
+                <a href="#"><span>Canettes et bouteilles</span></a>
+            </div>
+        </div>
+
 		<form id="formBeers">
-			Prix en euros
 			<div class="row typeTarif">
 				<div class="col-xs-offset-3 col-xs-3">
 					Tarif normal
@@ -16,11 +30,20 @@
 					Happy-Hour
 				</div>
 			</div>
-			<div class="BeerBusinesses_container">
-				<% var oneBeerTemplate = _.template($("#oneBeerBusinessForm").html()); 
-				_.each(prix, function(price) { %>
-					<%= oneBeerTemplate(price) %>
-				<% }); %>
+			<div id="BeerBusinesses_container">
+				<% var oneBeerTemplate = _.template($("#oneBeerBusinessForm").html()); %>
+				<div class="pressions">
+					<% _.each(prix, function(price) { 
+						if (price.pression)
+							print(oneBeerTemplate(price));
+					}); %>
+				</div>
+				<div class="others" style="display: none;">
+					<% _.each(prix, function(price) { 
+						if (!price.pression)
+							print(oneBeerTemplate(price));
+					}); %>
+				</div>
 			</div>
 			<a href="#" id="addVolumeBeer">+ Ajouter un volume</a>
 		</form>

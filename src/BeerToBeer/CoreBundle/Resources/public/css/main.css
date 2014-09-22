@@ -11,475 +11,521 @@
 }
 
 body {
-	font-family: 'MontserratBold';
+    font-family: 'MontserratBold';
 }
 
 /* DESIGN MOBILE */
 @media (max-width: 767px) {
-	#loaderLoop {
-		text-align: center;
-		margin-top: 10%;
-		color: #f96727;
-	}
-	#home.unfocus {
-	    position: absolute;
-	    top: 20%;
-	    width: 100%;
-	}
-	h1 {
-		color: #f96727;
-		text-align: center;
-		font-size: 27px;
-		font-family: 'MontserratBold';
-		font-weight: bold;
-		margin-bottom: 5px;
-	}
-	h1 a, h1 a:hover, h1 a:focus {
-		color: inherit;
-		text-decoration: none;
-	}
-	h2 {
-		color: #f96727;
-		text-align: center;
-		font-size: 18px;
-		margin-top: 0;
-		margin-bottom: 35px;
-	}
-	#searchForm {
-		margin: 0 12px;
-		text-align: center;
-	}
-	#home.unfocus label {
-		text-align: center;
-		width: 100%;
-		font-weight: normal;
-		font-size: 13px;
-	}
-	#searchForm input {
-		border-radius: 0;
-		padding: 6px 6px;
-	    border: 1px solid #ccc;
-	    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
-    	transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
-	}
-	#searchForm input:focus {
-		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
-    	outline: 0 none;
-	}
-	.businessList .searchDiv {
-		margin-top: 15px;
-	}
-	#searchForm button {
-		padding: 8px 10px;
-		margin:0;
-		border:0; /* Remove default button styles */
-		background-color:transparent;
-	}
-	/*#searchForm .searchDiv {
-	    width: 100%;
-	    border: 1px solid #ccc;
-	    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
-    	color: #555;
-    	transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
-	}
-	#searchForm .searchDiv:focus {
-		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
-    	outline: 0 none;
-	}*/
-	#searchForm .location {
-	    display: none;
-	    float: right;
-	    height: 30px;
-	    margin-right: 4px;
-	    margin-top: 4px;
-	    width: 20px;
-	}
-	/* enable absolute positioning */
-	.inner-icon { 
-	    position: relative; 
-	}
+    #loaderLoop {
+        text-align: center;
+        margin-top: 10%;
+        color: #f96727;
+    }
+    #home.unfocus {
+        position: absolute;
+        top: 20%;
+        width: 100%;
+    }
+    h1 {
+        color: #f96727;
+        text-align: center;
+        font-size: 27px;
+        font-family: 'MontserratBold';
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    h1 a, h1 a:hover, h1 a:focus {
+        color: inherit;
+        text-decoration: none;
+    }
+    h2 {
+        color: #f96727;
+        text-align: center;
+        font-size: 18px;
+        margin-top: 0;
+        margin-bottom: 35px;
+    }
+    #searchForm {
+        margin: 0 12px;
+        text-align: center;
+    }
+    #home.unfocus label {
+        text-align: center;
+        width: 100%;
+        font-weight: normal;
+        font-size: 13px;
+    }
+    #searchForm input {
+        border-radius: 0;
+        padding: 6px 6px;
+        border: 1px solid #ccc;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+        transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    }
+    #searchForm input:focus {
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
+        outline: 0 none;
+    }
+    .businessList .searchDiv {
+        margin-top: 15px;
+    }
+    #searchForm button {
+        padding: 8px 10px;
+        margin:0;
+        border:0; /* Remove default button styles */
+        background-color:transparent;
+    }
+    /*#searchForm .searchDiv {
+        width: 100%;
+        border: 1px solid #ccc;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+        color: #555;
+        transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    }
+    #searchForm .searchDiv:focus {
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
+        outline: 0 none;
+    }*/
+    #searchForm .location {
+        display: none;
+        float: right;
+        height: 30px;
+        margin-right: 4px;
+        margin-top: 4px;
+        width: 20px;
+    }
+    /* enable absolute positioning */
+    .inner-icon { 
+        position: relative; 
+    }
 
-	/* style icon */
-	.inner-icon button {
-	  position: absolute;
-	  padding: 10px;
-	  pointer-events: none;
-	}
+    /* style icon */
+    .inner-icon button {
+      position: absolute;
+      padding: 10px;
+      pointer-events: none;
+    }
 
-	/* align icon */
-	.left-icon button  { left:  0px;}
-	.right-icon button { right: 0px;}
+    /* align icon */
+    .left-icon button  { left:  0px;}
+    .right-icon button { right: 0px;}
 
-	.leftBack {
-		position: absolute;
-		top: 22px;
-		left: 15px;
-		height: 20px;
-		width: 44px;
-		background-image: url('../images/back.png');
-		cursor: pointer;
-	}
+    .leftBack {
+        position: absolute;
+        top: 22px;
+        left: 15px;
+        height: 20px;
+        width: 44px;
+        background-image: url('../images/back.png');
+        cursor: pointer;
+    }
 
-	.businessList .infosPrix {
-		border: 1px solid #eeeeee;
-		margin: 20px 5px;
-    	padding: 6px 0;
-	}
-	.businessList .infosPrix .prix{
-		padding-left: 5px;
-	}
-	.businessList .infosPrix .titre {
-		font-size: 0.8em;
-		text-align: right;
-		line-height: 16px;
-		color: #979797;
-	}
-	.businessList .prix {
-		line-height: 16px;
-		padding: 0;
-	}
-	.businessList .bar {
-		padding: 0;
-		line-height: 16px;
-		white-space:nowrap;
-		overflow: hidden;
-		-o-text-overflow: ellipsis;
-		text-overflow: ellipsis;
-		font-size: 0.8em;
-		color: #979797;
-	}
-	.businessList .bar .nom {
-		color: #333;
-		font-size: 14px;
-	}
-	.businessList .BusinessesCounts {
-		font-size: 0.8em;
-		color: #979797;
-	}
-	.businessList .prixHappyHour {
-		color: #b3b3b3;
-	}
-	.businessList .prixNow {
-		color: #f96727;
-	}
-	.businessList .business {
-		margin: 10px 0;
-	}
-	.businessList .type {
-		font-size: 1em;
-		color: #333;
-		margin-left: 7px;
-	}
+    .businessList .infosPrix {
+        border: 1px solid #eeeeee;
+        margin: 20px 5px;
+        padding: 6px 0;
+    }
+    .businessList .infosPrix .prix{
+        padding-left: 5px;
+    }
+    .businessList .infosPrix .titre {
+        font-size: 0.8em;
+        text-align: right;
+        line-height: 16px;
+        color: #979797;
+    }
+    .businessList .prix {
+        line-height: 16px;
+        padding: 0;
+    }
+    .businessList .bar {
+        padding: 0;
+        line-height: 16px;
+        white-space:nowrap;
+        overflow: hidden;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        font-size: 0.8em;
+        color: #979797;
+    }
+    .businessList .bar .nom {
+        color: #333;
+        font-size: 14px;
+    }
+    .businessList .BusinessesCounts {
+        font-size: 0.8em;
+        color: #979797;
+    }
+    .businessList .prixHappyHour {
+        color: #b3b3b3;
+    }
+    .businessList .prixNow {
+        color: #f96727;
+    }
+    .businessList .business {
+        margin: 10px 0;
+    }
+    .businessList .type {
+        font-size: 1em;
+        color: #333;
+        margin-left: 7px;
+    }
 
-	.fullBusiness h1 {
-		color: #333;
-		font-size: 18px;
-	}
-	.fullBusiness h2 {
-		color: #333;
-		font-size: 15px;
-	}
+    .fullBusiness h1 {
+        color: #333;
+        font-size: 18px;
+    }
+    .fullBusiness h2 {
+        color: #333;
+        font-size: 15px;
+    }
 
-	.fullBusiness .horaires {
-		background-color: #f9f9f9;
-	    height: 45px;
-	}
-	.fullBusiness .horaires .today {
-		margin-top: 13px;
-	}
-	.fullBusiness .horaires #dropHoraires {
-		padding: 3px 6px;
-		margin-top: 9px;
-		border-top-left-radius: 4px;
-		border-top-right-radius: 4px;
-		border: 1px solid transparent;    
-		position: absolute;
-    	right: 15px;
-		z-index: 30;
-	}
-	.fullBusiness .horaires #dropHoraires.focus {
-		background-color: white;
-		border: 1px solid #93918a;
-		border-bottom: 1px solid white;
-	}
-	.fullBusiness .horaires .moreHoraires {
-		position: absolute;
-		z-index: 20;
-		background-color: white;
-		border-radius: 4px;
-		border-top-right-radius: 0;
-		border: 1px solid #93918a;
-		width: 210px;
-		line-height: 15px;
-		font-family: 'Montserrat';
-		font-size: 11px;
-		right: 15px;
-		top: 36px;
-	}
-	.fullBusiness .horaires .more .caretHoraires {
-		cursor: pointer;
-	}
-	.fullBusiness .horaires .moreHoraires .row {
-		width: 210px;
-		margin: 0;
-		padding: 0 16px;
-	}
-	.fullBusiness .horaires .moreHoraires .row .col-xs-6 {
-		padding: 0;
-	}
-	.fullBusiness .horaires .moreHoraires .typeHoraires {
-		height: 40px;
-		font-size: 14px;
-		padding: 0 6px;
-	}
-	.fullBusiness .horaires .moreHoraires .typeHoraires div {
-		border-radius: 4px;
-		padding: 6px 8px;
-		margin: 7px 0;
-		background-color: transparent;
-		cursor: pointer;
-	}
-	.fullBusiness .horaires .moreHoraires .typeHoraires .ouverture.focus {
-		cursor: default;
-		background-color: #ffeeaa;
-	}
-	.fullBusiness .horaires .moreHoraires .typeHoraires .happyHour.focus {
-		cursor: default;
-		background-color: #eed7f4;
-	}
-	.fullBusiness .horaires .moreHoraires .horairesDays .jour {
-		border-top: 1px solid #d4d3d1;
-		line-height: 25px;
-		padding: 5px 16px;
-	}
-	.fullBusiness .location {
-	    border-bottom: 1px solid #d5d5d5;
-	    margin-top: 10px;
-	    padding-bottom: 10px;
-	}
-	.fullBusiness .location .adresse {
-		color: #666;
-		font-size: 0.9em;
-	}
-	.fullBusiness .location .btnFullBusiness {
-		background-color: #ffe680;
-		border: 2px solid #ffcc00;
-		text-shadow: none;
-	}
-	.fullBusiness .beers {
-		margin-top: 15px;
-	}
-	.fullBusiness .beers .type {
-		font-size: 0.95em; /* On réduit un tout petit peu pour éviter le chevauchement */
-		margin-bottom: 12px;
-		height: 20px;
-	}
-	.fullBusiness .beers #beers_container {
-	}
-	.fullBusiness .beers .beer {
-		color: #4d4d4d;
-		font-size: 0.95em;
-	}
-	.fullBusiness .beers .beer .prices {
-		font-size: 0.9em;
-		color: #808080;
-	}
-	.fullBusiness .beers .beer .degree {
-		font-size: 0.8em;
-		color: #808080;
-		margin-left: 10px;
-	}
-	.fullBusiness .beers .beer .prices .price .volume {
-		margin-right: 6px;
-	}
-	.fullBusiness .beers .beer .prices .price {
-		border-right: 1px solid #cccccc;
-		padding-right: 8px;
-		margin-right: 8px;
-	}
-	.fullBusiness .beers .beer .prices .lastPrice {
-		border-right: none;
-	}
-	.fullBusiness .beers #noBeers {
-		text-align: center;
-		font-size: 1.4em;
-		color: #666666;
-		margin-top: 20%;
-		padding: 0 50px;
-	}
-	.fullBusiness #mapFullBusiness {
-		width: 100%;
-		height: 1px;
-	}
-	.fullBusiness #btnsMap, .fullBusiness .btnsBeer, .btnsHome {
-		position: absolute;
-		top: calc(100% - 50px);
-		left: 0;
-		z-index: 10;
-		width: 100%;
-		text-align: center;
-	}
-	.fullBusiness #btnsMap .btn, .fullBusiness .btnsBeer .btn, .btnsHome .btn {
-	    width: 280px;
-		height: 30px;
-	    border: 1px solid #ff6600;
-	    border-radius: 0;
-	    color: #ff6600;
-	    padding-top: 5px;
-	    text-transform: uppercase;
-	}
-	.fullBusiness .btnsBeer #btnAddBeer.btn {
-		background-color: #ff6600;
-		color: white;
-	}
+    .fullBusiness .horaires {
+        background-color: #f9f9f9;
+        height: 45px;
+    }
+    .fullBusiness .horaires .today {
+        margin-top: 13px;
+    }
+    .fullBusiness .horaires #dropHoraires {
+        padding: 3px 6px;
+        margin-top: 9px;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        border: 1px solid transparent;    
+        position: absolute;
+        right: 15px;
+        z-index: 30;
+    }
+    .fullBusiness .horaires #dropHoraires.focus {
+        background-color: white;
+        border: 1px solid #93918a;
+        border-bottom: 1px solid white;
+    }
+    .fullBusiness .horaires .moreHoraires {
+        position: absolute;
+        z-index: 20;
+        background-color: white;
+        border-radius: 4px;
+        border-top-right-radius: 0;
+        border: 1px solid #93918a;
+        width: 210px;
+        line-height: 15px;
+        font-family: 'Montserrat';
+        font-size: 11px;
+        right: 15px;
+        top: 36px;
+    }
+    .fullBusiness .horaires .more .caretHoraires {
+        cursor: pointer;
+    }
+    .fullBusiness .horaires .moreHoraires .row {
+        width: 210px;
+        margin: 0;
+        padding: 0 16px;
+    }
+    .fullBusiness .horaires .moreHoraires .row .col-xs-6 {
+        padding: 0;
+    }
+    .fullBusiness .horaires .moreHoraires .typeHoraires {
+        height: 40px;
+        font-size: 14px;
+        padding: 0 6px;
+    }
+    .fullBusiness .horaires .moreHoraires .typeHoraires div {
+        border-radius: 4px;
+        padding: 6px 8px;
+        margin: 7px 0;
+        background-color: transparent;
+        cursor: pointer;
+    }
+    .fullBusiness .horaires .moreHoraires .typeHoraires .ouverture.focus {
+        cursor: default;
+        background-color: #ffeeaa;
+    }
+    .fullBusiness .horaires .moreHoraires .typeHoraires .happyHour.focus {
+        cursor: default;
+        background-color: #eed7f4;
+    }
+    .fullBusiness .horaires .moreHoraires .horairesDays .jour {
+        border-top: 1px solid #d4d3d1;
+        line-height: 25px;
+        padding: 5px 16px;
+    }
+    .fullBusiness .location {
+        border-bottom: 1px solid #d5d5d5;
+        margin-top: 10px;
+        padding-bottom: 10px;
+    }
+    .fullBusiness .location .adresse {
+        color: #666;
+        font-size: 0.9em;
+    }
+    .fullBusiness .location .btnFullBusiness {
+        background-color: #ffe680;
+        border: 2px solid #ffcc00;
+        text-shadow: none;
+    }
+    .fullBusiness .beers {
+        margin-top: 15px;
+    }
+    .fullBusiness .beers .type {
+        font-size: 0.95em; /* On réduit un tout petit peu pour éviter le chevauchement */
+        margin-bottom: 12px;
+        height: 20px;
+    }
+    .fullBusiness .beers #beers_container {
+    }
+    .fullBusiness .beers .beer {
+        color: #4d4d4d;
+        font-size: 0.95em;
+    }
+    .fullBusiness .beers .beer .prices {
+        font-size: 0.9em;
+        color: #808080;
+    }
+    .fullBusiness .beers .beer .degree {
+        font-size: 0.8em;
+        color: #808080;
+        margin-left: 10px;
+    }
+    .fullBusiness .beers .beer .prices .price .volume {
+        margin-right: 6px;
+    }
+    .fullBusiness .beers .beer .prices .price {
+        border-right: 1px solid #cccccc;
+        padding-right: 8px;
+        margin-right: 8px;
+    }
+    .fullBusiness .beers .beer .prices .lastPrice {
+        border-right: none;
+    }
+    .fullBusiness .beers #noBeers {
+        text-align: center;
+        font-size: 1.4em;
+        color: #666666;
+        margin-top: 20%;
+        padding: 0 50px;
+    }
+    .fullBusiness #mapFullBusiness {
+        width: 100%;
+        height: 1px;
+    }
+    .fullBusiness #btnsMap, .fullBusiness .btnsBeer, .btnsHome {
+        position: fixed;
+        top: calc(100% - 50px);
+        left: 0;
+        z-index: 10;
+        width: 100%;
+        text-align: center;
+    }
+    .fullBusiness #btnsMap .btn, .fullBusiness .btnsBeer .btn, .btnsHome .btn {
+        width: 280px;
+        height: 30px;
+        border: 1px solid #ff6600;
+        border-radius: 0;
+        color: #ff6600;
+        padding-top: 5px;
+        text-transform: uppercase;
+    }
+    .fullBusiness .btnsBeer #btnAddBeer.btn {
+        background-color: #ff6600;
+        color: white;
+    }
 
-	.formBeer {
-		position: absolute;
-		height: 100%;
-		width: 100%;
-		z-index: 200;
-		top: 0;
-		background-color: #f9f9f9;
-	}
+    .formBeer {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        z-index: 200;
+        top: 0;
+        background-color: #f9f9f9;
+    }
 
-	.formBeer form {
-		margin-top: 30px;
-	}
-	.formBeer .typeTarif div {
-		white-space: nowrap;
-		font-size: 0.8em;
-		padding: 0;
-		width: 29%;
-	}
-	.formBeer .typeTarif .col-xs-offset-3 {
-		padding-left: 8px;
-	}
-	.formBeer #addVolumeBeer {
-		margin-top: 6px;
-		font-size: 0.9em;
-	}
-	.formBeer .oneBeerBusiness {
-		margin: 5px;
-	}
-	.formBeer .oneBeerBusiness .volume {
-		color: #808080;
-		opacity: 0.7;
-	}
-	.formBeer .oneBeerBusiness.undefined .volume {
-		padding: 0;
-	}
-	.formBeer .oneBeerBusiness.undefined .volume input {
-		display: inline-block;
-		margin-right: 7px;
-	}
-	.formBeer .oneBeerBusiness .col-xs-3 {
-		height: 40px;
-		line-height: 40px;
-	}
-	.formBeer .oneBeerBusiness .col-xs-3.prix {
-		width: 30%;
-		padding-left: 10px;
-		background-image: url("../images/crayon.png");
-		background-repeat: no-repeat;
-		background-position: right;
-	}
+    .formBeer form {
+        margin-top: 30px;
+    }
+    .formBeer .typeTarif div {
+        white-space: nowrap;
+        font-size: 0.8em;
+        padding: 0;
+        width: 29%;
+    }
+    .formBeer .typeTarif .col-xs-offset-3 {
+        padding-left: 8px;
+    }
+    .formBeer #addVolumeBeer {
+        display: block;
+        margin-top: 6px;
+        font-size: 0.9em;
+        width: 100%;
+        margin-top: 10px;
+        text-align: center;
+    }
+    .formBeer .oneBeerBusiness {
+        margin: 5px;
+    }
+    .formBeer .oneBeerBusiness .volume {
+        color: #808080;
+        opacity: 0.7;
+    }
+    .formBeer .oneBeerBusiness.undefined .volume {
+        padding: 0;
+    }
+    .formBeer .oneBeerBusiness.undefined .volume input {
+        display: inline-block;
+        margin-right: 7px;
+    }
+    .formBeer .oneBeerBusiness .col-xs-3 {
+        height: 40px;
+        line-height: 40px;
+    }
+    .formBeer .oneBeerBusiness .col-xs-3.prix {
+        width: 30%;
+        padding-left: 10px;
+        background-image: url("../images/crayon.png");
+        background-repeat: no-repeat;
+        background-position: right;
+    }
 
-	/* Pour faire en sorte que le tiret disparaisse lors du focus */
-	input[type=number]:focus::-webkit-input-placeholder { color:transparent; }
-	input[type=number]:focus::-moz-placeholder { color:transparent; }
-	input[type=number]:focus:-ms-input-placeholder { color:transparent; } /* ie */
-	input[type=number]:focus:-moz-placeholder { color:transparent; }
+    /* Pour faire en sorte que le tiret disparaisse lors du focus */
+    input[type=number]:focus::-webkit-input-placeholder { color:transparent; }
+    input[type=number]:focus::-moz-placeholder { color:transparent; }
+    input[type=number]:focus:-ms-input-placeholder { color:transparent; } /* ie */
+    input[type=number]:focus:-moz-placeholder { color:transparent; }
 
-	.formBeer .oneBeerBusiness .col-xs-3.volume {
-		width: 25%;
-	}
-	.formBeer .oneBeerBusiness .col-xs-3.remove {
-		width: 15%;
-	}
-	.formBeer form .oneBeerBusiness input[type=number] {
-		height: 40px;
-		width: 42px;
-		border-radius: 2px;
-		padding: 0;
-		text-align: center;
-		font-size: 1.3em;
-	}
-	.formBeer .container {
-		margin-bottom: 130px; /* Pour que ça ne déborde pas sur les boutons */
-	}
-	.formBeer .buttons {
-		position: absolute;
-		bottom: 20px;
-		z-index: 210;
-		width: 100%;
-		text-align: center;
-	}
-	.formBeer .buttons .btn {
-	    width: 280px;
-		height: 30px;
-	    border-radius: 0;
-	    padding-top: 5px;
-	    text-transform: uppercase;
-	    margin-top: 8px;
-		border: 1px solid #ff6600;
-	}
-	.formBeer .buttons .btn:focus, .formBeer .buttons .btn:hover {
-		background-color: white;
-	}
-	.formBeer .buttons .btn.delete {
-		color: #ff6600;
-	}
-	.formBeer .buttons .btn.submit {
-		border-color: #6abacb;
-		background-color: #6abacb;
-		color: white;
-	}
-	.formBeer .buttons a.cancel {
-		display: block;
-		text-transform: uppercase;
-	    margin-top: 12px;
-		color: #b3b3b3;
-		text-align: center;
-	}
-	.formBeer #beerNameInput {
-		background-image: url("../images/crayon.png");
-		background-repeat: no-repeat;
-		background-position: calc(100% - 5px);
-	}
-	.formBeer.addBeer {
-		padding-top: 40px;
-	}
+    .formBeer .oneBeerBusiness .col-xs-3.volume {
+        width: 25%;
+    }
+    .formBeer .oneBeerBusiness .col-xs-3.remove {
+        width: 15%;
+    }
+    .formBeer form .oneBeerBusiness input[type=number] {
+        height: 40px;
+        width: 42px;
+        border-radius: 2px;
+        padding: 0;
+        text-align: center;
+        font-size: 1.3em;
+    }
+    .formBeer .container {
+        margin-bottom: 130px; /* Pour que ça ne déborde pas sur les boutons */
+    }
+    .formBeer .buttons {
+        display: block;
+        position: fixed;
+        bottom: 20px;
+        z-index: 210;
+        width: 100%;
+        text-align: center;
+    }
+    .fixfixed .formBeer .buttons {
+        display: none;
+    }
+    .formBeer .buttons .btn {
+        width: 280px;
+        height: 30px;
+        border-radius: 0;
+        padding-top: 5px;
+        text-transform: uppercase;
+        margin-top: 8px;
+        border: 1px solid #ff6600;
+    }
+    .formBeer .buttons .btn:focus, .formBeer .buttons .btn:hover {
+        background-color: white;
+    }
+    .formBeer .buttons .btn.delete {
+        color: #ff6600;
+    }
+    .formBeer .buttons .btn.submit {
+        border-color: #6abacb;
+        background-color: #6abacb;
+        color: white;
+    }
+    .formBeer .buttons a.cancel {
+        display: block;
+        text-transform: uppercase;
+        margin-top: 12px;
+        color: #b3b3b3;
+        text-align: center;
+    }
+    .formBeer #beerNameInput {
+        background-image: url("../images/crayon.png");
+        background-repeat: no-repeat;
+        background-position: calc(100% - 5px);
+    }
+    .formBeer.addBeer {
+        padding-top: 40px;
+    }
+    .formBeer #changeType {
+        margin: 10px 0;
+        padding: 15px 0;
+        border: 1px solid #e6e6e6;
+        background-color: white;
+    }
+    .formBeer #changeType div {
+        padding: 0;
+        text-align: center;
+    }
+
+    /* Ici création du petit triangle trop soin full-CSS */
+    .formBeer #changeType .current:before, .formBeer #changeType .current:after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-color: transparent;
+        border-top: 0;
+    }
+    .formBeer #changeType .current:before {
+        bottom: -15px;
+        left: calc(50% - 15px);
+
+        border-bottom-color: #e6e6e6;
+        border-width: 12px;
+    }
+    .formBeer #changeType .current:after {
+        bottom: -16px;
+        left: calc(50% - 14px);
+        border-bottom-color: #f9f9f9;
+        border-width: 11px;
+    }
+
+    .formBeer .labelPrix {
+        margin-top: 20px;
+    }
 }
 
 ul.autocomplete {
-	display: none;
-	position: absolute;
-	background-color: #fff;
-	z-index: 20;
-	margin: 0;
-	padding: 3px 0;
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    z-index: 20;
+    margin: 0;
+    padding: 3px 0;
 }
 ul.autocomplete li {
-	list-style: none;
-	background-color: #fff;
-	margin: 0;
-	padding: 5px 7px;
-	border: 1px solid #eaeaea;
-	border-top: none;
-	line-height: 40px;
+    list-style: none;
+    background-color: #fff;
+    margin: 0;
+    padding: 5px 7px;
+    border: 1px solid #eaeaea;
+    border-top: none;
+    line-height: 40px;
 }
 ul.autocomplete li.active, ul.autocomplete li:hover {
-	cursor: pointer;
-	background-color: #d3d3d3;
+    cursor: pointer;
+    background-color: #d3d3d3;
 }
 ul.autocomplete li a {
-	color: #3d3d3d;
-	text-decoration: none;
+    color: #3d3d3d;
+    text-decoration: none;
 }
 ul.autocomplete li a .degree {
-	margin-left: 5px;
-	font-size: 0.7em;
-	color: #808080;
+    margin-left: 5px;
+    font-size: 0.7em;
+    color: #808080;
 }
 
 
@@ -497,103 +543,103 @@ input[type=number] {
 
 /* Google Places autocomplete */
 .pac-container {
-	background-color:#fff;
-	margin: 0 auto;
-	z-index:1000;
-	border-radius:0px;
-	border-top: none;
-	font-family: 'MontserratBold';
-	box-shadow: none;
-	overflow:hidden;
-	margin-top: 1px;
+    background-color:#fff;
+    margin: 0 auto;
+    z-index:1000;
+    border-radius:0px;
+    border-top: none;
+    font-family: 'MontserratBold';
+    box-shadow: none;
+    overflow:hidden;
+    margin-top: 1px;
 }
 
 .pac-container:after {
-	content:"";
-	padding:1px 1px 1px 0;
-	height:16px;
-	text-align:right;
-	display:none;
-	background-image:url(//maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white2.png);
-	background-position:right;
-	background-repeat:no-repeat;
-	background-size:104px 16px;
+    content:"";
+    padding:1px 1px 1px 0;
+    height:16px;
+    text-align:right;
+    display:none;
+    background-image:url(//maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white2.png);
+    background-position:right;
+    background-repeat:no-repeat;
+    background-size:104px 16px;
 }
 
 .hdpi.pac-container:after {
-	background-image:url(//maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white2_hdpi.png);
+    background-image:url(//maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white2_hdpi.png);
 }
 
 .pac-item {
-	display: block;
-	cursor:default;
-	padding: 0 12px;
-	text-overflow:ellipsis;
-	overflow:hidden;
-	white-space:nowrap;
-	line-height:40px;
-	border: 1px solid #eaeaea;
-	border-top: none;
-	font-size: 0.8em;
-	color:#979797;
+    display: block;
+    cursor:default;
+    padding: 0 12px;
+    text-overflow:ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+    line-height:40px;
+    border: 1px solid #eaeaea;
+    border-top: none;
+    font-size: 0.8em;
+    color:#979797;
 }
 
 .pac-item:hover {
-	background-color:#fafafa;
-	text-decoration: none;
+    background-color:#fafafa;
+    text-decoration: none;
 }
 
 .pac-item-selected, .pac-item-selected:hover {
-	background-color:#ebf2fe;
+    background-color:#ebf2fe;
 }
 
 .pac-matched {
-	font-weight:700;
+    font-weight:700;
 }
 
 .pac-item-query {
-	font-size:1.3em;
-	padding-right: 7px;
-	color:#555;
+    font-size:1.3em;
+    padding-right: 7px;
+    color:#555;
 }
 
 .pac-icon {
-	display: none;
+    display: none;
 }
 
 .hdpi .pac-icon {
-	background-image:url(//maps.gstatic.com/mapfiles/api-3/images/autocomplete-icons_hdpi.png);
+    background-image:url(//maps.gstatic.com/mapfiles/api-3/images/autocomplete-icons_hdpi.png);
 }
 
 .pac-icon-search {
-	background-position:-1px -1px;
+    background-position:-1px -1px;
 }
 
 .pac-item-selected .pac-icon-search {
-	background-position:-18px -1px;
+    background-position:-18px -1px;
 }
 
 .pac-icon-marker {
-	background-position:-1px -161px;
+    background-position:-1px -161px;
 }
 
 .pac-item-selected .pac-icon-marker {
-	background-position:-18px -161px;
+    background-position:-18px -161px;
 }
 
 .pac-placeholder {
-	color:gray;
+    color:gray;
 }
 
 /* gpsContainer = "Chercher autour de moi" */
 #gpsContainer {
-	text-align: center;
-	margin: 0 12px;
-	font-family: 'MontserratBold';
-	position: absolute;
-	background-color: white;
-	z-index: 500;
+    text-align: center;
+    margin: 0 12px;
+    font-family: 'MontserratBold';
+    position: absolute;
+    background-color: white;
+    z-index: 500;
 }
 #gpsContainer .pac-item {
-	padding: 0;
+    padding: 0;
 }
