@@ -9,6 +9,9 @@
       prix: {}
     },
     label: function () {
-      return this.get("name") + ' <span class="degree">' + this.get("degree") + '°</span>';
+      var degree = this.get("degree");
+      if (degree == null)
+        degree = "?";
+      return this.get("name") + ' <span class="degree">' + degree + '°</span>';
     }
   });
