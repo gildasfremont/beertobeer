@@ -272,7 +272,7 @@ app.BusinessView = Backbone.View.extend({
                         alert("Vous devez rentrer un volume.");
                         error = true;
                     }
-                    else if (_.some(app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix, function(prix) { return (prix.volume == volume ); })) {
+                    else if (_.some(app.AppView.BusinessesView.fullBusinessView.model.attributes.beers[beerId].prix, function(prix) { return (prix.volume == volume && prix.pression == pression); })) {
                         alert("Vous tentez de faire 2 prix pour un même volume.");
                         error = true;
                     }
