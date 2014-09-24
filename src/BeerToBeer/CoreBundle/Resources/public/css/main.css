@@ -516,6 +516,19 @@ body {
         font-size: 15px;
         margin-left: 10px;
     }
+
+    .proposeBusiness {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        z-index: 200;
+        top: 0;
+        background-color: #f9f9f9;
+    }
+    .proposeBusiness .form-control {
+        border-radius: 0;
+        margin: 5px;
+    }
 }
 
 ul.autocomplete {
