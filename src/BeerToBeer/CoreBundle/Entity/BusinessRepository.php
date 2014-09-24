@@ -157,7 +157,7 @@ class BusinessRepository extends EntityRepository
 		// Pour l'instant on ne modifie que les bières
 		foreach ($businessFromApi["beers"] as $idBeerFromApi => $beerFromApi) {
 			// Création d'une nouvelle bière. On essaie d'en trouver une avec le même nom. Si elle n'existe pas on la crée.
-			if ($idBeerFromApi == -1) {
+			if ($beerFromApi["id"] == -1) {
 				$beer = $this->_em->getRepository("BeerToBeerCoreBundle:Beer")->findBy(array("name" => $beerFromApi["name"]));
 				if (isset($beer[0]))
 					$beer = $beer[0];
