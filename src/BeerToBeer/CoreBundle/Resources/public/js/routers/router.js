@@ -7,6 +7,7 @@ $(function() {
 	    "searchAdd/lat/:lat/lng/:lng": "searchAddBusiness",
 	    "search": "focusSearchInput",
 	    "gps": "gps",
+	    "business/propose": "proposeBusiness",
 	    "business/:id": "fullBusiness"
 	  },
 
@@ -31,6 +32,11 @@ $(function() {
 	  fullBusiness: function(id) {
 		console.log("fullBusiness (id: "+id+") Route requested.");
 		app.AppView.BusinessesView.renderFullBusiness(id);
+	  },
+
+	  proposeBusiness: function() {
+	  	console.log("ProposeBusiness route requested");
+	  	app.AppView.BusinessesView.proposeBusiness();
 	  },
 
 	  focusSearchInput: function() {

@@ -6,6 +6,7 @@ app.BusinessesView = Backbone.View.extend({
     userLat: 0,
     userLng: 0,
     userAdress: "",
+    proposeBusinessTemplate: _.template($('#proposeBusinessForm').html()),
 
     events: {
         "click a #link_pressions": "linkPressions",
@@ -248,6 +249,14 @@ app.BusinessesView = Backbone.View.extend({
         else {
             this.fullBusinessView.renderFull();
         }
+    },
+
+    proposeBusiness: function() {
+        this.$el.html(this.proposeBusinessTemplate());
+        $("#cancelPropose").click(function(event) {
+            event.preventDefault();
+            Backbone.history.history.back();
+        });
     },
 
     linkPressions: function(e) {
