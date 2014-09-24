@@ -422,7 +422,7 @@ body {
     .fixfixed .formBeer .buttons {
         display: none;
     }
-    .formBeer .buttons .btn {
+    .formBeer .buttons .btn, .proposeBusiness .btn {
         width: 280px;
         height: 30px;
         border-radius: 0;
@@ -437,12 +437,12 @@ body {
     .formBeer .buttons .btn.delete {
         color: #ff6600;
     }
-    .formBeer .buttons .btn.submit {
+    .formBeer .buttons .btn.submit, .proposeBusiness .btn.submit {
         border-color: #6abacb;
         background-color: #6abacb;
         color: white;
     }
-    .formBeer .buttons a.cancel {
+    .formBeer .buttons a.cancel, .proposeBusiness a.cancel {
         display: block;
         text-transform: uppercase;
         margin-top: 12px;
@@ -515,6 +515,19 @@ body {
         border-bottom: 2px solid #d35f5f;
         font-size: 15px;
         margin-left: 10px;
+    }
+
+    .proposeBusiness {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        z-index: 200;
+        top: 0;
+        background-color: #f9f9f9;
+    }
+    .proposeBusiness .form-control {
+        border-radius: 0;
+        margin: 5px;
     }
 }
 
