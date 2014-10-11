@@ -2,6 +2,9 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
 
+parameters:
+    dev_mail: ilan.coulon@gmail.com
+
 framework:
     #esi:             ~
     #translator:      { fallback: "%locale%" }

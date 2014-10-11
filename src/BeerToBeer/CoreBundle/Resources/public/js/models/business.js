@@ -60,7 +60,7 @@
         2: "Resto"
       },
 
-      id: 0,
+      id: null,
       prixNormal: 0,
       prixHappyHour: 0,
       nom: '',
@@ -71,7 +71,11 @@
       distance: "",
       horaires: {},
       prixNow: 0,
-      beers: {}
+      beers: {},
+
+      // On enregistre ici la proposition dans le cas d'une proposition de Business
+      proposerProposition: "",
+      proposerEmail: ""
     }
 
   });

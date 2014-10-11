@@ -24,6 +24,28 @@ class ApiController extends Controller
 		throw new HttpException(404, "Page introuvable.");
 	}
 
+    public function proposeBusinessAction() {
+        $request = $this->getRequest();
+        $email = $request->request->get("proposerEmail");
+        $proposition = $request->request->get("proposerProposition");
+        if (strlen($proposition) < 10 || (strlen($email) > 0 && !preg_match("/^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/", $email)))
+            throw new HttpException(400, "Votre proposition est trop courte ou vous semblez vous être trompé dans votre adresse e-mail.");
+
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Nouvelle proposition !')
+            ->setFrom('admin@beertobeer.fr')
+            ->setTo($this->container->getParameter('dev_mail'))
+            ->setContentType('text/html')
+            ->setBody($this->renderView('BeerToBeerCoreBundle:Emails:businessProposition.html.twig', array('email' => $email, 'proposition' => $proposition)))
+        ;
+        $this->get('mailer')->send($message);
+
+        $response = new Response();
+        $response->setContent('Votre proposition a bien été envoyée !');
+        $response->setStatusCode(200);
+        return $response;
+    }
+
     public function searchFromGpsAction($latitude, $longitude, $forAdd = false, $offset = 0)
     {
     	if (!is_numeric($latitude) || !is_numeric($longitude)) {
