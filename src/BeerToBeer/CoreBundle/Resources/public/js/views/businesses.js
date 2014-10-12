@@ -257,6 +257,26 @@ app.BusinessesView = Backbone.View.extend({
             event.preventDefault();
             Backbone.history.history.back();
         });
+        $("#submitPropose").click(function(event) {
+            var businessToPropose = new app.Business({
+                proposerProposition: $("#businessDetails").val(),
+                proposerEmail: $("#userEmail").val()
+            });
+            // Vérification
+            var error = false;
+            if (businessToPropose.get('proposerProposition').length < 10) {
+                error = true;
+                alert("Essayez de nous donner plus de détails s'il-vous-plaît (plus de 10 caractères)");
+            }
+            if (!error) {
+                businessToPropose.save(null, {
+                    success: function() {
+                        app.Router.navigate("");
+                    }
+                });
+                
+            }
+        });
     },
 
     linkPressions: function(e) {
