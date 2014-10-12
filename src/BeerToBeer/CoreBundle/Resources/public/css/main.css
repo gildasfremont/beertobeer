@@ -525,9 +525,26 @@ body {
         top: 0;
         background-color: #f9f9f9;
     }
+    .proposeBusiness h1 {
+        margin-bottom: 30px;
+    }
     .proposeBusiness .form-control {
         border-radius: 0;
-        margin: 5px;
+        margin: 10px auto;
+        width: calc(100% - 30px);
+        margin-bottom: 10px;
+    }
+    .proposeBusiness textarea {
+        height: 180px;
+    }
+    .proposeBusiness label.userEmail div {
+        font-size: 0.7em;
+        color: #808080;
+        margin-top: 8px;
+    }
+    .proposeBusiness .btn {
+        display: block;
+        margin: 20px auto auto;
     }
 }
 
