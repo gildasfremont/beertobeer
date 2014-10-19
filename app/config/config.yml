@@ -3,7 +3,7 @@ imports:
     - { resource: security.yml }
 
 parameters:
-    contact_mail: dev@beertobeer.fr
+    dev_mail: ilan.coulon@gmail.com
 
 framework:
     #esi:             ~
