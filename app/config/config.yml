@@ -2,6 +2,9 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
 
+parameters:
+    contact_mail: dev@beertobeer.fr
+
 framework:
     #esi:             ~
     #translator:      { fallback: "%locale%" }

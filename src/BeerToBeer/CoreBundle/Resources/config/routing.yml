@@ -5,6 +5,14 @@ beer_to_beer_core_homepage:
 btb_api_business:
     path:     /api/business
     defaults: { _controller: BeerToBeerCoreBundle:Api:business }
+    requirements:
+        _method: GET
+
+btb_api_business_propose:
+    path:     /api/business
+    defaults: { _controller: BeerToBeerCoreBundle:Api:proposeBusiness }
+    requirements:
+        _method: POST
 
 btb_api_business_id:
     path:     /api/business/{id}

@@ -1,0 +1,22 @@
+<html>
+	<head>
+	</head>
+
+	<body>
+		<h1>Une proposition d'établissement a été déposé !</h1>
+
+		<p>
+			{% if email|length > 0 %}
+			L'adresse e-mail de l'auteur de cette proposition est la suivante : <strong>{{ email }}</strong>
+			{% else %}
+			L'auteur de la proposition n'a pas fourni son e-mail.
+			{% endif %}
+		</p>
+
+		<p>Ci-dessous le contenu de sa proposition !</p>
+
+		<p style="font-style: italic;">
+			{{ proposition|nl2br }}
+		</p>
+	</body>
+</html>
