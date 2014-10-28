@@ -38,13 +38,12 @@ class ApiController extends Controller
             ->setContentType('text/html')
             ->setBody($this->renderView('BeerToBeerCoreBundle:Emails:businessProposition.html.twig', array('email' => $email, 'proposition' => $proposition)))
         ;
-        $this->get('mailer')->send($message);
+        $sended = $this->get('mailer')->send($message);
 
-        $results = array();
-        $results["message"] = 'Votre proposition a bien été envoyée !';
-        $results["statusCode"] = 200;
-        $response = new JsonResponse();
-        return $response->setData($results);
+        $response = new Response();
+        $response->setContent('Votre proposition a bien été envoyée !'.$sended);
+        $response->setStatusCode(200);
+        return $response;
     }
 
     public function searchFromGpsAction($latitude, $longitude, $forAdd = false, $offset = 0)
