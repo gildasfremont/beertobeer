@@ -38,10 +38,10 @@ class ApiController extends Controller
             ->setContentType('text/html')
             ->setBody($this->renderView('BeerToBeerCoreBundle:Emails:businessProposition.html.twig', array('email' => $email, 'proposition' => $proposition)))
         ;
-        $sended = $this->get('mailer')->send($message);
+        $this->get('mailer')->send($message);
 
         $response = new Response();
-        $response->setContent('Votre proposition a bien été envoyée !'.$sended);
+        $response->setContent('Votre proposition a bien été envoyée !');
         $response->setStatusCode(200);
         return $response;
     }
