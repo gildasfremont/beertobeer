@@ -271,7 +271,8 @@ app.BusinessesView = Backbone.View.extend({
             if (!error) {
                 businessToPropose.save(null, {
                     success: function() {
-                        app.Router.navigate("");
+                        alert("Votre proposition a bien été envoyée !")
+                        app.Router.navigate("", {trigger: true});
                     }
                 });
                 
