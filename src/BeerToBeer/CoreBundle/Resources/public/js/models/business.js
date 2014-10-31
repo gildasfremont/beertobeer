@@ -6,6 +6,7 @@
     urlRoot: "api/business",
 
     parse: function(response) {
+      // Formater les horaires dans un format compatible et facilement utilisable
       var normalizedHoraires = [];
       _.each(response.horaires, function(horaire) {
         normalizedHoraires[horaire.jour] = normalizedHoraires[horaire.jour] || [];
@@ -32,6 +33,14 @@
           normalizedHoraires[index].ouvert = false;
       });
       response.horaires = normalizedHoraires;
+
+      // Changer d'unité si la distance est trop grande
+      if (response.distance < 1000) {
+        response.distance = response.distance + " m";
+      }
+      else {
+        response.distance = response.distance/1000 + " km";
+      }
 
       return response;
     },

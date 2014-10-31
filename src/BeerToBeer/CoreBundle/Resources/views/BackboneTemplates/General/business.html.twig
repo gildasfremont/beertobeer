@@ -1,4 +1,5 @@
-<div class="col-xs-10 bar">
+<% if (app.AppView.BusinessesView.collection.forAdd) { %>
+<div class="col-xs-8 bar">
     <span class="nom"><%- nom %></span> 
     <span class="type">
     	<%= typeArray[type] %>
@@ -7,7 +8,6 @@
     <br>
     <span class="adress"><%= distance %> m - <%- adresse %>, <%= codePostal %> <%- ville %></span>
 </div>
-<% if (app.AppView.BusinessesView.collection.forAdd) { %>
 	<div class="col-xs-2 prix">
 		<% if (typeof beers != "undefined" && !_.isEmpty(beers)) { %>
 			OK
@@ -16,8 +16,37 @@
 		<% } %>
 	</div>
 <% } else { %>
-	<div class="col-xs-2 prix">
+
+<div class="col-xs-8 bar">
+    <span class="nom"><%- nom %></span> 
+    <span class="type">
+    	<%= typeArray[type] %>
+    </span>
+    <br>
+    <% if (_.size(beers) == 1) { %>
+    <span class="beers"><strong><%= beers[_.keys(beers)[0]].name %></strong></span>
+    <% } else { 
+	var pintesPression = _.filter(beers, function(beer) {
+        return _.some(beer.prix, function(price) {
+            return (price.pression == true && (price.volume == 50 || price.volume == 40)); // Je mets aussi les "choppes" de 40 cl
+        });
+    });
+    pintesPression = _.sortBy(pintesPression, function (beerPression) {
+    	var prices = _.sortBy(beerPression.prix, 'prixNormal');
+    	return prices[0];
+	});
+    var name = pintesPression[0].name;
+    	%>
+    	<span class="beers"><strong><%= name %></strong> et <%= _.size(beers)-1 %> autre<% if (_.size(beers) > 2) { print("s"); }%></span>
+    	<% } %>
+
+    <br>
+    <span class="adress">à <%= distance %></span>
+</div>
+	<div class="col-xs-4 prix">
 	    <span class="prixHappyHour">€ <%= prixHappyHour %></span><br>
 	    <span class="prixNow"><%= prixNow %></span>
 	</div>
 <% } %>
+
+
