@@ -1,0 +1,8 @@
+oneBusinessController {
+    init () {
+        $scope.business = business;
+        $scope.business = businessService.getOneBusiness(business.id);
+
+        // GMAP
+    }
+}

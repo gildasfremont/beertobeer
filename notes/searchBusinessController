@@ -1,0 +1,8 @@
+searchBusinessController {
+    searchBusinessesFromPosition(position) {
+        $scope.businesses = businessService.searchBusinessesFromPosition(position);
+    }
+    searchBusinessesAroundMe() {
+        $scope.businesses = businessService.searchBusinessesFromPosition(positionService.getMyPosition());
+    }
+}

@@ -1,0 +1,5 @@
+positionService {
+    getMyPosition() {
+        return bimbam ma position;
+    }
+}

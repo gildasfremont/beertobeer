@@ -1,0 +1,11 @@
+businessService {
+    searchBusinessesFromPosition(position) { // position contient une recherche d'adresse et/ou des coordonnées GPS
+        APPEL à l'API en spécifiant qu'on ne souhaite *que* nom, type, position, prix de la pinte la moins chère, prix en happy hour
+        return listOfBusinesses;
+    }
+    getOneBusiness(id) {
+        APPEL à l'api : on prend tout
+        return oneBusiness;
+    }
+    
+}

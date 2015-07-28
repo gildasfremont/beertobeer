@@ -1,0 +1,6 @@
+beerOfBusinessController {
+    // Fenêtre modale pour éditer ou créer une bière dans une bar, on pourra y entrer plusieurs prix
+    confirm() {
+        return $scope.beer;
+    }
+}
